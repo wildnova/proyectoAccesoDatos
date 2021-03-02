@@ -1,0 +1,11 @@
+1.El lío entre no saber que es el conector y qué es el driver a la hora de asignarlo en la configuración de hibernate
+2. Tener el servidor con mariaDB y que la configuración esté en MySql
+3. Lo de que usa un Schema por defecto y pone una esta línea en lugar de la misma pero sin la parte después de 'ad':
+	  jdbc:mysql://192.168.100.233:3306/ad?zeroDateTimeBehavior=CONVERT_TO_NULL [cristian on Default schema]
+
+4. many to one en el archivo vehiculo.hbm.xml no sabiendo como va a reaccionar.
+5. El save-update sospecho que podría escribirse safe-update en realidad.
+
+6.En el mapeo de trabajador en la línea de key dentro del set, no se si debe ponerse dni en column o el nºexpedicion del informe al haber puesto inverse en false.
+
+7.

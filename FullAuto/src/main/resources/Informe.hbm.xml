@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.mycompany.fullauto.Informe" table="informe">
+    <id name="numExpedicion" type="int" column="num_Expedicion">
+        <generator class="assigned"/>
+    </id>
+    <property name="tareas" type="string" column="tareas"/>    
+    
+    <many-to-one name="trabajador" class="com.mycompany.fullauto.Trabajador" cascade="save-update"/>
+    <one-to-one name="factura" class="com.mycompany.fullauto.Factura" property-ref="numFactura"/>
+    </class>
+    
+    
+    
+</hibernate-mapping>
