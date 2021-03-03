@@ -7,14 +7,12 @@ package com.mycompany.fullauto.controlador;
 
 import com.mycompany.fullauto.modelo.ModeloHibernate;
 import com.mycompany.fullauto.modelo.ModeloJdbc;
+import com.mycompany.fullauto.vista.InsertarTrabajador;
 import com.mycompany.fullauto.vista.Vista;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.*;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JButton;
+
 
 
 /**
@@ -26,18 +24,23 @@ public class Controlador implements ActionListener
     private ModeloJdbc modeloJdbc;
     private ModeloHibernate modeloHibernate;
     private Vista vista;
-    private ResultSet rs;
+    private ArrayList listaTrabajadores;
+    private int contador;
     //Connection conn;
     
     public Controlador(Vista vista, ModeloJdbc modelo)
     {
         this.vista=vista;
         this.modeloJdbc=modelo;
-        rs=null;
+        contador=0;
+        listaTrabajadores=null;
         
         mostrarDatosBBDD();
+        
         vista.jbSiguienteTrabajador.addActionListener(this);
-        vista.jbObtenerDatosTrabajador.addActionListener(this);
+        vista.jbAnteriorTrabajador.addActionListener(this);
+        
+        vista.jbInsertarTrabajador.addActionListener(this);
     }
     public Controlador(Vista vista, ModeloHibernate modelo)
     {
@@ -46,40 +49,55 @@ public class Controlador implements ActionListener
         
       
         vista.jbSiguienteTrabajador.addActionListener(this);
-        vista.jbObtenerDatosTrabajador.addActionListener(this);
+        
     }
     public void mostrarDatosBBDD()
     {
 
-        ArrayList listaTrabajadores= modeloJdbc.getDatosTrabajador();
+        listaTrabajadores= modeloJdbc.getDatosTrabajador();
         String datosTrabajador[] = new String[5];
-        datosTrabajador=(String[])listaTrabajadores.get(0);
+        datosTrabajador=(String[])listaTrabajadores.get(contador);
         vista.cargarCampos(datosTrabajador);
 
     }
-    
+    public void mostrarSiguienteTrabajador()
+    {
+        contador++;
+        String datosTrabajador[] = new String[5];
+        datosTrabajador = (String[])listaTrabajadores.get(contador);
+        vista.cargarCampos(datosTrabajador);
+    }
+    public void mostrarAnteriorTrabajador()
+    {
+        contador--;
+        String datosTrabajador[] = new String[5];
+        datosTrabajador = (String[])listaTrabajadores.get(contador);
+        vista.cargarCampos(datosTrabajador);
+    }
+    public void insertarTrabajador()
+    {
+        InsertarTrabajador it = new InsertarTrabajador(vista, true);
+        it.setVisible(true);
+    }
 
     @Override
     public void actionPerformed(ActionEvent ae) {
         System.out.println("evento Activado");
-        
-        if(ae.getSource()==vista.jbObtenerDatosTrabajador)
-        {
-            System.out.println("jbObtenerDatos pulsado");
-            mostrarDatosBBDD();
-           
-        }
-        
-        
+ 
         if(ae.getSource()==vista.jbSiguienteTrabajador)
         {
             System.out.println("jbSiguienteTrabajador pulsado");
-            
-            String[] datosTrabajador= new String[5];
-            
-            
-            
-            vista.cargarCampos(datosTrabajador);
+            mostrarSiguienteTrabajador();
+        }
+        if(ae.getSource()==vista.jbAnteriorTrabajador)
+        {
+            System.out.println("jbAnteriorTrabajador pulsado");
+            mostrarAnteriorTrabajador();
+        }
+        if(ae.getSource()==vista.jbInsertarTrabajador)
+        {
+            System.out.println("jbInsertarTrabajador pulsado");
+           insertarTrabajador();
         }
     }
     

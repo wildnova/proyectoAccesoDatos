@@ -70,7 +70,6 @@ public class Vista extends javax.swing.JFrame {
         jlAceiteVehiculo = new javax.swing.JLabel();
         jlConsumoVehiculo = new javax.swing.JLabel();
         jlFechaEntradaVehiculo = new javax.swing.JLabel();
-        jbObtenerDatosVehiculo = new javax.swing.JButton();
         pTrabajadores = new javax.swing.JPanel();
         jlDniTrabajador = new javax.swing.JLabel();
         jtfDniTrabajador = new javax.swing.JTextField();
@@ -87,7 +86,6 @@ public class Vista extends javax.swing.JFrame {
         jbInsertarTrabajador = new javax.swing.JButton();
         jbModificarTrabajador = new javax.swing.JButton();
         jbEliminarTrabajador = new javax.swing.JButton();
-        jbObtenerDatosTrabajador = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jtfNumExpedicionInforme = new javax.swing.JTextField();
         jlNumExpedicionInforme = new javax.swing.JLabel();
@@ -95,7 +93,6 @@ public class Vista extends javax.swing.JFrame {
         jlTareasInforme = new javax.swing.JLabel();
         jlDniTrabajadorInforme = new javax.swing.JLabel();
         jtfDniTrabajadorInforme = new javax.swing.JTextField();
-        jbObtenerDatosInforme = new javax.swing.JButton();
         jbSiguienteInforme = new javax.swing.JButton();
         jbAnteriorInforme = new javax.swing.JButton();
         jbInsertarInforme = new javax.swing.JButton();
@@ -108,7 +105,6 @@ public class Vista extends javax.swing.JFrame {
         jlPrecioFactura = new javax.swing.JLabel();
         jlLineaFactura = new javax.swing.JLabel();
         jtfLineaFactura = new javax.swing.JTextField();
-        jbObtenerDatosFactura = new javax.swing.JButton();
         jbSiguienteFactura = new javax.swing.JButton();
         jbAnteriorFactura = new javax.swing.JButton();
         jbInsertarFactura = new javax.swing.JButton();
@@ -141,7 +137,6 @@ public class Vista extends javax.swing.JFrame {
         jlFechaCompraRepuesto = new javax.swing.JLabel();
         jlBastidorVehiculoRepuestos = new javax.swing.JLabel();
         jlNumeroFacturaRepuestos = new javax.swing.JLabel();
-        jbObtenerDatosRepuestos = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         pTrabajadores3 = new javax.swing.JPanel();
         jlIdObd = new javax.swing.JLabel();
@@ -167,7 +162,6 @@ public class Vista extends javax.swing.JFrame {
         jlTemperaturaAguaObd = new javax.swing.JLabel();
         jlCodigoSalidaObd = new javax.swing.JLabel();
         jlBastidorVehiculoObd = new javax.swing.JLabel();
-        jbObtenerDatosObd = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -222,13 +216,6 @@ public class Vista extends javax.swing.JFrame {
         jlConsumoVehiculo.setText("Consumo");
 
         jlFechaEntradaVehiculo.setText("Fecha entrada");
-
-        jbObtenerDatosVehiculo.setText("Obtener datos");
-        jbObtenerDatosVehiculo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbObtenerDatosVehiculoActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout pTrabajadores1Layout = new javax.swing.GroupLayout(pTrabajadores1);
         pTrabajadores1.setLayout(pTrabajadores1Layout);
@@ -285,10 +272,8 @@ public class Vista extends javax.swing.JFrame {
                                     .addComponent(jbEliminarVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(142, 142, 142))
                             .addGroup(pTrabajadores1Layout.createSequentialGroup()
-                                .addGroup(pTrabajadores1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jbAnteriorVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jbObtenerDatosVehiculo))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                                .addComponent(jbAnteriorVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(535, Short.MAX_VALUE))))))
         );
         pTrabajadores1Layout.setVerticalGroup(
             pTrabajadores1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -301,8 +286,7 @@ public class Vista extends javax.swing.JFrame {
                     .addGroup(pTrabajadores1Layout.createSequentialGroup()
                         .addGroup(pTrabajadores1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jtfBastidorVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jlBastidorVehiculo)
-                            .addComponent(jbObtenerDatosVehiculo))
+                            .addComponent(jlBastidorVehiculo))
                         .addGroup(pTrabajadores1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pTrabajadores1Layout.createSequentialGroup()
                                 .addGap(9, 9, 9)
@@ -399,13 +383,6 @@ public class Vista extends javax.swing.JFrame {
 
         jbEliminarTrabajador.setText("Eliminar trabajador");
 
-        jbObtenerDatosTrabajador.setText("Obtener datos");
-        jbObtenerDatosTrabajador.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbObtenerDatosTrabajadorActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout pTrabajadoresLayout = new javax.swing.GroupLayout(pTrabajadores);
         pTrabajadores.setLayout(pTrabajadoresLayout);
         pTrabajadoresLayout.setHorizontalGroup(
@@ -424,12 +401,10 @@ public class Vista extends javax.swing.JFrame {
                     .addComponent(jlApellido2Trabajador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jlFuncionTrabajador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(63, 63, 63)
-                .addGroup(pTrabajadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pTrabajadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jbSiguienteTrabajador, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
-                        .addComponent(jbAnteriorTrabajador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jbObtenerDatosTrabajador))
-                .addGap(80, 80, 80)
+                .addGroup(pTrabajadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jbSiguienteTrabajador, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
+                    .addComponent(jbAnteriorTrabajador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(98, 98, 98)
                 .addGroup(pTrabajadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jbEliminarTrabajador, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
                     .addComponent(jbInsertarTrabajador, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
@@ -442,9 +417,7 @@ public class Vista extends javax.swing.JFrame {
                 .addGroup(pTrabajadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(pTrabajadoresLayout.createSequentialGroup()
                         .addGap(41, 41, 41)
-                        .addGroup(pTrabajadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jbInsertarTrabajador, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jbObtenerDatosTrabajador))
+                        .addComponent(jbInsertarTrabajador, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(44, 44, 44)
                         .addComponent(jbModificarTrabajador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(pTrabajadoresLayout.createSequentialGroup()
@@ -489,13 +462,6 @@ public class Vista extends javax.swing.JFrame {
 
         jlDniTrabajadorInforme.setText("Dni trabajador");
 
-        jbObtenerDatosInforme.setText("Obtener datos");
-        jbObtenerDatosInforme.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbObtenerDatosInformeActionPerformed(evt);
-            }
-        });
-
         jbSiguienteInforme.setText("Siguiente");
         jbSiguienteInforme.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -525,12 +491,10 @@ public class Vista extends javax.swing.JFrame {
                     .addComponent(jlTareasInforme, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jlDniTrabajadorInforme, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(63, 63, 63)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jbSiguienteInforme, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
-                        .addComponent(jbAnteriorInforme, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jbObtenerDatosInforme))
-                .addGap(80, 80, 80)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jbSiguienteInforme, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
+                    .addComponent(jbAnteriorInforme, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(98, 98, 98)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jbEliminarInforme, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
                     .addComponent(jbInsertarInforme, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
@@ -543,9 +507,7 @@ public class Vista extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(41, 41, 41)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jbInsertarInforme, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jbObtenerDatosInforme))
+                        .addComponent(jbInsertarInforme, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(44, 44, 44)
                         .addComponent(jbModificarInforme, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -586,13 +548,6 @@ public class Vista extends javax.swing.JFrame {
 
         jlLineaFactura.setText("Línea Factura");
 
-        jbObtenerDatosFactura.setText("Obtener datos");
-        jbObtenerDatosFactura.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbObtenerDatosFacturaActionPerformed(evt);
-            }
-        });
-
         jbSiguienteFactura.setText("Siguiente");
         jbSiguienteFactura.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -628,12 +583,10 @@ public class Vista extends javax.swing.JFrame {
                             .addComponent(jlPrecioFactura, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jlLineaFactura, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(63, 63, 63)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jbSiguienteFactura, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
-                                .addComponent(jbAnteriorFactura, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jbObtenerDatosFactura))))
-                .addGap(80, 80, 80)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jbSiguienteFactura, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
+                            .addComponent(jbAnteriorFactura, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(98, 98, 98)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jbEliminarFactura, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
                     .addComponent(jbInsertarFactura, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
@@ -646,9 +599,7 @@ public class Vista extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(41, 41, 41)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jbInsertarFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jbObtenerDatosFactura))
+                        .addComponent(jbInsertarFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(44, 44, 44)
                         .addComponent(jbModificarFactura, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -737,13 +688,6 @@ public class Vista extends javax.swing.JFrame {
 
         jlNumeroFacturaRepuestos.setText("factura a que pertenece");
 
-        jbObtenerDatosRepuestos.setText("Obtener datos");
-        jbObtenerDatosRepuestos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbObtenerDatosRepuestosActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout pTrabajadores2Layout = new javax.swing.GroupLayout(pTrabajadores2);
         pTrabajadores2.setLayout(pTrabajadores2Layout);
         pTrabajadores2Layout.setHorizontalGroup(
@@ -755,7 +699,7 @@ public class Vista extends javax.swing.JFrame {
                         .addGroup(pTrabajadores2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jlUsoRepuesto)
                             .addComponent(jlReferenciaRepuesto))
-                        .addGap(708, 708, 708))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 759, Short.MAX_VALUE))
                     .addGroup(pTrabajadores2Layout.createSequentialGroup()
                         .addGroup(pTrabajadores2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pTrabajadores2Layout.createSequentialGroup()
@@ -779,12 +723,9 @@ public class Vista extends javax.swing.JFrame {
                                 .addComponent(jtfFechaCompraRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(pTrabajadores2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pTrabajadores2Layout.createSequentialGroup()
-                                .addComponent(jbObtenerDatosRepuestos)
-                                .addGap(48, 48, 48))
                             .addComponent(jbSiguienteRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jbAnteriorRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                            .addComponent(jbAnteriorRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 215, Short.MAX_VALUE)))
                 .addGroup(pTrabajadores2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jbModificarRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbEliminarRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -847,7 +788,6 @@ public class Vista extends javax.swing.JFrame {
                 .addGroup(pTrabajadores2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtfNumSerieRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlNumSerieRepuesto)
-                    .addComponent(jbObtenerDatosRepuestos)
                     .addComponent(jbInsertarRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(2, 2, 2)
                 .addComponent(jlReferenciaRepuesto)
@@ -926,13 +866,6 @@ public class Vista extends javax.swing.JFrame {
 
         jlBastidorVehiculoObd.setText("bastidor del vehículo de esta lectura ");
 
-        jbObtenerDatosObd.setText("Obtener datos");
-        jbObtenerDatosObd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbObtenerDatosObdActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout pTrabajadores3Layout = new javax.swing.GroupLayout(pTrabajadores3);
         pTrabajadores3.setLayout(pTrabajadores3Layout);
         pTrabajadores3Layout.setHorizontalGroup(
@@ -944,7 +877,7 @@ public class Vista extends javax.swing.JFrame {
                         .addGroup(pTrabajadores3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jlConsumoMedioObd)
                             .addComponent(jlRpmInstObd))
-                        .addGap(708, 708, 708))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 759, Short.MAX_VALUE))
                     .addGroup(pTrabajadores3Layout.createSequentialGroup()
                         .addGroup(pTrabajadores3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pTrabajadores3Layout.createSequentialGroup()
@@ -969,12 +902,9 @@ public class Vista extends javax.swing.JFrame {
                                 .addComponent(jtfCodigoSalidaObd, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(pTrabajadores3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pTrabajadores3Layout.createSequentialGroup()
-                                .addComponent(jbObtenerDatosObd)
-                                .addGap(48, 48, 48))
                             .addComponent(jbSiguienteObd, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jbAnteriorObd, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                            .addComponent(jbAnteriorObd, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 167, Short.MAX_VALUE)))
                 .addGroup(pTrabajadores3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jbModificarObd, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbEliminarObd, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1029,7 +959,6 @@ public class Vista extends javax.swing.JFrame {
                         .addGroup(pTrabajadores3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jtfIdObd, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jlIdObd)
-                            .addComponent(jbObtenerDatosObd)
                             .addComponent(jbInsertarObd, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(2, 2, 2)
                         .addComponent(jlRpmInstObd)
@@ -1108,26 +1037,9 @@ public class Vista extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfConsumoVehiculoActionPerformed
 
-    private void jbObtenerDatosTrabajadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbObtenerDatosTrabajadorActionPerformed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_jbObtenerDatosTrabajadorActionPerformed
-
-    private void jbObtenerDatosVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbObtenerDatosVehiculoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jbObtenerDatosVehiculoActionPerformed
-
-    private void jbObtenerDatosInformeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbObtenerDatosInformeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jbObtenerDatosInformeActionPerformed
-
     private void jbSiguienteInformeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSiguienteInformeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jbSiguienteInformeActionPerformed
-
-    private void jbObtenerDatosFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbObtenerDatosFacturaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jbObtenerDatosFacturaActionPerformed
 
     private void jbSiguienteFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSiguienteFacturaActionPerformed
         // TODO add your handling code here:
@@ -1144,10 +1056,6 @@ public class Vista extends javax.swing.JFrame {
     private void jtfnumeroFacturaRepuestosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfnumeroFacturaRepuestosActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfnumeroFacturaRepuestosActionPerformed
-
-    private void jbObtenerDatosRepuestosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbObtenerDatosRepuestosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jbObtenerDatosRepuestosActionPerformed
 
     private void jbInsertarRepuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbInsertarRepuestoActionPerformed
         // TODO add your handling code here:
@@ -1168,10 +1076,6 @@ public class Vista extends javax.swing.JFrame {
     private void jtfBastidorVehiculoObdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfBastidorVehiculoObdActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfBastidorVehiculoObdActionPerformed
-
-    private void jbObtenerDatosObdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbObtenerDatosObdActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jbObtenerDatosObdActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1239,12 +1143,6 @@ public class Vista extends javax.swing.JFrame {
     public javax.swing.JButton jbModificarRepuesto;
     public javax.swing.JButton jbModificarTrabajador;
     public javax.swing.JButton jbModificarVehiculo;
-    public javax.swing.JButton jbObtenerDatosFactura;
-    public javax.swing.JButton jbObtenerDatosInforme;
-    public javax.swing.JButton jbObtenerDatosObd;
-    public javax.swing.JButton jbObtenerDatosRepuestos;
-    public javax.swing.JButton jbObtenerDatosTrabajador;
-    public javax.swing.JButton jbObtenerDatosVehiculo;
     public javax.swing.JButton jbSiguienteFactura;
     public javax.swing.JButton jbSiguienteInforme;
     public javax.swing.JButton jbSiguienteObd;

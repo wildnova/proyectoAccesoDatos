@@ -175,11 +175,8 @@
                                           <EmptySpace min="-2" pref="142" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" attributes="0">
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jbAnteriorVehiculo" alignment="0" min="-2" pref="87" max="-2" attributes="0"/>
-                                              <Component id="jbObtenerDatosVehiculo" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace max="32767" attributes="0"/>
+                                          <Component id="jbAnteriorVehiculo" min="-2" pref="87" max="-2" attributes="0"/>
+                                          <EmptySpace pref="535" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -200,7 +197,6 @@
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="jtfBastidorVehiculo" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                                       <Component id="jlBastidorVehiculo" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jbObtenerDatosVehiculo" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" attributes="0">
@@ -455,17 +451,6 @@
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                   </AuxValues>
                 </Component>
-                <Component class="javax.swing.JButton" name="jbObtenerDatosVehiculo">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Obtener datos"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbObtenerDatosVehiculoActionPerformed"/>
-                  </Events>
-                  <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-                  </AuxValues>
-                </Component>
               </SubComponents>
             </Container>
           </SubComponents>
@@ -500,14 +485,11 @@
                           <Component id="jlFuncionTrabajador" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jbSiguienteTrabajador" pref="87" max="32767" attributes="0"/>
-                              <Component id="jbAnteriorTrabajador" max="32767" attributes="0"/>
-                          </Group>
-                          <Component id="jbObtenerDatosTrabajador" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jbSiguienteTrabajador" pref="87" max="32767" attributes="0"/>
+                          <Component id="jbAnteriorTrabajador" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="98" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="jbEliminarTrabajador" pref="196" max="32767" attributes="0"/>
                           <Component id="jbInsertarTrabajador" pref="196" max="32767" attributes="0"/>
@@ -523,10 +505,7 @@
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jbInsertarTrabajador" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
-                                  <Component id="jbObtenerDatosTrabajador" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="jbInsertarTrabajador" min="-2" pref="45" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
                               <Component id="jbModificarTrabajador" max="32767" attributes="0"/>
                           </Group>
@@ -683,17 +662,6 @@
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JButton" name="jbObtenerDatosTrabajador">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Obtener datos"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbObtenerDatosTrabajadorActionPerformed"/>
-              </Events>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-              </AuxValues>
-            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="jPanel1">
@@ -719,14 +687,11 @@
                           <Component id="jlDniTrabajadorInforme" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jbSiguienteInforme" alignment="0" pref="87" max="32767" attributes="0"/>
-                              <Component id="jbAnteriorInforme" alignment="0" max="32767" attributes="0"/>
-                          </Group>
-                          <Component id="jbObtenerDatosInforme" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jbSiguienteInforme" alignment="0" pref="87" max="32767" attributes="0"/>
+                          <Component id="jbAnteriorInforme" alignment="0" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="98" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="jbEliminarInforme" alignment="0" pref="196" max="32767" attributes="0"/>
                           <Component id="jbInsertarInforme" alignment="0" pref="196" max="32767" attributes="0"/>
@@ -742,10 +707,7 @@
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jbInsertarInforme" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
-                                  <Component id="jbObtenerDatosInforme" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="jbInsertarInforme" min="-2" pref="45" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
                               <Component id="jbModificarInforme" max="32767" attributes="0"/>
                           </Group>
@@ -831,17 +793,6 @@
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JButton" name="jbObtenerDatosInforme">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Obtener datos"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbObtenerDatosInformeActionPerformed"/>
-              </Events>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-              </AuxValues>
-            </Component>
             <Component class="javax.swing.JButton" name="jbSiguienteInforme">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Siguiente"/>
@@ -914,16 +865,13 @@
                                   <Component id="jlLineaFactura" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="jbSiguienteFactura" alignment="0" pref="87" max="32767" attributes="0"/>
-                                      <Component id="jbAnteriorFactura" alignment="0" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Component id="jbObtenerDatosFactura" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="jbSiguienteFactura" alignment="0" pref="87" max="32767" attributes="0"/>
+                                  <Component id="jbAnteriorFactura" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="98" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="jbEliminarFactura" alignment="0" pref="196" max="32767" attributes="0"/>
                           <Component id="jbInsertarFactura" alignment="0" pref="196" max="32767" attributes="0"/>
@@ -939,10 +887,7 @@
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jbInsertarFactura" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
-                                  <Component id="jbObtenerDatosFactura" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="jbInsertarFactura" min="-2" pref="45" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
                               <Component id="jbModificarFactura" max="32767" attributes="0"/>
                           </Group>
@@ -1028,17 +973,6 @@
               </AuxValues>
             </Component>
             <Component class="javax.swing.JTextField" name="jtfLineaFactura">
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-              </AuxValues>
-            </Component>
-            <Component class="javax.swing.JButton" name="jbObtenerDatosFactura">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Obtener datos"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbObtenerDatosFacturaActionPerformed"/>
-              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
               </AuxValues>
@@ -1146,7 +1080,7 @@
                                       <Component id="jlUsoRepuesto" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jlReferenciaRepuesto" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="-2" pref="708" max="-2" attributes="0"/>
+                                  <EmptySpace pref="759" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -1178,16 +1112,12 @@
                                   </Group>
                                   <EmptySpace max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="1" attributes="0">
-                                          <Component id="jbObtenerDatosRepuestos" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
-                                      </Group>
                                       <Component id="jbSiguienteRepuesto" min="-2" pref="87" max="-2" attributes="0"/>
                                       <Component id="jbAnteriorRepuesto" min="-2" pref="87" max="-2" attributes="0"/>
                                   </Group>
+                                  <EmptySpace pref="215" max="32767" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace pref="51" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jbModificarRepuesto" alignment="0" min="-2" pref="196" max="-2" attributes="0"/>
                               <Component id="jbEliminarRepuesto" alignment="0" min="-2" pref="196" max="-2" attributes="0"/>
@@ -1266,7 +1196,6 @@
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jtfNumSerieRepuesto" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                               <Component id="jlNumSerieRepuesto" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jbObtenerDatosRepuestos" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jbInsertarRepuesto" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
@@ -1450,17 +1379,6 @@
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                   </AuxValues>
                 </Component>
-                <Component class="javax.swing.JButton" name="jbObtenerDatosRepuestos">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Obtener datos"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbObtenerDatosRepuestosActionPerformed"/>
-                  </Events>
-                  <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-                  </AuxValues>
-                </Component>
               </SubComponents>
             </Container>
           </SubComponents>
@@ -1510,7 +1428,7 @@
                                       <Component id="jlConsumoMedioObd" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jlRpmInstObd" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="-2" pref="708" max="-2" attributes="0"/>
+                                  <EmptySpace pref="759" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -1543,16 +1461,12 @@
                                   </Group>
                                   <EmptySpace max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="1" attributes="0">
-                                          <Component id="jbObtenerDatosObd" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
-                                      </Group>
                                       <Component id="jbSiguienteObd" alignment="0" min="-2" pref="87" max="-2" attributes="0"/>
                                       <Component id="jbAnteriorObd" alignment="0" min="-2" pref="87" max="-2" attributes="0"/>
                                   </Group>
+                                  <EmptySpace pref="167" max="32767" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace pref="51" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jbModificarObd" alignment="0" min="-2" pref="196" max="-2" attributes="0"/>
                               <Component id="jbEliminarObd" alignment="0" min="-2" pref="196" max="-2" attributes="0"/>
@@ -1623,7 +1537,6 @@
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="jtfIdObd" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                                       <Component id="jlIdObd" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jbObtenerDatosObd" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="jbInsertarObd" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
@@ -1814,17 +1727,6 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="bastidor del veh&#xed;culo de esta lectura "/>
                   </Properties>
-                  <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-                  </AuxValues>
-                </Component>
-                <Component class="javax.swing.JButton" name="jbObtenerDatosObd">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Obtener datos"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbObtenerDatosObdActionPerformed"/>
-                  </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                   </AuxValues>
