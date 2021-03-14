@@ -15,6 +15,6 @@
         <mapping resource="Repuestos.hbm.xml" />
         <mapping resource="Informe.hbm.xml" />
         <mapping resource="Factura.hbm.xml" />
-        <mapping resource="Obd.hbm.xml" /> 
+        <mapping resource="Obd.hbm.xml" />
     </session-factory>
 </hibernate-configuration>

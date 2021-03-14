@@ -5,6 +5,7 @@
  */
 package com.mycompany.fullauto;
 
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -17,7 +18,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="obd")
-public class Obd {
+public class Obd implements Serializable {
     @Id
     @Column(name="id")
     private int id;

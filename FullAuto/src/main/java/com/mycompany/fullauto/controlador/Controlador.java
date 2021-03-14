@@ -5,13 +5,25 @@
  */
 package com.mycompany.fullauto.controlador;
 
+import com.mycompany.fullauto.Exceptions.DAOConexionExcepcion;
+import com.mycompany.fullauto.Exceptions.DAOTrabajadorExcepcion;
+import com.mycompany.fullauto.Factura;
+import com.mycompany.fullauto.Informe;
+import com.mycompany.fullauto.Obd;
+import com.mycompany.fullauto.Repuestos;
+import com.mycompany.fullauto.Trabajador;
+import com.mycompany.fullauto.Vehiculo;
+import com.mycompany.fullauto.modelo.DAO;
 import com.mycompany.fullauto.modelo.ModeloHibernate;
 import com.mycompany.fullauto.modelo.ModeloJdbc;
-import com.mycompany.fullauto.vista.InsertarTrabajador;
+import com.mycompany.fullauto.modelo.ModeloMongo;
+import com.mycompany.fullauto.modelo.ModeloObjectDB;
+import com.mycompany.fullauto.vista.EliminarTrabajador;
+import com.mycompany.fullauto.vista.FormularioTrabajador;
 import com.mycompany.fullauto.vista.Vista;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.List;
+
 
 
 
@@ -19,86 +31,104 @@ import java.util.ArrayList;
  *
  * @author novad
  */
-public class Controlador implements ActionListener
+public class Controlador 
 {
+    private DAO modelo;
     private ModeloJdbc modeloJdbc;
     private ModeloHibernate modeloHibernate;
+    private ModeloObjectDB modeloObjectDB;
+    private ModeloMongo modeloMongo;
     private Vista vista;
-    private ArrayList listaTrabajadores;
-    private int contador;
-    //Connection conn;
     
-    public Controlador(Vista vista, ModeloJdbc modelo)
+    /*private ArrayList<Trabajador> listaTrabajadores;
+    private ArrayList<Vehiculo> listaVehiculos;
+    private ArrayList<Obd> listaObd;
+    private ArrayList<Repuestos> listaRepuestos;
+    private ArrayList<Informe> listaInformes;
+    private ArrayList<Factura> listaFacturas;
+    
+    private int contadorTrabajador;
+    private int contadorVehiculo;*/
+   
+    
+    public Controlador(Vista vista)
     {
         this.vista=vista;
-        this.modeloJdbc=modelo;
-        contador=0;
-        listaTrabajadores=null;
-        
-        mostrarDatosBBDD();
-        
-        vista.jbSiguienteTrabajador.addActionListener(this);
-        vista.jbAnteriorTrabajador.addActionListener(this);
-        
-        vista.jbInsertarTrabajador.addActionListener(this);
-    }
-    public Controlador(Vista vista, ModeloHibernate modelo)
-    {
-        this.vista=vista;
-        this.modeloHibernate=modelo;
-        
-      
-        vista.jbSiguienteTrabajador.addActionListener(this);
-        
-    }
-    public void mostrarDatosBBDD()
-    {
-
-        listaTrabajadores= modeloJdbc.getDatosTrabajador();
-        String datosTrabajador[] = new String[5];
-        datosTrabajador=(String[])listaTrabajadores.get(contador);
-        vista.cargarCampos(datosTrabajador);
+        this.modeloJdbc= new ModeloJdbc();
+        this.modeloHibernate = new ModeloHibernate();
+        this.modeloObjectDB = new ModeloObjectDB();
+        this.modeloMongo = new ModeloMongo();
 
     }
-    public void mostrarSiguienteTrabajador()
+   
+    public ArrayList<Trabajador> getListadoTrabajadores()
     {
-        contador++;
-        String datosTrabajador[] = new String[5];
-        datosTrabajador = (String[])listaTrabajadores.get(contador);
-        vista.cargarCampos(datosTrabajador);
+        ArrayList<Trabajador> listaTrabajadores = null;
+        try 
+        {
+            listaTrabajadores = modeloJdbc.getListadoTrabajadores();
+        }
+        catch (DAOTrabajadorExcepcion ex) 
+        {
+            System.out.println("Error obteniendo la lista de trabajadores");
+            ex.getMessage();
+        }
+        return listaTrabajadores;
+        
     }
-    public void mostrarAnteriorTrabajador()
+    public void insertarTrabajador(Trabajador trabajador)
     {
-        contador--;
-        String datosTrabajador[] = new String[5];
-        datosTrabajador = (String[])listaTrabajadores.get(contador);
-        vista.cargarCampos(datosTrabajador);
+        try 
+        {
+            modeloJdbc.insertarTrabajador(trabajador);
+            //mostrarDatosTrabajador();
+        } 
+        catch (DAOTrabajadorExcepcion ex) 
+        {
+            System.out.println("Error insertando el trabajador");
+            ex.getMessage();
+        } 
     }
-    public void insertarTrabajador()
+    
+    public void modificarTrabajador(Trabajador trabajador, String dniOriginal)
     {
-        InsertarTrabajador it = new InsertarTrabajador(vista, true);
-        it.setVisible(true);
+   
+        try {
+            modeloJdbc.modificarTrabajador(trabajador,dniOriginal);
+        } 
+        catch (DAOTrabajadorExcepcion ex) 
+        {
+            System.out.println("Error al modificar el trabajador");
+            ex.getMessage();
+        }
+        
     }
-
-    @Override
-    public void actionPerformed(ActionEvent ae) {
-        System.out.println("evento Activado");
+    
+    public void eliminarTrabajador(Trabajador trabajador)
+    {
+  
+        try 
+        {
+            modeloJdbc.eliminarTrabajador(trabajador);
+        }
+        catch (DAOTrabajadorExcepcion ex) 
+        {
+            System.out.println("Error al eliminar el trabajador");
+            ex.getMessage();
+        }
  
-        if(ae.getSource()==vista.jbSiguienteTrabajador)
-        {
-            System.out.println("jbSiguienteTrabajador pulsado");
-            mostrarSiguienteTrabajador();
-        }
-        if(ae.getSource()==vista.jbAnteriorTrabajador)
-        {
-            System.out.println("jbAnteriorTrabajador pulsado");
-            mostrarAnteriorTrabajador();
-        }
-        if(ae.getSource()==vista.jbInsertarTrabajador)
-        {
-            System.out.println("jbInsertarTrabajador pulsado");
-           insertarTrabajador();
-        }
     }
+    
+    /*
+    
+    //Funciones para la pestaña vehículo que utiliza hibernate
+    public void mostrarDatosVehiculo() throws DAOConexionExcepcion
+    {
+  
+        listaVehiculos = modeloHibernate.getListadoVehiculos();
+        /*String[] datosVehiculo = new String[10];
+        System.out.println(listaVehiculos.get(contadorVehiculo).getMarca());
+        vista.cargarCamposVehiculo(datosVehiculo);
+    }*/
     
 }

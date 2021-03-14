@@ -5,31 +5,213 @@
  */
 package com.mycompany.fullauto.vista;
 
+import com.mycompany.fullauto.Exceptions.DAOConexionExcepcion;
+import com.mycompany.fullauto.Factura;
+import com.mycompany.fullauto.Informe;
+import com.mycompany.fullauto.Obd;
+import com.mycompany.fullauto.Repuestos;
+import com.mycompany.fullauto.Trabajador;
+import com.mycompany.fullauto.Vehiculo;
 import com.mycompany.fullauto.controlador.Controlador;
 import com.mycompany.fullauto.modelo.ModeloJdbc;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.*;
+import java.util.ArrayList;
 /**
  *
  * @author novad
  */
-public class Vista extends javax.swing.JFrame {
+public class Vista extends javax.swing.JFrame implements ActionListener{
 
     /**
      * Creates new form Vista
      */
+    private Controlador controlador;
+    private ArrayList<Trabajador> listaTrabajadores;
+    private ArrayList<Vehiculo> listaVehiculos;
+    private ArrayList<Informe> listaInformes;
+    private ArrayList<Factura> listaFacturas;
+    private ArrayList<Repuestos> listaRepuestos;
+    private ArrayList<Obd> listaObd;
     
-    public Vista() {
+    
+    private int contadorTrabajador;
+    private int contadorVehiculo;
+    private int contadorInforme;
+    private int contadorRepuestos;
+    private int contadorObd;
+    private int contadorFactura;
+    
+    public Vista(){
         initComponents();
-        ModeloJdbc modelo = new ModeloJdbc();
-        Controlador c1 = new Controlador(this,modelo);
+        controlador = new Controlador(this);
+        
+        
+        jbSiguienteTrabajador.addActionListener(this);
+        jbAnteriorTrabajador.addActionListener(this);
+        jbInsertarTrabajador.addActionListener(this);
+        jbModificarTrabajador.addActionListener(this);
+        jbEliminarTrabajador.addActionListener(this);
+        
+        listaTrabajadores=null;
+        listaVehiculos=null;
+        listaInformes=null;
+        listaFacturas =null;
+        listaRepuestos=null;
+        listaObd=null;
+        
+        contadorTrabajador=0;
+        contadorVehiculo=0;
+        contadorInforme=0;
+        contadorRepuestos=0;
+        contadorObd=0;
+        contadorFactura=0;
+        mostrarDatosTrabajador();
     }
-    public void cargarCampos(String[] trabajador)
+    
+    public void actionPerformed(ActionEvent ae) {
+        System.out.println("evento Activado");
+ 
+        if(ae.getSource()==jbSiguienteTrabajador)
+        {
+            System.out.println("jbSiguienteTrabajador pulsado");
+            mostrarSiguienteTrabajador();
+        }
+        if(ae.getSource()==jbAnteriorTrabajador)
+        {
+            System.out.println("jbAnteriorTrabajador pulsado");
+            mostrarAnteriorTrabajador();
+        }
+        if(ae.getSource()==jbInsertarTrabajador)
+        {
+            System.out.println("jbInsertarTrabajador pulsado");
+           insertarTrabajador();
+        }
+        
+        if(ae.getSource()==jbModificarTrabajador)
+        {
+           System.out.println("jbModificarTrabajador pulsado");
+           modificarTrabajador();
+        }
+        
+        if(ae.getSource()==jbEliminarTrabajador)
+        {
+            System.out.println("jbEliminarTrabajador pulsado");
+           eliminarTrabajador();
+        }
+    }
+    public void mostrarDatosTrabajador()
     {
-        jtfDniTrabajador.setText(trabajador[0]);
-        jtfNombreTrabajador.setText(trabajador[1]);
-        jtfApellido1Trabajador.setText(trabajador[2]);
-        jtfApellido2Trabajador.setText(trabajador[3]);
-        jtfFuncionTrabajador.setText(trabajador[4]);
+        listaTrabajadores= controlador.getListadoTrabajadores();
+        Trabajador trabajador = listaTrabajadores.get(contadorTrabajador);
+        cargarCamposTrabajador(trabajador);
+
+    }
+    public void mostrarSiguienteTrabajador()
+    {
+        contadorTrabajador++;
+        Trabajador trabajador=listaTrabajadores.get(contadorTrabajador);
+        cargarCamposTrabajador(trabajador);
+    }
+    public void mostrarAnteriorTrabajador()
+    {
+        contadorTrabajador--;
+        Trabajador trabajador=listaTrabajadores.get(contadorTrabajador);
+        cargarCamposTrabajador(trabajador);
+    }
+    public void insertarTrabajador()
+    {
+        boolean confirmarInsertar;
+        FormularioTrabajador ft = new FormularioTrabajador(this, true);
+        ft.setTextoTitulo("Insertar trabajador");
+        ft.setVisible(true);
+        confirmarInsertar= ft.getConfirmacion();
+        if(confirmarInsertar)
+        {
+            Trabajador trabajador=new Trabajador(ft.getDni(),ft.getNombre(),ft.getApellido1(),ft.getApellido2(),ft.getFuncion());
+            controlador.insertarTrabajador(trabajador);
+            
+            mostrarDatosTrabajador();
+        }
+     
+    }
+    public void modificarTrabajador()
+    {
+        boolean confirmarModificar;
+        //Esta variable se usa para guardar el dni que corresponde al trabajador que se va a modificar cuando se haga la búsqueda en la base de datos en el modelo.
+        String dniOriginal;
+        
+        Trabajador trabajador = listaTrabajadores.get(contadorTrabajador);
+        dniOriginal= trabajador.getDni();
+        FormularioTrabajador ft = new FormularioTrabajador(this, true);
+        ft.setTextoTitulo("Modificar trabajador");
+        ft.setTextoDni(trabajador.getDni());
+        ft.setTextoNombre(trabajador.getNombre());
+        ft.setTextoApellido1(trabajador.getApellido1());
+        ft.setTextoApellido2(trabajador.getApellido2());
+        ft.setTextoFuncion(trabajador.getFuncion());
+        
+        ft.setVisible(true);
+        confirmarModificar=ft.getConfirmacion();
+        
+        if(confirmarModificar)
+        {
+            trabajador.setDni(ft.getDni());
+            trabajador.setNombre(ft.getNombre());
+            trabajador.setApellido1(ft.getApellido1());
+            trabajador.setApellido2(ft.getApellido2());
+            trabajador.setFuncion(ft.getFuncion());
+            controlador.modificarTrabajador(trabajador,dniOriginal);
+            
+            mostrarDatosTrabajador();
+        }
+        
+    }
+    
+    public void eliminarTrabajador()
+    {
+        boolean confirmarEliminar;
+        String dni;
+        
+        Trabajador trabajador = listaTrabajadores.get(contadorTrabajador);
+        
+        EliminarTrabajador et = new EliminarTrabajador(this, true);
+        et.setTextoDni(trabajador.getDni());
+        et.setTextoNombre(trabajador.getNombre());
+        et.setTextoApellido1(trabajador.getApellido1());
+        et.setTextoApellido2(trabajador.getApellido2());
+        et.setTextoFuncion(trabajador.getFuncion());
+        et.setVisible(true);
+        
+        confirmarEliminar=et.getConfirmacion();
+        if(confirmarEliminar)
+        {
+            controlador.eliminarTrabajador(trabajador);
+            mostrarDatosTrabajador();
+        }
+    }
+    public void cargarCamposTrabajador(Trabajador trabajador)
+    {
+        jtfDniTrabajador.setText(trabajador.getDni());
+        jtfNombreTrabajador.setText(trabajador.getNombre());
+        jtfApellido1Trabajador.setText(trabajador.getApellido1());
+        jtfApellido2Trabajador.setText(trabajador.getApellido2());
+        jtfFuncionTrabajador.setText(trabajador.getFuncion());
+    }
+    public void cargarCamposVehiculo(String[] vehiculo)
+    {
+        jtfBastidorVehiculo.setText(vehiculo[0]);
+        jtfMatriculaVehiculo.setText(vehiculo[1]);
+        jtfMarcaVehiculo.setText(vehiculo[2]);
+        jtfModeloVehiculo.setText(vehiculo[3]);
+        jtfMotorVehiculo.setText(vehiculo[4]);
+        jtfPotenciaVehiculo.setText(vehiculo[5]);
+        jtfCarburanteVehiculo.setText(vehiculo[6]);
+        jtfAceiteVehiculo.setText(vehiculo[7]);
+        jtfConsumoVehiculo.setText(vehiculo[8]);
+        jtfFechaEntradaVehiculo.setText(vehiculo[9]);
+        
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -42,7 +224,23 @@ public class Vista extends javax.swing.JFrame {
     private void initComponents() {
 
         lblTitle = new javax.swing.JLabel();
-        jObd = new javax.swing.JTabbedPane();
+        jtpTablaPrincipal = new javax.swing.JTabbedPane();
+        pTrabajadores = new javax.swing.JPanel();
+        jlDniTrabajador = new javax.swing.JLabel();
+        jtfDniTrabajador = new javax.swing.JTextField();
+        jlNombreTrabajador = new javax.swing.JLabel();
+        jtfNombreTrabajador = new javax.swing.JTextField();
+        jlApellido1Trabajador = new javax.swing.JLabel();
+        jtfApellido1Trabajador = new javax.swing.JTextField();
+        jlApellido2Trabajador = new javax.swing.JLabel();
+        jtfApellido2Trabajador = new javax.swing.JTextField();
+        jlFuncionTrabajador = new javax.swing.JLabel();
+        jtfFuncionTrabajador = new javax.swing.JTextField();
+        jbSiguienteTrabajador = new javax.swing.JButton();
+        jbAnteriorTrabajador = new javax.swing.JButton();
+        jbInsertarTrabajador = new javax.swing.JButton();
+        jbModificarTrabajador = new javax.swing.JButton();
+        jbEliminarTrabajador = new javax.swing.JButton();
         pVehiculos = new javax.swing.JPanel();
         pTrabajadores1 = new javax.swing.JPanel();
         jlBastidorVehiculo = new javax.swing.JLabel();
@@ -70,22 +268,6 @@ public class Vista extends javax.swing.JFrame {
         jlAceiteVehiculo = new javax.swing.JLabel();
         jlConsumoVehiculo = new javax.swing.JLabel();
         jlFechaEntradaVehiculo = new javax.swing.JLabel();
-        pTrabajadores = new javax.swing.JPanel();
-        jlDniTrabajador = new javax.swing.JLabel();
-        jtfDniTrabajador = new javax.swing.JTextField();
-        jlNombreTrabajador = new javax.swing.JLabel();
-        jtfNombreTrabajador = new javax.swing.JTextField();
-        jlApellido1Trabajador = new javax.swing.JLabel();
-        jtfApellido1Trabajador = new javax.swing.JTextField();
-        jlApellido2Trabajador = new javax.swing.JLabel();
-        jtfApellido2Trabajador = new javax.swing.JTextField();
-        jlFuncionTrabajador = new javax.swing.JLabel();
-        jtfFuncionTrabajador = new javax.swing.JTextField();
-        jbSiguienteTrabajador = new javax.swing.JButton();
-        jbAnteriorTrabajador = new javax.swing.JButton();
-        jbInsertarTrabajador = new javax.swing.JButton();
-        jbModificarTrabajador = new javax.swing.JButton();
-        jbEliminarTrabajador = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jtfNumExpedicionInforme = new javax.swing.JTextField();
         jlNumExpedicionInforme = new javax.swing.JLabel();
@@ -170,14 +352,129 @@ public class Vista extends javax.swing.JFrame {
         lblTitle.setText("FullAuto");
         lblTitle.setToolTipText("");
 
+        jlDniTrabajador.setText("DNI");
+
+        jtfDniTrabajador.setEditable(false);
+
+        jlNombreTrabajador.setText("Nombre");
+
+        jtfNombreTrabajador.setEditable(false);
+
+        jlApellido1Trabajador.setText("Apellido 1");
+
+        jtfApellido1Trabajador.setEditable(false);
+
+        jlApellido2Trabajador.setText("Apellido 2");
+
+        jtfApellido2Trabajador.setEditable(false);
+
+        jlFuncionTrabajador.setText("Función");
+
+        jtfFuncionTrabajador.setEditable(false);
+
+        jbSiguienteTrabajador.setText("Siguiente");
+        jbSiguienteTrabajador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSiguienteTrabajadorActionPerformed(evt);
+            }
+        });
+
+        jbAnteriorTrabajador.setText("Anterior");
+
+        jbInsertarTrabajador.setText("Insertar nuevo trabajador");
+
+        jbModificarTrabajador.setText("Modificar trabajador");
+
+        jbEliminarTrabajador.setText("Eliminar trabajador");
+
+        javax.swing.GroupLayout pTrabajadoresLayout = new javax.swing.GroupLayout(pTrabajadores);
+        pTrabajadores.setLayout(pTrabajadoresLayout);
+        pTrabajadoresLayout.setHorizontalGroup(
+            pTrabajadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pTrabajadoresLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(pTrabajadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jtfDniTrabajador)
+                    .addComponent(jtfNombreTrabajador)
+                    .addComponent(jtfApellido1Trabajador)
+                    .addComponent(jtfApellido2Trabajador)
+                    .addComponent(jtfFuncionTrabajador)
+                    .addComponent(jlDniTrabajador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jlNombreTrabajador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jlApellido1Trabajador, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
+                    .addComponent(jlApellido2Trabajador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jlFuncionTrabajador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(63, 63, 63)
+                .addGroup(pTrabajadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jbSiguienteTrabajador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbAnteriorTrabajador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(98, 98, 98)
+                .addGroup(pTrabajadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jbEliminarTrabajador, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
+                    .addComponent(jbInsertarTrabajador, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
+                    .addComponent(jbModificarTrabajador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(513, Short.MAX_VALUE))
+        );
+        pTrabajadoresLayout.setVerticalGroup(
+            pTrabajadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pTrabajadoresLayout.createSequentialGroup()
+                .addGroup(pTrabajadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(pTrabajadoresLayout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addComponent(jbInsertarTrabajador, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(44, 44, 44)
+                        .addComponent(jbModificarTrabajador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(pTrabajadoresLayout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addGroup(pTrabajadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(pTrabajadoresLayout.createSequentialGroup()
+                                .addComponent(jlDniTrabajador)
+                                .addGap(10, 10, 10)
+                                .addComponent(jtfDniTrabajador, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jlNombreTrabajador)
+                                .addGap(19, 19, 19)
+                                .addComponent(jtfNombreTrabajador, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jlApellido1Trabajador, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jbSiguienteTrabajador, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGroup(pTrabajadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pTrabajadoresLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jtfApellido1Trabajador, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jbEliminarTrabajador, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pTrabajadoresLayout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addGroup(pTrabajadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jlApellido2Trabajador)
+                            .addComponent(jbAnteriorTrabajador, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jtfApellido2Trabajador, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(17, 17, 17)
+                .addComponent(jlFuncionTrabajador)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addComponent(jtfFuncionTrabajador, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(288, 288, 288))
+        );
+
+        jtpTablaPrincipal.addTab("Trabajadores", pTrabajadores);
+
         jlBastidorVehiculo.setText("Bastidor");
+
+        jtfBastidorVehiculo.setEditable(false);
 
         jlMatriculaVehiculo.setText("Matrícula");
 
+        jtfMatriculaVehiculo.setEditable(false);
+
         jlMarcaVehiculo.setText("Marca");
+
+        jtfMarcaVehiculo.setEditable(false);
 
         jlModeloVehiculo.setText("Modelo");
 
+        jtfModeloVehiculo.setEditable(false);
         jtfModeloVehiculo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtfModeloVehiculoActionPerformed(evt);
@@ -185,6 +482,8 @@ public class Vista extends javax.swing.JFrame {
         });
 
         jlMotorVehiculo.setText("Motor");
+
+        jtfMotorVehiculo.setEditable(false);
 
         jbSiguienteVehiculo.setText("Siguiente");
         jbSiguienteVehiculo.addActionListener(new java.awt.event.ActionListener() {
@@ -201,11 +500,20 @@ public class Vista extends javax.swing.JFrame {
 
         jbEliminarVehiculo.setText("Eliminar vehículo");
 
+        jtfFechaEntradaVehiculo.setEditable(false);
+
+        jtfConsumoVehiculo.setEditable(false);
         jtfConsumoVehiculo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtfConsumoVehiculoActionPerformed(evt);
             }
         });
+
+        jtfAceiteVehiculo.setEditable(false);
+
+        jtfCarburanteVehiculo.setEditable(false);
+
+        jtfPotenciaVehiculo.setEditable(false);
 
         jlPotenciaVehiculo.setText("Potencia");
 
@@ -247,13 +555,16 @@ public class Vista extends javax.swing.JFrame {
                                         .addComponent(jtfPotenciaVehiculo))
                                     .addComponent(jtfBastidorVehiculo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pTrabajadores1Layout.createSequentialGroup()
-                                .addGroup(pTrabajadores1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jlCarburanteVehiculo)
-                                    .addComponent(jlAceiteVehiculo)
-                                    .addComponent(jlConsumoVehiculo)
-                                    .addComponent(jlFechaEntradaVehiculo)
-                                    .addComponent(jlPotenciaVehiculo)
-                                    .addComponent(jlModeloVehiculo))
+                                .addGroup(pTrabajadores1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(pTrabajadores1Layout.createSequentialGroup()
+                                        .addGroup(pTrabajadores1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jlCarburanteVehiculo)
+                                            .addComponent(jlAceiteVehiculo)
+                                            .addComponent(jlConsumoVehiculo)
+                                            .addComponent(jlPotenciaVehiculo)
+                                            .addComponent(jlModeloVehiculo))
+                                        .addGap(17, 17, 17))
+                                    .addComponent(jlFechaEntradaVehiculo))
                                 .addGroup(pTrabajadores1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(pTrabajadores1Layout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -334,10 +645,10 @@ public class Vista extends javax.swing.JFrame {
                     .addComponent(jtfConsumoVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlConsumoVehiculo))
                 .addGap(18, 18, 18)
-                .addGroup(pTrabajadores1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pTrabajadores1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtfFechaEntradaVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlFechaEntradaVehiculo))
-                .addContainerGap(125, Short.MAX_VALUE))
+                .addContainerGap(113, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout pVehiculosLayout = new javax.swing.GroupLayout(pVehiculos);
@@ -347,120 +658,29 @@ public class Vista extends javax.swing.JFrame {
             .addGroup(pVehiculosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(pTrabajadores1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(154, Short.MAX_VALUE))
+                .addContainerGap(167, Short.MAX_VALUE))
         );
         pVehiculosLayout.setVerticalGroup(
             pVehiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pVehiculosLayout.createSequentialGroup()
-                .addGap(0, 7, Short.MAX_VALUE)
-                .addComponent(pTrabajadores1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pTrabajadores1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
-        jObd.addTab("Vehículos", pVehiculos);
+        jtpTablaPrincipal.addTab("Vehículos", pVehiculos);
 
-        jlDniTrabajador.setText("DNI");
-
-        jlNombreTrabajador.setText("Nombre");
-
-        jlApellido1Trabajador.setText("Apellido 1");
-
-        jlApellido2Trabajador.setText("Apellido 2");
-
-        jlFuncionTrabajador.setText("Función");
-
-        jbSiguienteTrabajador.setText("Siguiente");
-        jbSiguienteTrabajador.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbSiguienteTrabajadorActionPerformed(evt);
-            }
-        });
-
-        jbAnteriorTrabajador.setText("Anterior");
-
-        jbInsertarTrabajador.setText("Insertar nuevo trabajador");
-
-        jbModificarTrabajador.setText("Modificar trabajador");
-
-        jbEliminarTrabajador.setText("Eliminar trabajador");
-
-        javax.swing.GroupLayout pTrabajadoresLayout = new javax.swing.GroupLayout(pTrabajadores);
-        pTrabajadores.setLayout(pTrabajadoresLayout);
-        pTrabajadoresLayout.setHorizontalGroup(
-            pTrabajadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pTrabajadoresLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(pTrabajadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jtfDniTrabajador)
-                    .addComponent(jtfNombreTrabajador)
-                    .addComponent(jtfApellido1Trabajador)
-                    .addComponent(jtfApellido2Trabajador)
-                    .addComponent(jtfFuncionTrabajador)
-                    .addComponent(jlDniTrabajador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jlNombreTrabajador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jlApellido1Trabajador, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
-                    .addComponent(jlApellido2Trabajador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jlFuncionTrabajador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(63, 63, 63)
-                .addGroup(pTrabajadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jbSiguienteTrabajador, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
-                    .addComponent(jbAnteriorTrabajador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(98, 98, 98)
-                .addGroup(pTrabajadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jbEliminarTrabajador, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
-                    .addComponent(jbInsertarTrabajador, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
-                    .addComponent(jbModificarTrabajador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(475, Short.MAX_VALUE))
-        );
-        pTrabajadoresLayout.setVerticalGroup(
-            pTrabajadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pTrabajadoresLayout.createSequentialGroup()
-                .addGroup(pTrabajadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(pTrabajadoresLayout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addComponent(jbInsertarTrabajador, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(44, 44, 44)
-                        .addComponent(jbModificarTrabajador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(pTrabajadoresLayout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addGroup(pTrabajadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(pTrabajadoresLayout.createSequentialGroup()
-                                .addComponent(jlDniTrabajador)
-                                .addGap(10, 10, 10)
-                                .addComponent(jtfDniTrabajador, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jlNombreTrabajador)
-                                .addGap(19, 19, 19)
-                                .addComponent(jtfNombreTrabajador, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jlApellido1Trabajador, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jbSiguienteTrabajador, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGroup(pTrabajadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pTrabajadoresLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtfApellido1Trabajador, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jbEliminarTrabajador, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pTrabajadoresLayout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addGroup(pTrabajadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jlApellido2Trabajador)
-                            .addComponent(jbAnteriorTrabajador, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(jtfApellido2Trabajador, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(17, 17, 17)
-                .addComponent(jlFuncionTrabajador)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
-                .addComponent(jtfFuncionTrabajador, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(288, 288, 288))
-        );
-
-        jObd.addTab("Trabajadores", pTrabajadores);
+        jtfNumExpedicionInforme.setEditable(false);
 
         jlNumExpedicionInforme.setText("Número de expedición");
+
+        jtfTareasInforme.setEditable(false);
 
         jlTareasInforme.setText("Tareas");
 
         jlDniTrabajadorInforme.setText("Dni trabajador");
+
+        jtfDniTrabajadorInforme.setEditable(false);
 
         jbSiguienteInforme.setText("Siguiente");
         jbSiguienteInforme.addActionListener(new java.awt.event.ActionListener() {
@@ -492,14 +712,14 @@ public class Vista extends javax.swing.JFrame {
                     .addComponent(jlDniTrabajadorInforme, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(63, 63, 63)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jbSiguienteInforme, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
+                    .addComponent(jbSiguienteInforme, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jbAnteriorInforme, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(98, 98, 98)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jbEliminarInforme, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
                     .addComponent(jbInsertarInforme, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
                     .addComponent(jbModificarInforme, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(475, Short.MAX_VALUE))
+                .addContainerGap(513, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -537,10 +757,10 @@ public class Vista extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addComponent(jtfDniTrabajadorInforme, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(378, Short.MAX_VALUE))
+                .addContainerGap(377, Short.MAX_VALUE))
         );
 
-        jObd.addTab("Informes", jPanel1);
+        jtpTablaPrincipal.addTab("Informes", jPanel1);
 
         jlNumFactura.setText("Número de factura");
 
@@ -584,14 +804,14 @@ public class Vista extends javax.swing.JFrame {
                             .addComponent(jlLineaFactura, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(63, 63, 63)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jbSiguienteFactura, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
+                            .addComponent(jbSiguienteFactura, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jbAnteriorFactura, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(98, 98, 98)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jbEliminarFactura, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
                     .addComponent(jbInsertarFactura, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
                     .addComponent(jbModificarFactura, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(475, Short.MAX_VALUE))
+                .addContainerGap(513, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -633,10 +853,10 @@ public class Vista extends javax.swing.JFrame {
                         .addComponent(jlnumExpedicionInformeFactura)))
                 .addGap(18, 18, 18)
                 .addComponent(jtfnumExpedicionInformeFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(325, Short.MAX_VALUE))
+                .addContainerGap(324, Short.MAX_VALUE))
         );
 
-        jObd.addTab("Facturas", jPanel2);
+        jtpTablaPrincipal.addTab("Facturas", jPanel2);
 
         jlNumSerieRepuesto.setText("número de serie");
 
@@ -699,7 +919,7 @@ public class Vista extends javax.swing.JFrame {
                         .addGroup(pTrabajadores2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jlUsoRepuesto)
                             .addComponent(jlReferenciaRepuesto))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 759, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 762, Short.MAX_VALUE))
                     .addGroup(pTrabajadores2Layout.createSequentialGroup()
                         .addGroup(pTrabajadores2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pTrabajadores2Layout.createSequentialGroup()
@@ -725,7 +945,7 @@ public class Vista extends javax.swing.JFrame {
                         .addGroup(pTrabajadores2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jbSiguienteRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jbAnteriorRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 215, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 232, Short.MAX_VALUE)))
                 .addGroup(pTrabajadores2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jbModificarRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbEliminarRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -736,66 +956,69 @@ public class Vista extends javax.swing.JFrame {
                     .addGroup(pTrabajadores2Layout.createSequentialGroup()
                         .addGap(74, 74, 74)
                         .addGroup(pTrabajadores2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jlBastidorVehiculoRepuestos)
                             .addComponent(jtfBastidorVehiculoRepuestos, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jlNumeroFacturaRepuestos)
-                            .addComponent(jtfnumeroFacturaRepuestos, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jtfnumeroFacturaRepuestos, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(pTrabajadores2Layout.createSequentialGroup()
+                                .addGap(24, 24, 24)
+                                .addComponent(jlBastidorVehiculoRepuestos))))
                     .addComponent(jlFechaCompraRepuesto))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         pTrabajadores2Layout.setVerticalGroup(
             pTrabajadores2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pTrabajadores2Layout.createSequentialGroup()
-                .addGap(77, 77, 77)
-                .addComponent(jtfReferenciaRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
-                .addGroup(pTrabajadores2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtfNombreRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlNombreRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbModificarRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addGroup(pTrabajadores2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtfMarcaRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlMarcaRepuesto))
                 .addGroup(pTrabajadores2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pTrabajadores2Layout.createSequentialGroup()
-                        .addGap(46, 46, 46)
+                        .addGap(77, 77, 77)
+                        .addComponent(jtfReferenciaRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)
                         .addGroup(pTrabajadores2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jlUsoRepuesto)
-                            .addComponent(jtfUsoRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jtfNombreRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jlNombreRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jbModificarRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(26, 26, 26)
+                        .addGroup(pTrabajadores2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jtfMarcaRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jlMarcaRepuesto))
+                        .addGroup(pTrabajadores2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pTrabajadores2Layout.createSequentialGroup()
+                                .addGap(46, 46, 46)
+                                .addGroup(pTrabajadores2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jlUsoRepuesto)
+                                    .addComponent(jtfUsoRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(pTrabajadores2Layout.createSequentialGroup()
+                                .addGap(17, 17, 17)
+                                .addComponent(jbEliminarRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(20, 20, 20)
+                        .addGroup(pTrabajadores2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jlTiendaRepuesto)
+                            .addComponent(jtfTiendaRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(19, 19, 19)
+                        .addGroup(pTrabajadores2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jlFechaCompraRepuesto)
+                            .addComponent(jtfFechaCompraRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(pTrabajadores2Layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addComponent(jbEliminarRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(20, 20, 20)
-                .addGroup(pTrabajadores2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlTiendaRepuesto)
-                    .addComponent(jtfTiendaRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(19, 19, 19)
-                .addGroup(pTrabajadores2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlFechaCompraRepuesto)
-                    .addComponent(jtfFechaCompraRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(48, 48, 48)
-                .addComponent(jlBastidorVehiculoRepuestos, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addGroup(pTrabajadores2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jtfNumSerieRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jlNumSerieRepuesto)
+                            .addComponent(jbInsertarRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(2, 2, 2)
+                        .addComponent(jlReferenciaRepuesto)
+                        .addGap(26, 26, 26)
+                        .addComponent(jbSiguienteRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(47, 47, 47)
+                        .addComponent(jbAnteriorRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
+                .addComponent(jlBastidorVehiculoRepuestos, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addComponent(jtfBastidorVehiculoRepuestos, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jlNumeroFacturaRepuestos)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jtfnumeroFacturaRepuestos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(73, 73, 73))
-            .addGroup(pTrabajadores2Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(pTrabajadores2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtfNumSerieRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlNumSerieRepuesto)
-                    .addComponent(jbInsertarRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(2, 2, 2)
-                .addComponent(jlReferenciaRepuesto)
-                .addGap(26, 26, 26)
-                .addComponent(jbSiguienteRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47)
-                .addComponent(jbAnteriorRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -805,16 +1028,16 @@ public class Vista extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(pTrabajadores2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(106, Short.MAX_VALUE))
+                .addContainerGap(122, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(0, 7, Short.MAX_VALUE)
-                .addComponent(pTrabajadores2, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 6, Short.MAX_VALUE)
+                .addComponent(pTrabajadores2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jObd.addTab("Repuestos", jPanel3);
+        jtpTablaPrincipal.addTab("Repuestos", jPanel3);
 
         jlIdObd.setText("identificador");
 
@@ -984,16 +1207,16 @@ public class Vista extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(pTrabajadores3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(71, Short.MAX_VALUE))
+                .addContainerGap(93, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addGap(0, 7, Short.MAX_VALUE)
+                .addGap(0, 6, Short.MAX_VALUE)
                 .addComponent(pTrabajadores3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jObd.addTab("OBD", jPanel4);
+        jtpTablaPrincipal.addTab("OBD", jPanel4);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -1004,8 +1227,8 @@ public class Vista extends javax.swing.JFrame {
                 .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(jObd)
+                .addContainerGap()
+                .addComponent(jtpTablaPrincipal)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -1013,8 +1236,8 @@ public class Vista extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(7, 7, 7)
                 .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jObd, javax.swing.GroupLayout.PREFERRED_SIZE, 690, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jtpTablaPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 684, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -1114,7 +1337,6 @@ public class Vista extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JTabbedPane jObd;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -1229,6 +1451,7 @@ public class Vista extends javax.swing.JFrame {
     public javax.swing.JTextField jtfUsoRepuesto;
     public javax.swing.JTextField jtfnumExpedicionInformeFactura;
     public javax.swing.JTextField jtfnumeroFacturaRepuestos;
+    public javax.swing.JTabbedPane jtpTablaPrincipal;
     public javax.swing.JLabel lblTitle;
     public javax.swing.JPanel pTrabajadores;
     public javax.swing.JPanel pTrabajadores1;

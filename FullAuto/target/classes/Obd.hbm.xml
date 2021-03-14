@@ -16,7 +16,7 @@
     <property name="cod_salida" type="string" column="cod_salida"/>
     
     
-    <one-to-one name="vehiculo" class="com.mycompany.fullauto.Vehiculo" property-ref="obd"/>
+    <many-to-one name="vehiculo" class="com.mycompany.fullauto.Vehiculo" column="bastidor_vehiculo"/>
     
     
     </class>

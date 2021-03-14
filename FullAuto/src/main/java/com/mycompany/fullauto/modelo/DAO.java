@@ -5,13 +5,19 @@
  */
 package com.mycompany.fullauto.modelo;
 
+import com.mycompany.fullauto.Exceptions.DAOFacturaExcepcion;
+import com.mycompany.fullauto.Exceptions.DAOInformeExcepcion;
+import com.mycompany.fullauto.Exceptions.DAOObdExcepcion;
+import com.mycompany.fullauto.Exceptions.DAORepuestoExcepcion;
 import com.mycompany.fullauto.Exceptions.DAOTrabajadorExcepcion;
+import com.mycompany.fullauto.Exceptions.DAOVehiculoExcepcion;
 import com.mycompany.fullauto.Factura;
 import com.mycompany.fullauto.Informe;
 import com.mycompany.fullauto.Obd;
 import com.mycompany.fullauto.Repuestos;
 import com.mycompany.fullauto.Trabajador;
 import com.mycompany.fullauto.Vehiculo;
+import java.util.ArrayList;
 import java.util.Set;
 
 /**
@@ -21,44 +27,45 @@ import java.util.Set;
 public interface DAO {
     
     //Interfaz para trabajador
-    void insertTrabajador(Trabajador tr) throws DAOTrabajadorExcepcion;
-    void deleteTrabajador(Trabajador tr) throws DAOTrabajadorExcepcion;
-    void updateTrabajador(Trabajador tr) throws DAOTrabajadorExcepcion;
-    Trabajador getTrabajador(String dni) throws DAOTrabajadorExcepcion;
-    int getNumTrabajadores();
+    ArrayList<Trabajador> getListadoTrabajadores() throws DAOTrabajadorExcepcion;
+    void insertarTrabajador(Trabajador tr) throws DAOTrabajadorExcepcion;
+    void modificarTrabajador(Trabajador tr, String dniOriginal) throws DAOTrabajadorExcepcion;
+    void eliminarTrabajador(Trabajador tr) throws DAOTrabajadorExcepcion;
     
-    
-    
+
     //Interfaz para vehículo
-    void insertVehiculo(Vehiculo vh);
-    void deleteVehiculo(Vehiculo vh);
-    void updateVehiculo(Vehiculo vh);
-    Vehiculo getVehiculo(String bastidor);
-    int getNumVehiculos();
-    
-    //Interfaz para Repuestos
-    void insertRepuesto (Repuestos rep);
-    void deleteRepuesto(Repuestos rep);
-    void updateVehiculo(Repuestos rep);
-    Repuestos getRepuesto (String numSerie);
-    int getNumRepuestos();
-    
-    //Interfaz para OBD
-    void insertObd (Obd obd);
-    void deleteObd(Obd obd);
-    void updateObd(Obd obd);
-    Obd getObd (int id);
-    
+    ArrayList<Vehiculo> getListadoVehiculos() throws DAOVehiculoExcepcion;
+    void insertarVehiculo(Vehiculo vh) throws DAOVehiculoExcepcion;
+    void modificarVehiculo(Vehiculo vh, String bastidorOriginal) throws DAOVehiculoExcepcion;
+    void eliminarVehiculo(Vehiculo vh) throws DAOVehiculoExcepcion;
+   
     //Interfaz para Informe
-    void insertInforme (Informe inf);
-    void deleteInforme(Informe inf);
-    void updateInforme(Informe inf);
-    Informe getInforme (int numExpedicion);
+    ArrayList<Informe> getListadoInformes() throws DAOInformeExcepcion;
+    void insertarInforme (Informe inf) throws DAOInformeExcepcion;
+    void modificarInforme(Informe inf,int numExpedicionOriginal) throws DAOInformeExcepcion;
+    void eliminarInforme(Informe inf) throws DAOInformeExcepcion;
     
     //Interfaz para Factura
-    void insertFactura (Factura fac);
-    void deleteFactura(Factura fac);
-    void updateFactura(Factura fac);
-    Factura getFactura (int numFactura);
+    ArrayList<Factura> getListadoFacturas() throws DAOFacturaExcepcion;
+    void insertFactura (Factura fac) throws DAOFacturaExcepcion;
+    void deleteFactura(Factura fac, int numFacturaOriginal) throws DAOFacturaExcepcion;
+    void updateFactura(Factura fac) throws DAOFacturaExcepcion;
+    
+    //Interfaz para Repuestos
+    ArrayList<Repuestos> getListadoRepuestos() throws DAORepuestoExcepcion;
+    void insertarRepuesto (Repuestos rep)  throws DAORepuestoExcepcion;
+    void modificarRepuesto(Repuestos rep, int numSerieOriginal) throws DAORepuestoExcepcion;
+    void eliminarRepuesto(Repuestos rep) throws DAORepuestoExcepcion;
+    
+    
+    //Interfaz para OBD
+    ArrayList<Obd> getListadoObd() throws DAOObdExcepcion;
+    void insertarObd (Obd obd) throws DAOObdExcepcion;
+    void modificarObd(Obd obd, int idOriginal) throws DAOObdExcepcion;
+    void eliminarObd(Obd obd) throws DAOObdExcepcion;
+    
+    
+   
+    
     
 }

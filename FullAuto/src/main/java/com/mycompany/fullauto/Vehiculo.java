@@ -23,7 +23,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="vehiculo")
-public class Vehiculo {
+public class Vehiculo{
     @Id
     @Column(name="bastidor")
     private String bastidor;

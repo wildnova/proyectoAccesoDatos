@@ -7,8 +7,13 @@ package com.mycompany.fullauto.modelo;
 
 import com.mycompany.fullauto.Exceptions.DAOConexionExcepcion;
 import com.mycompany.fullauto.Exceptions.DAOTrabajadorExcepcion;
+import com.mycompany.fullauto.Factura;
+import com.mycompany.fullauto.Informe;
+import com.mycompany.fullauto.Obd;
+import com.mycompany.fullauto.Repuestos;
 import com.mycompany.fullauto.Trabajador;
 import com.mycompany.fullauto.Vehiculo;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -24,11 +29,22 @@ import org.hibernate.cfg.Configuration;
  */
 public class ModeloHibernate{
 
-    private Session sesion;
+    private Session sesion=null;
     private SessionFactory factory;
     
     private void crearConexionHibernate() throws DAOConexionExcepcion{
+        
         factory= new Configuration().configure().buildSessionFactory();
+        
+        /*factory = new Configuration().configure("hibernate.cfg.xml")
+                .addAnnotatedClass(Factura.class)
+                .addAnnotatedClass(Informe.class)
+                .addAnnotatedClass(Obd.class)
+                .addAnnotatedClass(Repuestos.class)
+                .addAnnotatedClass(Trabajador.class)
+                .addAnnotatedClass(Vehiculo.class)
+                .buildSessionFactory();*/
+        
         sesion= factory.openSession();
         if(sesion==null)
         {
@@ -43,25 +59,24 @@ public class ModeloHibernate{
             throw new DAOConexionExcepcion("No se ha podido cerrar la conexión con hibernate.");
         
     }
-    public Trabajador getTrabajador(String dni) throws DAOTrabajadorExcepcion
+    public List<Vehiculo> getListadoVehiculos() throws DAOConexionExcepcion
     {
-        Trabajador trabajador=null;
-        if (sesion==null)
+        
+        List<Vehiculo> listadoVehiculos=null;
+        crearConexionHibernate();
+        if (sesion!=null)
         {
-            try
-            {
-            crearConexionHibernate();
+        
+        String sql="FROM Vehiculo";
+        Query q = sesion.createQuery(sql);
+        listadoVehiculos = q.list();
 
-            Query q = sesion.createQuery("from Trabajador where dni = '11111111A'");
-            List<Trabajador> listadoTrabajadores = q.list();
-            trabajador = listadoTrabajadores.get(0);
             
-            }
-            catch(DAOConexionExcepcion dce)
-            {
-                System.out.println("Error al conectar a hibernate (getTrabajador)");
-            }
+            
+            
         }
+        return listadoVehiculos;
+    }
         /*if(sesion!=null)
             try
             {
@@ -87,11 +102,8 @@ public class ModeloHibernate{
             {
                 System.out.println("Error al crear la conexión con hibernate");;
             }*/
-           return trabajador; 
-        
-    }
     
-    public int getNumTrabajadores(){
+    /*public int getNumTrabajadores(){
         int numTrabajadores=-1;
         if (sesion==null)
         {
@@ -102,6 +114,7 @@ public class ModeloHibernate{
             Query q = sesion.createQuery("from Trabajador");
             List<Trabajador> listadoTrabajadores = q.list();
             numTrabajadores=listadoTrabajadores.size();
+                
             
             }
             catch(DAOConexionExcepcion dce)
@@ -122,7 +135,7 @@ public class ModeloHibernate{
         }
         
         return numTrabajadores;
-    }
+    }*/
     
     public Set<Trabajador> getTodosTrabajadores() {
        Query q = sesion.createQuery("from Trabajador");
