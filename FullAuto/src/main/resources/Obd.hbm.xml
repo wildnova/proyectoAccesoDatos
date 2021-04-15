@@ -8,13 +8,10 @@
         <generator class="assigned"/>
     </id>
     <property name="rpm_inst" type="int" column="rpm_inst"/>
-    <property name="rpm_avg" type="int" column="rpm_avg"/>
-    <property name="consumo_inst" type="float" column="consumo_inst"/>
-    <property name="consumo_avg" type="float" column="consumo_avg"/>
     <property name="temp_aceite" type="float" column="temp_aceite"/>
     <property name="temp_agua" type="float" column="temp_agua"/>
     <property name="cod_salida" type="string" column="cod_salida"/>
-    
+    <property name="sensores" type="string" column="sensores"/>
     
     <many-to-one name="vehiculo" class="com.mycompany.fullauto.Vehiculo" column="bastidor_vehiculo"/>
     

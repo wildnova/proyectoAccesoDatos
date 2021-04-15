@@ -17,6 +17,7 @@
     <property name="consumo" type="string" column="consumo"/>
     <property name="fechaEntrada" type="java.util.Date" column="fecha_entrada"/>
     <property name="tiempoDedicado" type="string" column="tiempo_dedicado"/>
+    <property name="dniTrabajador" type="string" column="dni_trabajador" update="false" insert="false"/>
     
     <many-to-one name="trabajador" class="com.mycompany.fullauto.Trabajador" column="dni_trabajador" cascade="save-update"/>
     

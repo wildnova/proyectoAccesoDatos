@@ -16,7 +16,6 @@ import com.mycompany.fullauto.controlador.Controlador;
 import com.mycompany.fullauto.modelo.ModeloJdbc;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.*;
 import java.util.ArrayList;
 /**
  *
@@ -35,6 +34,8 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
     private ArrayList<Repuestos> listaRepuestos;
     private ArrayList<Obd> listaObd;
     
+    private SelectorConexion selector;
+    private int seleccionModelo;
     
     private int contadorTrabajador;
     private int contadorVehiculo;
@@ -43,16 +44,60 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
     private int contadorObd;
     private int contadorFactura;
     
+    
     public Vista(){
         initComponents();
-        controlador = new Controlador(this);
+        //Ventana inicial de selección de sistema de base de datos.
+        selector= new SelectorConexion(this, true);
+        selector.setVisible(true);
+        seleccionModelo= selector.getSeleccion();
         
         
+        //si no selecciona ninguna opción en la ventana inicial o si cierra la ventana, se corta la ejecución del programa.
+        if(seleccionModelo==0)
+        {
+            System.exit(0);
+        }
+        
+        controlador = new Controlador(this,seleccionModelo);
+        
+        //Listeners de los botones
         jbSiguienteTrabajador.addActionListener(this);
         jbAnteriorTrabajador.addActionListener(this);
         jbInsertarTrabajador.addActionListener(this);
         jbModificarTrabajador.addActionListener(this);
         jbEliminarTrabajador.addActionListener(this);
+        
+        jbSiguienteVehiculo.addActionListener(this);
+        jbAnteriorVehiculo.addActionListener(this);
+        jbInsertarVehiculo.addActionListener(this);
+        jbModificarVehiculo.addActionListener(this);
+        jbEliminarVehiculo.addActionListener(this);
+        
+        jbSiguienteInforme.addActionListener(this);
+        jbAnteriorInforme.addActionListener(this);
+        jbInsertarInforme.addActionListener(this);
+        jbModificarInforme.addActionListener(this);
+        jbEliminarInforme.addActionListener(this);
+        
+        
+        jbSiguienteFactura.addActionListener(this);
+        jbAnteriorFactura.addActionListener(this);
+        jbInsertarFactura.addActionListener(this);
+        jbModificarFactura.addActionListener(this);
+        jbEliminarFactura.addActionListener(this);
+        
+        jbSiguienteRepuesto.addActionListener(this);
+        jbAnteriorRepuesto.addActionListener(this);
+        jbInsertarRepuesto.addActionListener(this);
+        jbModificarRepuesto.addActionListener(this);
+        jbEliminarRepuesto.addActionListener(this);
+        
+        jbSiguienteObd.addActionListener(this);
+        jbAnteriorObd.addActionListener(this);
+        jbInsertarObd.addActionListener(this);
+        jbModificarObd.addActionListener(this);
+        jbEliminarObd.addActionListener(this);
         
         listaTrabajadores=null;
         listaVehiculos=null;
@@ -67,9 +112,17 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
         contadorRepuestos=0;
         contadorObd=0;
         contadorFactura=0;
+        
+        //Cargar los datos de la base de datos en los distintos campos
         mostrarDatosTrabajador();
+        mostrarDatosVehiculo();
+        mostrarDatosInforme();
+        mostrarDatosFactura();
+        mostrarDatosRepuesto();
+        mostrarDatosObd();
     }
     
+    //LLamadas a cada uno de los distintos botones de la interfaz
     public void actionPerformed(ActionEvent ae) {
         System.out.println("evento Activado");
  
@@ -100,7 +153,152 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
             System.out.println("jbEliminarTrabajador pulsado");
            eliminarTrabajador();
         }
+        
+        
+          if(ae.getSource()==jbSiguienteVehiculo)
+        {
+            System.out.println("jbSiguienteVehiculo pulsado");
+            mostrarSiguienteVehiculo();
+        }
+        if(ae.getSource()==jbAnteriorVehiculo)
+        {
+            System.out.println("jbAnteriorVehiculo pulsado");
+            mostrarAnteriorVehiculo();
+        }
+        if(ae.getSource()==jbInsertarVehiculo)
+        {
+            System.out.println("jbInsertarVehiculo pulsado");
+           insertarVehiculo();
+        }
+        
+        if(ae.getSource()==jbModificarVehiculo)
+        {
+           System.out.println("jbModificarVehiculo pulsado");
+           modificarVehiculo();
+        }
+        
+        if(ae.getSource()==jbEliminarVehiculo)
+        {
+            System.out.println("jbEliminarVehiculo pulsado");
+           eliminarVehiculo();
+        }
+        
+        
+          if(ae.getSource()==jbSiguienteInforme)
+        {
+            System.out.println("jbSiguienteInforme pulsado");
+            mostrarSiguienteInforme();
+        }
+        if(ae.getSource()==jbAnteriorInforme)
+        {
+            System.out.println("jbAnteriorInforme pulsado");
+            mostrarAnteriorInforme();
+        }
+        if(ae.getSource()==jbInsertarInforme)
+        {
+            System.out.println("jbInsertarInforme pulsado");
+           insertarInforme();
+        }
+        
+        if(ae.getSource()==jbModificarInforme)
+        {
+           System.out.println("jbModificarInforme pulsado");
+           modificarInforme();
+        }
+        
+        if(ae.getSource()==jbEliminarInforme)
+        {
+            System.out.println("jbEliminarInforme pulsado");
+           eliminarInforme();
+        }
+        
+          if(ae.getSource()==jbSiguienteFactura)
+        {
+            System.out.println("jbSiguienteFactura pulsado");
+            mostrarSiguienteFactura();
+        }
+        if(ae.getSource()==jbAnteriorFactura)
+        {
+            System.out.println("jbAnteriorFactura pulsado");
+            mostrarAnteriorFactura();
+        }
+        if(ae.getSource()==jbInsertarFactura)
+        {
+            System.out.println("jbInsertarFactura pulsado");
+           insertarFactura();
+        }
+        
+        if(ae.getSource()==jbModificarFactura)
+        {
+           System.out.println("jbModificarFactura pulsado");
+           modificarFactura();
+        }
+        
+        if(ae.getSource()==jbEliminarFactura)
+        {
+            System.out.println("jbEliminarFactura pulsado");
+           eliminarFactura();
+        }
+        
+          if(ae.getSource()==jbSiguienteRepuesto)
+        {
+            System.out.println("jbSiguienteRepuesto pulsado");
+            mostrarSiguienteRepuesto();
+        }
+        if(ae.getSource()==jbAnteriorRepuesto)
+        {
+            System.out.println("jbAnteriorRepuesto pulsado");
+            mostrarAnteriorRepuesto();
+        }
+        if(ae.getSource()==jbInsertarRepuesto)
+        {
+            System.out.println("jbInsertarRepuesto pulsado");
+           insertarRepuesto();
+        }
+        
+        if(ae.getSource()==jbModificarRepuesto)
+        {
+           System.out.println("jbModificarRepuesto pulsado");
+           modificarRepuesto();
+        }
+        
+        if(ae.getSource()==jbEliminarRepuesto)
+        {
+            System.out.println("jbEliminarRepuesto pulsado");
+           eliminarRepuesto();
+        }
+        
+          if(ae.getSource()==jbSiguienteObd)
+        {
+            System.out.println("jbSiguienteObd pulsado");
+            mostrarSiguienteObd();
+        }
+        if(ae.getSource()==jbAnteriorObd)
+        {
+            System.out.println("jbAnteriorObd pulsado");
+            mostrarAnteriorObd();
+        }
+        if(ae.getSource()==jbInsertarObd)
+        {
+            System.out.println("jbInsertarObd pulsado");
+           insertarObd();
+        }
+        
+        if(ae.getSource()==jbModificarObd)
+        {
+           System.out.println("jbModificarObd pulsado");
+           modificarObd();
+        }
+        
+        if(ae.getSource()==jbEliminarObd)
+        {
+            System.out.println("jbEliminarObd pulsado");
+           eliminarObd();
+        }
+        
     }
+    
+    //Funciones de TRABAJADOR
     public void mostrarDatosTrabajador()
     {
         listaTrabajadores= controlador.getListadoTrabajadores();
@@ -139,13 +337,12 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
     public void modificarTrabajador()
     {
         boolean confirmarModificar;
-        //Esta variable se usa para guardar el dni que corresponde al trabajador que se va a modificar cuando se haga la búsqueda en la base de datos en el modelo.
-        String dniOriginal;
         
         Trabajador trabajador = listaTrabajadores.get(contadorTrabajador);
-        dniOriginal= trabajador.getDni();
+        
         FormularioTrabajador ft = new FormularioTrabajador(this, true);
         ft.setTextoTitulo("Modificar trabajador");
+        ft.desactivarDni();
         ft.setTextoDni(trabajador.getDni());
         ft.setTextoNombre(trabajador.getNombre());
         ft.setTextoApellido1(trabajador.getApellido1());
@@ -162,7 +359,7 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
             trabajador.setApellido1(ft.getApellido1());
             trabajador.setApellido2(ft.getApellido2());
             trabajador.setFuncion(ft.getFuncion());
-            controlador.modificarTrabajador(trabajador,dniOriginal);
+            controlador.modificarTrabajador(trabajador);
             
             mostrarDatosTrabajador();
         }
@@ -172,7 +369,6 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
     public void eliminarTrabajador()
     {
         boolean confirmarEliminar;
-        String dni;
         
         Trabajador trabajador = listaTrabajadores.get(contadorTrabajador);
         
@@ -191,6 +387,494 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
             mostrarDatosTrabajador();
         }
     }
+    
+    //Funciones de VEHICULO
+    
+    public void mostrarDatosVehiculo()
+    {
+        listaVehiculos= controlador.getListadoVehiculos();
+        Vehiculo vehiculo = listaVehiculos.get(contadorVehiculo);
+        String nombreCompleto=controlador.comprobarTrabajadorAsignado(vehiculo);
+        cargarCamposVehiculo(vehiculo,nombreCompleto);
+    }
+    
+    public void mostrarSiguienteVehiculo()
+    {
+        contadorVehiculo++;
+        Vehiculo vehiculo=listaVehiculos.get(contadorVehiculo);
+        String nombreCompleto=controlador.comprobarTrabajadorAsignado(vehiculo);
+        cargarCamposVehiculo(vehiculo,nombreCompleto);
+    }
+    public void mostrarAnteriorVehiculo()
+    {
+        contadorVehiculo--;
+        Vehiculo vehiculo=listaVehiculos.get(contadorVehiculo);
+        String nombreCompleto=controlador.comprobarTrabajadorAsignado(vehiculo);
+        cargarCamposVehiculo(vehiculo,nombreCompleto);
+    }
+    public void insertarVehiculo()
+    {
+        boolean confirmarInsertar;
+        FormularioVehiculo fv = new FormularioVehiculo(this, true);
+        fv.setTextoTitulo("Insertar vehículo");
+        fv.setVisible(true);
+        confirmarInsertar= fv.getConfirmacion();
+        if(confirmarInsertar)
+        {
+            Vehiculo vehiculo = new Vehiculo(fv.getBastidor(),fv.getMatricula(),fv.getMarca(),fv.getModelo(),fv.getMotor(),fv.getPotencia(),fv.getCarburante(),fv.getAceite(),fv.getConsumo(),fv.getFechaEntrada(),fv.getTiempoDedicado(),fv.getDniTrabajadorAsignado());
+            controlador.insertarVehiculo(vehiculo);
+            
+            mostrarDatosVehiculo();
+        }
+    }
+    public void modificarVehiculo()
+    {
+         boolean confirmarModificar;
+     
+        Vehiculo vehiculo = listaVehiculos.get(contadorVehiculo);
+        
+        FormularioVehiculo fv = new FormularioVehiculo(this, true);
+        fv.setTextoTitulo("Modificar vehículo");
+        fv.desactivarBastidor();
+        fv.setTextoBastidor(vehiculo.getBastidor());
+        fv.setTextoMatricula(vehiculo.getMatricula());
+        fv.setTextoMarca(vehiculo.getMarca());
+        fv.setTextoModelo(vehiculo.getModelo());
+        fv.setTextoMotor(vehiculo.getMotor());
+        fv.setTextoPotencia(vehiculo.getPotenciaCv());
+        fv.setTextoCarburante(vehiculo.getCarburante());
+        fv.setTextoAceite(vehiculo.getAceite());
+        fv.setTextoConsumo(vehiculo.getConsumo());
+        fv.setTextoFechaEntrada(vehiculo.getFechaEntrada());
+        fv.setTextoTiempoDedicado(vehiculo.getTiempoDedicado());
+        fv.setTextoDniTrabajadorAsignado(vehiculo.getDniTrabajador());
+        
+        fv.setVisible(true);
+        confirmarModificar=fv.getConfirmacion();
+        
+        if(confirmarModificar)
+        {
+            vehiculo.setBastidor(fv.getBastidor());
+            vehiculo.setMatricula(fv.getMatricula());
+            vehiculo.setMarca(fv.getMarca());
+            vehiculo.setModelo(fv.getModelo());
+            vehiculo.setMotor(fv.getMotor());
+            vehiculo.setPotenciaCv(fv.getPotencia());
+            vehiculo.setCarburante(fv.getCarburante());
+            vehiculo.setAceite(fv.getAceite());
+            vehiculo.setConsumo(fv.getConsumo());
+            vehiculo.setFechaEntrada(fv.getFechaEntrada());
+            vehiculo.setTiempoDedicado(fv.getTiempoDedicado());
+            vehiculo.setDniTrabajador(fv.getDniTrabajadorAsignado());
+           
+           
+            controlador.modificarVehiculo(vehiculo);
+            
+            mostrarDatosVehiculo();
+        }
+    }
+    public void eliminarVehiculo()
+    {
+        boolean confirmarEliminar;
+        
+        Vehiculo vehiculo = listaVehiculos.get(contadorVehiculo);
+        
+        EliminarVehiculo ev = new EliminarVehiculo(this, true);
+       
+        ev.setTextoBastidor(vehiculo.getBastidor());
+        ev.setTextoMatricula(vehiculo.getMatricula());
+        ev.setTextoMarca(vehiculo.getMarca());
+        ev.setTextoModelo(vehiculo.getModelo());
+        ev.setTextoMotor(vehiculo.getMotor());
+        ev.setTextoPotencia(vehiculo.getPotenciaCv());
+        ev.setTextoCarburante(vehiculo.getCarburante());
+        ev.setTextoAceite(vehiculo.getAceite());
+        ev.setTextoConsumo(vehiculo.getConsumo());
+        ev.setTextoFechaEntrada(vehiculo.getFechaEntrada());
+        ev.setTextoTiempoDedicado(vehiculo.getTiempoDedicado());
+        ev.setTextoDniTrabajadorAsignado(vehiculo.getDniTrabajador());
+        ev.setVisible(true);
+        
+        confirmarEliminar=ev.getConfirmacion();
+        if(confirmarEliminar)
+        {
+            controlador.eliminarVehiculo(vehiculo);
+            mostrarDatosVehiculo();
+        }
+    }
+    
+    //Funciones de INFORME
+    
+    public void mostrarDatosInforme()
+    {
+        listaInformes= controlador.getListadoInformes();
+        Informe informe = listaInformes.get(contadorInforme);
+        cargarCamposInforme(informe);
+    }
+    public void mostrarSiguienteInforme()
+    {
+        contadorInforme++;
+        Informe informe=listaInformes.get(contadorInforme);
+        cargarCamposInforme(informe);
+    }
+    public void mostrarAnteriorInforme()
+    {
+        contadorInforme--;
+        Informe informe=listaInformes.get(contadorInforme);
+        cargarCamposInforme(informe);
+    }
+    public void insertarInforme()
+    {
+        boolean confirmarInsertar;
+        FormularioInforme fi = new FormularioInforme(this, true);
+        fi.setTextoTitulo("Insertar informe");
+        fi.setVisible(true);
+        confirmarInsertar= fi.getConfirmacion();
+        if(confirmarInsertar)
+        {
+            Informe informe=new Informe(Integer.parseInt(fi.getNumExpedicion()),fi.getTareas(),fi.getDniTrabajadorInforme());
+            controlador.insertarInforme(informe);
+            
+            mostrarDatosInforme();
+        }
+    }
+    public void modificarInforme()
+    {
+        boolean confirmarModificar;
+        
+        Informe informe = listaInformes.get(contadorInforme);
+        
+        FormularioInforme fi = new FormularioInforme(this, true);
+        fi.setTextoTitulo("Modificar informe");
+        fi.desactivarNumExpedicion();
+        fi.setTextoNumExpedicion(String.valueOf(informe.getNumExpedicion()));
+        fi.setTextoTareas(informe.getTareas());
+        fi.setTextoDniTrabajadorInforme(informe.getDniTrabajadorInforme());
+        
+        
+        fi.setVisible(true);
+        confirmarModificar=fi.getConfirmacion();
+        
+        if(confirmarModificar)
+        {
+            informe.setNumExpedicion(Integer.parseInt(fi.getNumExpedicion()));
+            informe.setTareas(fi.getTareas());
+            informe.setDniTrabajadorInforme(fi.getDniTrabajadorInforme());
+            
+            controlador.modificarInforme(informe);
+            
+            mostrarDatosInforme();
+        }
+    }
+    public void eliminarInforme()
+    {
+        
+        boolean confirmarEliminar;
+        
+        Informe informe = listaInformes.get(contadorInforme);
+        
+        EliminarInforme ei = new EliminarInforme(this, true);
+       
+        ei.setTextoNumExpedicion(String.valueOf(informe.getNumExpedicion()));
+        ei.setTextoTareas(informe.getTareas());
+        ei.setTextoDniTrabajadorInforme(informe.getDniTrabajadorInforme());
+        
+        ei.setVisible(true);
+        
+        confirmarEliminar=ei.getConfirmacion();
+        if(confirmarEliminar)
+        {
+            controlador.eliminarInforme(informe);
+            mostrarDatosInforme();
+        }
+    }
+    
+    //Funciones de FACTURA
+    
+    public void mostrarDatosFactura()
+    {
+        listaFacturas= controlador.getListadoFacturas();
+        Factura factura = listaFacturas.get(contadorFactura);
+        cargarCamposFactura(factura);
+    }
+    public void mostrarSiguienteFactura()
+    {
+        contadorFactura++;
+        Factura factura=listaFacturas.get(contadorFactura);
+        cargarCamposFactura(factura);
+    }
+    public void mostrarAnteriorFactura()
+    {
+        contadorFactura--;
+        Factura factura=listaFacturas.get(contadorFactura);
+        cargarCamposFactura(factura);
+    }
+    public void insertarFactura()
+    {
+        boolean confirmarInsertar;
+        FormularioFactura ff = new FormularioFactura(this, true);
+        ff.setTextoTitulo("Insertar factura");
+        ff.setVisible(true);
+        confirmarInsertar= ff.getConfirmacion();
+        if(confirmarInsertar)
+        {
+            Factura factura=new Factura(Integer.parseInt(ff.getNumFactura()),Double.parseDouble(ff.getPrecio()),ff.getLineaFactura(),ff.getNumExpedicionInforme());
+            controlador.insertarFactura(factura);
+            
+            mostrarDatosFactura();
+        }
+    }
+    public void modificarFactura()
+    {
+        boolean confirmarModificar;
+        
+        Factura factura = listaFacturas.get(contadorFactura);
+        
+        FormularioFactura ff = new FormularioFactura(this, true);
+        ff.setTextoTitulo("Modificar factura");
+        ff.desactivarNumFactura();
+        ff.setTextoNumFactura(String.valueOf(factura.getNumFactura()));
+        ff.setTextoPrecio(String.valueOf(factura.getPrecio()));
+        ff.setTextoLineaFactura(factura.getLineaFactura());
+        ff.setTextoNumExpedicionInforme(factura.getNumExpedicionInforme());
+        
+        ff.setVisible(true);
+        confirmarModificar=ff.getConfirmacion();
+        
+        if(confirmarModificar)
+        {
+            factura.setNumFactura(Integer.parseInt(ff.getNumFactura()));
+            factura.setPrecio(Double.parseDouble(ff.getPrecio()));
+            factura.setLineaFactura(ff.getLineaFactura());
+            factura.setNumExpedicionInforme(ff.getNumExpedicionInforme());
+            
+            controlador.modificarFactura(factura);
+            
+            mostrarDatosFactura();
+        }
+    }
+    public void eliminarFactura()
+    {
+        boolean confirmarEliminar;
+        
+        Factura factura = listaFacturas.get(contadorFactura);
+        
+        EliminarFactura ef = new EliminarFactura(this, true);
+       
+        ef.setTextoNumFactura(String.valueOf(factura.getNumFactura()));
+        ef.setTextoPrecio(String.valueOf(factura.getPrecio()));
+        ef.setTextoLineaFactura(factura.getLineaFactura());
+        ef.setTextoNumExpedicionInforme(factura.getNumExpedicionInforme());
+        
+        ef.setVisible(true);
+        
+        confirmarEliminar=ef.getConfirmacion();
+        if(confirmarEliminar)
+        {
+            controlador.eliminarFactura(factura);
+            mostrarDatosFactura();
+        }
+    }
+    
+    //Funciones de REPUESTOS
+    
+    public void mostrarDatosRepuesto()
+    {
+        listaRepuestos= controlador.getListadoRepuestos();
+        Repuestos repuesto = listaRepuestos.get(contadorRepuestos);
+        cargarCamposRepuestos(repuesto);
+    }
+    public void mostrarSiguienteRepuesto()
+    {
+        contadorRepuestos++;
+        Repuestos repuesto=listaRepuestos.get(contadorRepuestos);
+        cargarCamposRepuestos(repuesto);
+    
+    }
+    public void mostrarAnteriorRepuesto()
+    {
+        contadorRepuestos--;
+        Repuestos repuesto=listaRepuestos.get(contadorRepuestos);
+        cargarCamposRepuestos(repuesto);
+    }
+    public void insertarRepuesto()
+    {
+        boolean confirmarInsertar;
+        FormularioRepuestos fr = new FormularioRepuestos(this, true);
+        fr.setTextoTitulo("Insertar repuesto");
+        fr.setVisible(true);
+        confirmarInsertar= fr.getConfirmacion();
+        if(confirmarInsertar)
+        {
+            Repuestos repuesto=new Repuestos(fr.getNumSerie(),fr.getReferencia(),fr.getNombre(),fr.getMarca(),fr.getUso(),fr.getTienda(),fr.getFechaCompra(),fr.getBastidorVehiculoRepuestos(),fr.getNumFacturaRepuestos());
+            controlador.insertarRepuesto(repuesto);
+            
+            mostrarDatosRepuesto();
+        }
+    }
+    public void modificarRepuesto()
+    {
+      boolean confirmarModificar;
+        
+        Repuestos repuesto = listaRepuestos.get(contadorRepuestos);
+        
+        FormularioRepuestos fr = new FormularioRepuestos(this, true);
+        fr.setTextoTitulo("Modificar repuesto");
+        fr.desactivarNumSerie();
+        fr.setTextoNumSerie(repuesto.getNumSerie());
+        fr.setTextoReferencia(repuesto.getReferencia());
+        fr.setTextoNombre(repuesto.getNombre());
+        fr.setTextoMarca(repuesto.getMarca());
+        fr.setTextoUso(repuesto.getUso());
+        fr.setTextoTienda(repuesto.getTienda());
+        fr.setTextoFechaCompra(repuesto.getFechaCompra());
+        fr.setTextoBastidorRepuestos(repuesto.getBastidorVehiculoRepuestos());
+        fr.setTextoNumFacturaRepuestos(repuesto.getNumFacturaRepuestos());
+        
+        fr.setVisible(true);
+        confirmarModificar=fr.getConfirmacion();
+        
+        if(confirmarModificar)
+        {
+            repuesto.setNumSerie(fr.getNumSerie());
+            repuesto.setReferencia(fr.getReferencia());
+            repuesto.setNombre(fr.getNombre());
+            repuesto.setMarca(fr.getMarca());
+            repuesto.setUso(fr.getUso());
+            repuesto.setTienda(fr.getTienda());
+            repuesto.setTienda(fr.getTienda());
+            repuesto.setFechaCompra(fr.getFechaCompra());
+            repuesto.setBastidorVehiculoRepuestos(fr.getBastidorVehiculoRepuestos());
+            repuesto.setNumFacturaRepuestos(fr.getNumFacturaRepuestos());
+            controlador.modificarRepuesto(repuesto);
+            
+            mostrarDatosRepuesto();
+        }  
+    }
+    public void eliminarRepuesto()
+    {
+        boolean confirmarEliminar;
+        
+        Repuestos repuesto = listaRepuestos.get(contadorRepuestos);
+        
+        EliminarRepuestos er = new EliminarRepuestos(this, true);
+       
+        er.setTextoNumSerie(repuesto.getNumSerie());
+        er.setTextoReferencia(repuesto.getReferencia());
+        er.setTextoNombre(repuesto.getNombre());
+        er.setTextoMarca(repuesto.getMarca());
+        er.setTextoUso(repuesto.getUso());
+        er.setTextoTienda(repuesto.getTienda());
+        er.setTextoFechaCompra(repuesto.getFechaCompra().toString());
+        er.setTextoBastidorRepuestos(repuesto.getBastidorVehiculoRepuestos());
+        er.setTextoNumFacturaRepuestos(repuesto.getNumFacturaRepuestos());
+        er.setVisible(true);
+        
+        confirmarEliminar=er.getConfirmacion();
+        if(confirmarEliminar)
+        {
+            controlador.eliminarRepuesto(repuesto);
+            mostrarDatosRepuesto();
+        }
+    }
+    
+    //Funciones de OBD
+    
+    public void mostrarDatosObd()
+    {
+        listaObd= controlador.getListadoObd();
+        Obd obd = listaObd.get(contadorObd);
+        cargarCamposObd(obd);
+    }
+    public void mostrarSiguienteObd()
+    {
+        contadorObd++;
+        Obd obd=listaObd.get(contadorObd);
+        cargarCamposObd(obd);
+    }
+    public void mostrarAnteriorObd()
+    {
+        contadorObd--;
+        Obd obd=listaObd.get(contadorObd);
+        cargarCamposObd(obd);
+    }
+    public void insertarObd()
+    {
+        boolean confirmarInsertar;
+        FormularioObd fo = new FormularioObd(this, true);
+        fo.setTextoTitulo("Insertar Obd");
+        fo.setVisible(true);
+        confirmarInsertar= fo.getConfirmacion();
+        if(confirmarInsertar)
+        {
+            Obd obd=new Obd(Integer.parseInt(fo.getId()),Integer.parseInt(fo.getRpmInst()),Double.parseDouble(fo.getTempAceite()),Double.parseDouble(fo.getTempAgua()),fo.getCodSalida(),fo.getSensores(),fo.getBastidorObd());
+            controlador.insertarObd(obd);
+            
+            mostrarDatosObd();
+        }
+    }
+    public void modificarObd()
+    {
+        boolean confirmarModificar;
+        
+        Obd obd = listaObd.get(contadorObd);
+        
+        FormularioObd fo = new FormularioObd(this, true);
+        fo.setTextoTitulo("Modificar Obd");
+        fo.desactivarIdObd();
+        fo.setTextoId(String.valueOf(obd.getId()));
+        fo.setTextoRpmInst(String.valueOf(obd.getRpm_inst()));
+        fo.setTextoTempAceite(String.valueOf(obd.getTemp_aceite()));
+        fo.setTextoTempAgua(String.valueOf(obd.getTemp_agua()));
+        fo.setTextoCodSalida(obd.getCod_salida());
+        fo.setTextoSensores(obd.getSensores());
+        fo.setTextoBastidorObd(obd.getBastidorVehiculoObd());
+        
+        fo.setVisible(true);
+        confirmarModificar=fo.getConfirmacion();
+        
+        if(confirmarModificar)
+        {
+            obd.setId(Integer.parseInt(fo.getId()));
+            obd.setRpm_inst(Integer.parseInt(fo.getRpmInst()));
+            obd.setTemp_aceite(Double.parseDouble(fo.getTempAceite()));
+            obd.setTemp_agua(Double.parseDouble(fo.getTempAgua()));
+            obd.setCod_salida(obd.getCod_salida());
+            obd.setSensores(obd.getSensores());
+            obd.setBastidorVehiculoObd(obd.getBastidorVehiculoObd());
+                   
+            controlador.modificarObd(obd);
+            
+            mostrarDatosObd();
+        }
+    }
+    public void eliminarObd()
+    {
+        boolean confirmarEliminar;
+        
+        Obd obd = listaObd.get(contadorObd);
+        
+        EliminarObd eo = new EliminarObd(this, true);
+       
+        eo.setTextoId(String.valueOf(obd.getId()));
+        eo.setTextoRpmInst(String.valueOf(obd.getRpm_inst()));
+        eo.setTextoTempAceite(String.valueOf(obd.getTemp_aceite()));
+        eo.setTextoTempAgua(String.valueOf(obd.getTemp_agua()));
+        eo.setTextoCodSalida(obd.getCod_salida());
+        eo.setTextoSensores(obd.getSensores());
+        eo.setTextoBastidorObd(obd.getBastidorVehiculoObd());
+        eo.setVisible(true);
+        
+        confirmarEliminar=eo.getConfirmacion();
+        if(confirmarEliminar)
+        {
+            controlador.eliminarObd(obd);
+            mostrarDatosObd();
+        }
+    }
+    
+    //Funciones para cargar los campos trabajando con lo que reciba del controlador
+    
     public void cargarCamposTrabajador(Trabajador trabajador)
     {
         jtfDniTrabajador.setText(trabajador.getDni());
@@ -199,19 +883,60 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
         jtfApellido2Trabajador.setText(trabajador.getApellido2());
         jtfFuncionTrabajador.setText(trabajador.getFuncion());
     }
-    public void cargarCamposVehiculo(String[] vehiculo)
+    public void cargarCamposVehiculo(Vehiculo vehiculo, String nombreCompleto)
     {
-        jtfBastidorVehiculo.setText(vehiculo[0]);
-        jtfMatriculaVehiculo.setText(vehiculo[1]);
-        jtfMarcaVehiculo.setText(vehiculo[2]);
-        jtfModeloVehiculo.setText(vehiculo[3]);
-        jtfMotorVehiculo.setText(vehiculo[4]);
-        jtfPotenciaVehiculo.setText(vehiculo[5]);
-        jtfCarburanteVehiculo.setText(vehiculo[6]);
-        jtfAceiteVehiculo.setText(vehiculo[7]);
-        jtfConsumoVehiculo.setText(vehiculo[8]);
-        jtfFechaEntradaVehiculo.setText(vehiculo[9]);
+        jtfBastidorVehiculo.setText(vehiculo.getBastidor());
+        jtfMatriculaVehiculo.setText(vehiculo.getMatricula());
+        jtfMarcaVehiculo.setText(vehiculo.getMarca());
+        jtfModeloVehiculo.setText(vehiculo.getModelo());
+        jtfMotorVehiculo.setText(vehiculo.getMotor());
+        jtfPotenciaVehiculo.setText(vehiculo.getPotenciaCv());
+        jtfCarburanteVehiculo.setText(vehiculo.getCarburante());
+        jtfAceiteVehiculo.setText(vehiculo.getAceite());
+        jtfConsumoVehiculo.setText(vehiculo.getConsumo());
+        jtfFechaEntradaVehiculo.setText(vehiculo.getFechaEntrada().toString());
+        jtfTiempoDedicado.setText(vehiculo.getTiempoDedicado().toString());
+        jtfDNITrabajadorVehiculo.setText(vehiculo.getDniTrabajador());
+        jtfNombreCompletoTrabajadorVehiculo.setText(nombreCompleto);
         
+    }
+    public void cargarCamposInforme(Informe informe)
+    {
+        jtfNumExpedicionInforme.setText(String.valueOf(informe.getNumExpedicion()));
+        jtfTareasInforme.setText(informe.getTareas());
+        jtfDniTrabajadorInforme.setText(informe.getDniTrabajadorInforme());
+    
+    }
+    public void cargarCamposFactura(Factura factura)
+    {
+        jtfNumFactura.setText(String.valueOf(factura.getNumFactura()));
+        jtfPrecioFactura.setText(String.valueOf(factura.getPrecio()));
+        jtfLineaFactura.setText(factura.getLineaFactura());
+        jtfnumExpedicionInformeFactura.setText(factura.getNumExpedicionInforme());
+    }
+    public void cargarCamposRepuestos(Repuestos repuestos)
+    {
+        jtfNumSerieRepuesto.setText(repuestos.getNumSerie());
+        jtfReferenciaRepuesto.setText(repuestos.getReferencia());
+        jtfNombreRepuesto.setText(repuestos.getNombre());
+        jtfMarcaRepuesto.setText(repuestos.getMarca());
+        jtfUsoRepuesto.setText(repuestos.getUso());
+        jtfTiendaRepuesto.setText(repuestos.getTienda());
+        jtfFechaCompraRepuesto.setText(String.valueOf(repuestos.getFechaCompra()));
+        jtfBastidorVehiculoRepuestos.setText(repuestos.getBastidorVehiculoRepuestos());
+        jtfNumFacturaRepuestos.setText(repuestos.getNumFacturaRepuestos());
+        
+                
+    }
+    public void cargarCamposObd(Obd obd)
+    {
+        jtfIdObd.setText(String.valueOf(obd.getId()));
+        jtfRpmInstObd.setText(String.valueOf(obd.getRpm_inst()));
+        jtfTemperaturaAceiteObd.setText(String.valueOf(obd.getTemp_aceite()));
+        jtfTemperaturaAguaObd.setText(String.valueOf(obd.getTemp_aceite()));
+        jtfCodigoSalidaObd.setText(String.valueOf(obd.getTemp_aceite()));
+        jtfSensores.setText(obd.getSensores());
+        jtfBastidorVehiculoObd.setText(obd.getBastidorVehiculoObd());
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -223,6 +948,7 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        fondoMain = new javax.swing.JPanel();
         lblTitle = new javax.swing.JLabel();
         jtpTablaPrincipal = new javax.swing.JTabbedPane();
         pTrabajadores = new javax.swing.JPanel();
@@ -268,6 +994,13 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
         jlAceiteVehiculo = new javax.swing.JLabel();
         jlConsumoVehiculo = new javax.swing.JLabel();
         jlFechaEntradaVehiculo = new javax.swing.JLabel();
+        jtfTiempoDedicado = new javax.swing.JTextField();
+        jlTiempoDedicado = new javax.swing.JLabel();
+        jtfDNITrabajadorVehiculo = new javax.swing.JTextField();
+        jlTrabajadorAsignado = new javax.swing.JLabel();
+        jlDniTrabajadorVehiculo = new javax.swing.JLabel();
+        jtfNombreCompletoTrabajadorVehiculo = new javax.swing.JTextField();
+        jlNombreCompletoTrabajadorVehiculo = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jtfNumExpedicionInforme = new javax.swing.JTextField();
         jlNumExpedicionInforme = new javax.swing.JLabel();
@@ -311,7 +1044,7 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
         jbInsertarRepuesto = new javax.swing.JButton();
         jbModificarRepuesto = new javax.swing.JButton();
         jbEliminarRepuesto = new javax.swing.JButton();
-        jtfnumeroFacturaRepuestos = new javax.swing.JTextField();
+        jtfNumFacturaRepuestos = new javax.swing.JTextField();
         jtfBastidorVehiculoRepuestos = new javax.swing.JTextField();
         jtfFechaCompraRepuesto = new javax.swing.JTextField();
         jtfTiendaRepuesto = new javax.swing.JTextField();
@@ -325,12 +1058,6 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
         jtfIdObd = new javax.swing.JTextField();
         jlRpmInstObd = new javax.swing.JLabel();
         jtfRpmInstObd = new javax.swing.JTextField();
-        jlRpmAvgObd = new javax.swing.JLabel();
-        jtfRpmAvgObd = new javax.swing.JTextField();
-        jlConsumoInstObd = new javax.swing.JLabel();
-        jtfConsumoInstObd = new javax.swing.JTextField();
-        jlConsumoMedioObd = new javax.swing.JLabel();
-        jtfConsumoMedioOBD = new javax.swing.JTextField();
         jbSiguienteObd = new javax.swing.JButton();
         jbAnteriorObd = new javax.swing.JButton();
         jbInsertarObd = new javax.swing.JButton();
@@ -344,13 +1071,24 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
         jlTemperaturaAguaObd = new javax.swing.JLabel();
         jlCodigoSalidaObd = new javax.swing.JLabel();
         jlBastidorVehiculoObd = new javax.swing.JLabel();
+        jlSensores = new javax.swing.JLabel();
+        jtfSensores = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
+
+        fondoMain.setBackground(new java.awt.Color(255, 255, 255));
 
         lblTitle.setBackground(new java.awt.Color(0, 153, 255));
         lblTitle.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
         lblTitle.setText("FullAuto");
         lblTitle.setToolTipText("");
+
+        jtpTablaPrincipal.setBackground(new java.awt.Color(255, 255, 255));
+        jtpTablaPrincipal.setForeground(new java.awt.Color(0, 102, 204));
+
+        pTrabajadores.setBackground(new java.awt.Color(255, 255, 255));
 
         jlDniTrabajador.setText("DNI");
 
@@ -413,7 +1151,7 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
                     .addComponent(jbEliminarTrabajador, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
                     .addComponent(jbInsertarTrabajador, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
                     .addComponent(jbModificarTrabajador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(513, Short.MAX_VALUE))
+                .addContainerGap(555, Short.MAX_VALUE))
         );
         pTrabajadoresLayout.setVerticalGroup(
             pTrabajadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -453,12 +1191,14 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
                         .addComponent(jtfApellido2Trabajador, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(17, 17, 17)
                 .addComponent(jlFuncionTrabajador)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jtfFuncionTrabajador, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(288, 288, 288))
         );
 
         jtpTablaPrincipal.addTab("Trabajadores", pTrabajadores);
+
+        pTrabajadores1.setBackground(new java.awt.Color(255, 255, 255));
 
         jlBastidorVehiculo.setText("Bastidor");
 
@@ -525,6 +1265,20 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
 
         jlFechaEntradaVehiculo.setText("Fecha entrada");
 
+        jtfTiempoDedicado.setEditable(false);
+
+        jlTiempoDedicado.setText("Tiempo dedicado");
+
+        jtfDNITrabajadorVehiculo.setEditable(false);
+
+        jlTrabajadorAsignado.setText("Trabajador asignado:");
+
+        jlDniTrabajadorVehiculo.setText("DNI ");
+
+        jtfNombreCompletoTrabajadorVehiculo.setEditable(false);
+
+        jlNombreCompletoTrabajadorVehiculo.setText("Nombre completo");
+
         javax.swing.GroupLayout pTrabajadores1Layout = new javax.swing.GroupLayout(pTrabajadores1);
         pTrabajadores1.setLayout(pTrabajadores1Layout);
         pTrabajadores1Layout.setHorizontalGroup(
@@ -533,91 +1287,97 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
                 .addContainerGap()
                 .addGroup(pTrabajadores1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pTrabajadores1Layout.createSequentialGroup()
-                        .addGroup(pTrabajadores1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jlMotorVehiculo)
-                            .addComponent(jlMatriculaVehiculo))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jlTiempoDedicado)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jtfTiempoDedicado, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(pTrabajadores1Layout.createSequentialGroup()
                         .addGroup(pTrabajadores1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pTrabajadores1Layout.createSequentialGroup()
                                 .addGroup(pTrabajadores1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jlBastidorVehiculo)
-                                    .addComponent(jlMarcaVehiculo))
-                                .addGap(38, 38, 38)
+                                    .addComponent(jlMarcaVehiculo)
+                                    .addComponent(jlConsumoVehiculo)
+                                    .addComponent(jlMatriculaVehiculo))
+                                .addGap(61, 61, 61)
                                 .addGroup(pTrabajadores1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jtfMatriculaVehiculo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(pTrabajadores1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jtfCarburanteVehiculo, javax.swing.GroupLayout.DEFAULT_SIZE, 347, Short.MAX_VALUE)
-                                        .addComponent(jtfAceiteVehiculo)
-                                        .addComponent(jtfConsumoVehiculo)
-                                        .addComponent(jtfMarcaVehiculo)
-                                        .addComponent(jtfMotorVehiculo)
-                                        .addComponent(jtfPotenciaVehiculo))
-                                    .addComponent(jtfBastidorVehiculo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pTrabajadores1Layout.createSequentialGroup()
+                                    .addComponent(jtfMatriculaVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jtfMarcaVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jtfBastidorVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jlMotorVehiculo)
+                            .addGroup(pTrabajadores1Layout.createSequentialGroup()
                                 .addGroup(pTrabajadores1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(pTrabajadores1Layout.createSequentialGroup()
                                         .addGroup(pTrabajadores1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jlCarburanteVehiculo)
                                             .addComponent(jlAceiteVehiculo)
-                                            .addComponent(jlConsumoVehiculo)
                                             .addComponent(jlPotenciaVehiculo)
                                             .addComponent(jlModeloVehiculo))
                                         .addGap(17, 17, 17))
                                     .addComponent(jlFechaEntradaVehiculo))
+                                .addGap(34, 34, 34)
                                 .addGroup(pTrabajadores1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(pTrabajadores1Layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jtfFechaEntradaVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(pTrabajadores1Layout.createSequentialGroup()
-                                        .addGap(7, 7, 7)
-                                        .addComponent(jtfModeloVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(45, 45, 45)
+                                    .addComponent(jtfConsumoVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jtfFechaEntradaVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jtfAceiteVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jtfCarburanteVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jtfPotenciaVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jtfMotorVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jtfModeloVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(108, 108, 108)
+                        .addGroup(pTrabajadores1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jbAnteriorVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jbSiguienteVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 119, Short.MAX_VALUE)
                         .addGroup(pTrabajadores1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pTrabajadores1Layout.createSequentialGroup()
-                                .addComponent(jbSiguienteVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 197, Short.MAX_VALUE)
-                                .addGroup(pTrabajadores1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jbModificarVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jbInsertarVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jbEliminarVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(142, 142, 142))
-                            .addGroup(pTrabajadores1Layout.createSequentialGroup()
-                                .addComponent(jbAnteriorVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(535, Short.MAX_VALUE))))))
+                            .addComponent(jbEliminarVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jbModificarVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jbInsertarVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(362, 362, 362))))
+            .addGroup(pTrabajadores1Layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(jlTrabajadorAsignado)
+                .addGap(58, 58, 58)
+                .addComponent(jlDniTrabajadorVehiculo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jtfDNITrabajadorVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
+                .addComponent(jlNombreCompletoTrabajadorVehiculo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jtfNombreCompletoTrabajadorVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         pTrabajadores1Layout.setVerticalGroup(
             pTrabajadores1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pTrabajadores1Layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addGroup(pTrabajadores1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(pTrabajadores1Layout.createSequentialGroup()
-                        .addComponent(jbInsertarVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(109, 109, 109))
-                    .addGroup(pTrabajadores1Layout.createSequentialGroup()
-                        .addGroup(pTrabajadores1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jtfBastidorVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jlBastidorVehiculo))
-                        .addGroup(pTrabajadores1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pTrabajadores1Layout.createSequentialGroup()
-                                .addGap(9, 9, 9)
-                                .addGroup(pTrabajadores1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jlMatriculaVehiculo)
-                                    .addGroup(pTrabajadores1Layout.createSequentialGroup()
-                                        .addComponent(jtfMatriculaVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(21, 21, 21)
-                                        .addGroup(pTrabajadores1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(jtfMarcaVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jlMarcaVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jbModificarVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                            .addGroup(pTrabajadores1Layout.createSequentialGroup()
-                                .addGap(37, 37, 37)
-                                .addComponent(jbSiguienteVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(29, 29, 29)
-                                .addComponent(jbAnteriorVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(1, 1, 1)))
+                .addGap(28, 28, 28)
+                .addGroup(pTrabajadores1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtfBastidorVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlBastidorVehiculo))
                 .addGroup(pTrabajadores1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pTrabajadores1Layout.createSequentialGroup()
+                        .addGroup(pTrabajadores1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pTrabajadores1Layout.createSequentialGroup()
+                                .addGap(38, 38, 38)
+                                .addComponent(jbSiguienteVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addGroup(pTrabajadores1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jbAnteriorVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jbModificarVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(pTrabajadores1Layout.createSequentialGroup()
+                                .addGroup(pTrabajadores1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(pTrabajadores1Layout.createSequentialGroup()
+                                        .addGap(3, 3, 3)
+                                        .addGroup(pTrabajadores1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(jtfMatriculaVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jbInsertarVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(pTrabajadores1Layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jlMatriculaVehiculo)))
+                                .addGap(39, 39, 39)
+                                .addGroup(pTrabajadores1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jtfMarcaVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jlMarcaVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGroup(pTrabajadores1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jtfModeloVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jlModeloVehiculo))
@@ -626,7 +1386,7 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
                             .addComponent(jlMotorVehiculo)
                             .addComponent(jtfMotorVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(pTrabajadores1Layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
+                        .addGap(169, 169, 169)
                         .addComponent(jbEliminarVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(20, 20, 20)
                 .addGroup(pTrabajadores1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -641,34 +1401,43 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
                     .addComponent(jlAceiteVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtfAceiteVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pTrabajadores1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pTrabajadores1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtfConsumoVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlConsumoVehiculo))
                 .addGap(18, 18, 18)
                 .addGroup(pTrabajadores1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtfFechaEntradaVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlFechaEntradaVehiculo))
-                .addContainerGap(113, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(pTrabajadores1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtfTiempoDedicado, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlTiempoDedicado))
+                .addGap(18, 18, 18)
+                .addGroup(pTrabajadores1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pTrabajadores1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jtfNombreCompletoTrabajadorVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jlNombreCompletoTrabajadorVehiculo))
+                    .addGroup(pTrabajadores1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jtfDNITrabajadorVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jlTrabajadorAsignado)
+                        .addComponent(jlDniTrabajadorVehiculo)))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout pVehiculosLayout = new javax.swing.GroupLayout(pVehiculos);
         pVehiculos.setLayout(pVehiculosLayout);
         pVehiculosLayout.setHorizontalGroup(
             pVehiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pVehiculosLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(pTrabajadores1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(167, Short.MAX_VALUE))
+            .addComponent(pTrabajadores1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         pVehiculosLayout.setVerticalGroup(
             pVehiculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pVehiculosLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(pTrabajadores1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addComponent(pTrabajadores1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         jtpTablaPrincipal.addTab("Vehículos", pVehiculos);
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jtfNumExpedicionInforme.setEditable(false);
 
@@ -719,7 +1488,7 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
                     .addComponent(jbEliminarInforme, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
                     .addComponent(jbInsertarInforme, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
                     .addComponent(jbModificarInforme, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(513, Short.MAX_VALUE))
+                .addContainerGap(555, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -757,10 +1526,12 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addComponent(jtfDniTrabajadorInforme, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(377, Short.MAX_VALUE))
+                .addContainerGap(390, Short.MAX_VALUE))
         );
 
         jtpTablaPrincipal.addTab("Informes", jPanel1);
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
         jlNumFactura.setText("Número de factura");
 
@@ -811,7 +1582,7 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
                     .addComponent(jbEliminarFactura, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
                     .addComponent(jbInsertarFactura, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
                     .addComponent(jbModificarFactura, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(513, Short.MAX_VALUE))
+                .addContainerGap(555, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -853,10 +1624,12 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
                         .addComponent(jlnumExpedicionInformeFactura)))
                 .addGap(18, 18, 18)
                 .addComponent(jtfnumExpedicionInformeFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(324, Short.MAX_VALUE))
+                .addContainerGap(337, Short.MAX_VALUE))
         );
 
         jtpTablaPrincipal.addTab("Facturas", jPanel2);
+
+        pTrabajadores2.setBackground(new java.awt.Color(255, 255, 255));
 
         jlNumSerieRepuesto.setText("número de serie");
 
@@ -894,9 +1667,9 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
 
         jbEliminarRepuesto.setText("Eliminar repuesto");
 
-        jtfnumeroFacturaRepuestos.addActionListener(new java.awt.event.ActionListener() {
+        jtfNumFacturaRepuestos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfnumeroFacturaRepuestosActionPerformed(evt);
+                jtfNumFacturaRepuestosActionPerformed(evt);
             }
         });
 
@@ -915,11 +1688,8 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
             .addGroup(pTrabajadores2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pTrabajadores2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pTrabajadores2Layout.createSequentialGroup()
-                        .addGroup(pTrabajadores2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jlUsoRepuesto)
-                            .addComponent(jlReferenciaRepuesto))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 762, Short.MAX_VALUE))
+                    .addComponent(jlUsoRepuesto)
+                    .addComponent(jlReferenciaRepuesto)
                     .addGroup(pTrabajadores2Layout.createSequentialGroup()
                         .addGroup(pTrabajadores2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pTrabajadores2Layout.createSequentialGroup()
@@ -941,16 +1711,17 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
                                     .addComponent(jtfTiendaRepuesto))
                                 .addComponent(jtfNumSerieRepuesto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jtfFechaCompraRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 200, Short.MAX_VALUE)
                         .addGroup(pTrabajadores2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jbSiguienteRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jbAnteriorRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 232, Short.MAX_VALUE)))
+                        .addGap(161, 161, 161)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pTrabajadores2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jbModificarRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbEliminarRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbInsertarRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(142, 142, 142))
+                .addGap(213, 213, 213))
             .addGroup(pTrabajadores2Layout.createSequentialGroup()
                 .addGroup(pTrabajadores2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pTrabajadores2Layout.createSequentialGroup()
@@ -958,7 +1729,7 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
                         .addGroup(pTrabajadores2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jtfBastidorVehiculoRepuestos, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jlNumeroFacturaRepuestos)
-                            .addComponent(jtfnumeroFacturaRepuestos, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtfNumFacturaRepuestos, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(pTrabajadores2Layout.createSequentialGroup()
                                 .addGap(24, 24, 24)
                                 .addComponent(jlBastidorVehiculoRepuestos))))
@@ -972,24 +1743,18 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
                     .addGroup(pTrabajadores2Layout.createSequentialGroup()
                         .addGap(77, 77, 77)
                         .addComponent(jtfReferenciaRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(31, 31, 31)
+                        .addGap(42, 42, 42)
                         .addGroup(pTrabajadores2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jtfNombreRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jlNombreRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jbModificarRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(26, 26, 26)
+                            .addComponent(jlNombreRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(36, 36, 36)
                         .addGroup(pTrabajadores2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jtfMarcaRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jlMarcaRepuesto))
-                        .addGroup(pTrabajadores2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pTrabajadores2Layout.createSequentialGroup()
-                                .addGap(46, 46, 46)
-                                .addGroup(pTrabajadores2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jlUsoRepuesto)
-                                    .addComponent(jtfUsoRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(pTrabajadores2Layout.createSequentialGroup()
-                                .addGap(17, 17, 17)
-                                .addComponent(jbEliminarRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(46, 46, 46)
+                        .addGroup(pTrabajadores2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jlUsoRepuesto)
+                            .addComponent(jtfUsoRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(20, 20, 20)
                         .addGroup(pTrabajadores2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jlTiendaRepuesto)
@@ -999,25 +1764,35 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
                             .addComponent(jlFechaCompraRepuesto)
                             .addComponent(jtfFechaCompraRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(pTrabajadores2Layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addGroup(pTrabajadores2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jtfNumSerieRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jlNumSerieRepuesto)
-                            .addComponent(jbInsertarRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(2, 2, 2)
-                        .addComponent(jlReferenciaRepuesto)
-                        .addGap(26, 26, 26)
-                        .addComponent(jbSiguienteRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(47, 47, 47)
-                        .addComponent(jbAnteriorRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(36, 36, 36)
+                        .addGroup(pTrabajadores2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pTrabajadores2Layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addGroup(pTrabajadores2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(pTrabajadores2Layout.createSequentialGroup()
+                                        .addGap(110, 110, 110)
+                                        .addComponent(jbModificarRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(73, 73, 73)
+                                        .addComponent(jbEliminarRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jbInsertarRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(pTrabajadores2Layout.createSequentialGroup()
+                                .addGroup(pTrabajadores2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jtfNumSerieRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jlNumSerieRepuesto))
+                                .addGap(9, 9, 9)
+                                .addComponent(jlReferenciaRepuesto)
+                                .addGap(26, 26, 26)
+                                .addComponent(jbSiguienteRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(47, 47, 47)
+                                .addComponent(jbAnteriorRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(18, 18, 18)
                 .addComponent(jlBastidorVehiculoRepuestos, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addComponent(jtfBastidorVehiculoRepuestos, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jlNumeroFacturaRepuestos)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jtfnumeroFacturaRepuestos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addComponent(jtfNumFacturaRepuestos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(73, 73, 73))
         );
 
@@ -1025,35 +1800,20 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(pTrabajadores2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(122, Short.MAX_VALUE))
+            .addComponent(pTrabajadores2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(0, 6, Short.MAX_VALUE)
-                .addComponent(pTrabajadores2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(pTrabajadores2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         jtpTablaPrincipal.addTab("Repuestos", jPanel3);
 
+        pTrabajadores3.setBackground(new java.awt.Color(255, 255, 255));
+
         jlIdObd.setText("identificador");
 
         jlRpmInstObd.setText("rpm_inst");
-
-        jlRpmAvgObd.setText("rpm_avg");
-
-        jlConsumoInstObd.setText("consumo instantáneo");
-
-        jtfConsumoInstObd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfConsumoInstObdActionPerformed(evt);
-            }
-        });
-
-        jlConsumoMedioObd.setText("consumo medio");
 
         jbSiguienteObd.setText("Siguiente");
         jbSiguienteObd.addActionListener(new java.awt.event.ActionListener() {
@@ -1089,6 +1849,8 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
 
         jlBastidorVehiculoObd.setText("bastidor del vehículo de esta lectura ");
 
+        jlSensores.setText("sensores");
+
         javax.swing.GroupLayout pTrabajadores3Layout = new javax.swing.GroupLayout(pTrabajadores3);
         pTrabajadores3.setLayout(pTrabajadores3Layout);
         pTrabajadores3Layout.setHorizontalGroup(
@@ -1096,87 +1858,54 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
             .addGroup(pTrabajadores3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pTrabajadores3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jlRpmInstObd)
                     .addGroup(pTrabajadores3Layout.createSequentialGroup()
-                        .addGroup(pTrabajadores3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jlConsumoMedioObd)
-                            .addComponent(jlRpmInstObd))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 759, Short.MAX_VALUE))
-                    .addGroup(pTrabajadores3Layout.createSequentialGroup()
-                        .addGroup(pTrabajadores3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pTrabajadores3Layout.createSequentialGroup()
-                                .addComponent(jlTemperaturaAceiteObd)
-                                .addGap(90, 90, 90))
+                        .addGroup(pTrabajadores3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(pTrabajadores3Layout.createSequentialGroup()
+                                .addComponent(jlIdObd)
+                                .addGap(128, 128, 128)
                                 .addGroup(pTrabajadores3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jlIdObd)
-                                    .addComponent(jlRpmAvgObd)
-                                    .addComponent(jlConsumoInstObd))
-                                .addGap(38, 38, 38)))
-                        .addGroup(pTrabajadores3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jtfConsumoInstObd, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jtfRpmInstObd, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jtfIdObd, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(pTrabajadores3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jtfRpmInstObd, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(pTrabajadores3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jtfRpmAvgObd, javax.swing.GroupLayout.DEFAULT_SIZE, 347, Short.MAX_VALUE)
-                                    .addComponent(jtfConsumoMedioOBD)
-                                    .addComponent(jtfTemperaturaAceiteObd))
-                                .addComponent(jtfIdObd, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jtfTemperaturaAguaObd, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jtfCodigoSalidaObd, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(pTrabajadores3Layout.createSequentialGroup()
+                                    .addComponent(jlTemperaturaAceiteObd)
+                                    .addGap(90, 90, 90)
+                                    .addGroup(pTrabajadores3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jtfTemperaturaAceiteObd, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jtfTemperaturaAguaObd, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jtfCodigoSalidaObd, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jlTemperaturaAguaObd)
+                                .addComponent(jlCodigoSalidaObd)))
+                        .addGap(106, 106, 106)
                         .addGroup(pTrabajadores3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jbSiguienteObd, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jbAnteriorObd, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 167, Short.MAX_VALUE)))
-                .addGroup(pTrabajadores3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jbModificarObd, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbEliminarObd, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbInsertarObd, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(142, 142, 142))
-            .addGroup(pTrabajadores3Layout.createSequentialGroup()
-                .addGroup(pTrabajadores3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jbAnteriorObd, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(pTrabajadores3Layout.createSequentialGroup()
-                        .addGap(74, 74, 74)
+                        .addGap(199, 199, 199)
+                        .addComponent(jtfSensores, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jlSensores))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 163, Short.MAX_VALUE)
+                .addGroup(pTrabajadores3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pTrabajadores3Layout.createSequentialGroup()
+                        .addComponent(jbInsertarObd, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(237, 237, 237))
+                    .addGroup(pTrabajadores3Layout.createSequentialGroup()
                         .addGroup(pTrabajadores3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jtfBastidorVehiculoObd, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jlBastidorVehiculoObd)))
-                    .addComponent(jlTemperaturaAguaObd)
-                    .addComponent(jlCodigoSalidaObd))
+                            .addComponent(jbModificarObd, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jbEliminarObd, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap())))
+            .addGroup(pTrabajadores3Layout.createSequentialGroup()
+                .addGap(66, 66, 66)
+                .addGroup(pTrabajadores3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jtfBastidorVehiculoObd, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlBastidorVehiculoObd))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         pTrabajadores3Layout.setVerticalGroup(
             pTrabajadores3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pTrabajadores3Layout.createSequentialGroup()
                 .addGroup(pTrabajadores3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pTrabajadores3Layout.createSequentialGroup()
-                        .addGap(77, 77, 77)
-                        .addComponent(jtfRpmInstObd, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(31, 31, 31)
-                        .addGroup(pTrabajadores3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jtfRpmAvgObd, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jlRpmAvgObd)
-                            .addComponent(jbModificarObd, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(26, 26, 26)
-                        .addGroup(pTrabajadores3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jtfConsumoInstObd, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jlConsumoInstObd))
-                        .addGroup(pTrabajadores3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pTrabajadores3Layout.createSequentialGroup()
-                                .addGap(46, 46, 46)
-                                .addGroup(pTrabajadores3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jlConsumoMedioObd)
-                                    .addComponent(jtfConsumoMedioOBD, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(pTrabajadores3Layout.createSequentialGroup()
-                                .addGap(17, 17, 17)
-                                .addComponent(jbEliminarObd, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(20, 20, 20)
-                        .addGroup(pTrabajadores3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jlTemperaturaAceiteObd)
-                            .addComponent(jtfTemperaturaAceiteObd, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(19, 19, 19)
-                        .addGroup(pTrabajadores3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jlTemperaturaAguaObd)
-                            .addComponent(jtfTemperaturaAguaObd, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(pTrabajadores3Layout.createSequentialGroup()
                         .addGap(30, 30, 30)
                         .addGroup(pTrabajadores3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1185,60 +1914,97 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
                             .addComponent(jbInsertarObd, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(2, 2, 2)
                         .addComponent(jlRpmInstObd)
-                        .addGap(26, 26, 26)
+                        .addGap(29, 29, 29)
                         .addComponent(jbSiguienteObd, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(47, 47, 47)
-                        .addComponent(jbAnteriorObd, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addGroup(pTrabajadores3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jlCodigoSalidaObd, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtfCodigoSalidaObd, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
-                .addComponent(jlBastidorVehiculoObd)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(33, 33, 33)
+                        .addComponent(jbAnteriorObd, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(38, 38, 38)
+                        .addComponent(jbEliminarObd, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pTrabajadores3Layout.createSequentialGroup()
+                        .addGap(77, 77, 77)
+                        .addComponent(jtfRpmInstObd, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(pTrabajadores3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pTrabajadores3Layout.createSequentialGroup()
+                                .addGap(31, 31, 31)
+                                .addComponent(jbModificarObd, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pTrabajadores3Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(pTrabajadores3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jlTemperaturaAceiteObd)
+                                    .addComponent(jtfTemperaturaAceiteObd, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(19, 19, 19)
+                                .addGroup(pTrabajadores3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jlTemperaturaAguaObd)
+                                    .addComponent(jtfTemperaturaAguaObd, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(pTrabajadores3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jlCodigoSalidaObd, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jtfCodigoSalidaObd, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(pTrabajadores3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jlSensores, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtfSensores, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addComponent(jlBastidorVehiculoObd, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jtfBastidorVehiculoObd, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(73, 73, 73))
+                .addGap(252, 252, 252))
         );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(pTrabajadores3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(93, Short.MAX_VALUE))
+            .addComponent(pTrabajadores3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addGap(0, 6, Short.MAX_VALUE)
-                .addComponent(pTrabajadores3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(pTrabajadores3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         jtpTablaPrincipal.addTab("OBD", jPanel4);
+
+        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\novad\\Documents\\sincEstudios\\estudios\\DAM2\\AD\\proyecto\\FullAuto\\FullAutoLogoMini.png")); // NOI18N
+
+        javax.swing.GroupLayout fondoMainLayout = new javax.swing.GroupLayout(fondoMain);
+        fondoMain.setLayout(fondoMainLayout);
+        fondoMainLayout.setHorizontalGroup(
+            fondoMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(fondoMainLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(fondoMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jtpTablaPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 1352, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(fondoMainLayout.createSequentialGroup()
+                        .addGap(13, 13, 13)
+                        .addComponent(jLabel2)
+                        .addGap(107, 107, 107)
+                        .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        fondoMainLayout.setVerticalGroup(
+            fondoMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(fondoMainLayout.createSequentialGroup()
+                .addGroup(fondoMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(fondoMainLayout.createSequentialGroup()
+                        .addGap(53, 53, 53)
+                        .addComponent(lblTitle))
+                    .addGroup(fondoMainLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel2)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jtpTablaPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(499, 499, 499)
-                .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jtpTablaPrincipal)
-                .addContainerGap())
+            .addComponent(fondoMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(7, 7, 7)
-                .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jtpTablaPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 684, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addComponent(fondoMain, javax.swing.GroupLayout.PREFERRED_SIZE, 878, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -1247,18 +2013,6 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
     private void jbSiguienteTrabajadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSiguienteTrabajadorActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jbSiguienteTrabajadorActionPerformed
-
-    private void jbSiguienteVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSiguienteVehiculoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jbSiguienteVehiculoActionPerformed
-
-    private void jtfModeloVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfModeloVehiculoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfModeloVehiculoActionPerformed
-
-    private void jtfConsumoVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfConsumoVehiculoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfConsumoVehiculoActionPerformed
 
     private void jbSiguienteInformeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSiguienteInformeActionPerformed
         // TODO add your handling code here:
@@ -1276,17 +2030,13 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
         // TODO add your handling code here:
     }//GEN-LAST:event_jbSiguienteRepuestoActionPerformed
 
-    private void jtfnumeroFacturaRepuestosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfnumeroFacturaRepuestosActionPerformed
+    private void jtfNumFacturaRepuestosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfNumFacturaRepuestosActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jtfnumeroFacturaRepuestosActionPerformed
+    }//GEN-LAST:event_jtfNumFacturaRepuestosActionPerformed
 
     private void jbInsertarRepuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbInsertarRepuestoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jbInsertarRepuestoActionPerformed
-
-    private void jtfConsumoInstObdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfConsumoInstObdActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfConsumoInstObdActionPerformed
 
     private void jbSiguienteObdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSiguienteObdActionPerformed
         // TODO add your handling code here:
@@ -1299,6 +2049,18 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
     private void jtfBastidorVehiculoObdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfBastidorVehiculoObdActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfBastidorVehiculoObdActionPerformed
+
+    private void jtfConsumoVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfConsumoVehiculoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfConsumoVehiculoActionPerformed
+
+    private void jbSiguienteVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSiguienteVehiculoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbSiguienteVehiculoActionPerformed
+
+    private void jtfModeloVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfModeloVehiculoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfModeloVehiculoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1332,11 +2094,14 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
             public void run() {
                 new Vista().setVisible(true);
                 
+                
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel fondoMain;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -1379,11 +2144,10 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
     public javax.swing.JLabel jlBastidorVehiculoRepuestos;
     public javax.swing.JLabel jlCarburanteVehiculo;
     public javax.swing.JLabel jlCodigoSalidaObd;
-    public javax.swing.JLabel jlConsumoInstObd;
-    public javax.swing.JLabel jlConsumoMedioObd;
     public javax.swing.JLabel jlConsumoVehiculo;
     public javax.swing.JLabel jlDniTrabajador;
     public javax.swing.JLabel jlDniTrabajadorInforme;
+    public javax.swing.JLabel jlDniTrabajadorVehiculo;
     public javax.swing.JLabel jlFechaCompraRepuesto;
     public javax.swing.JLabel jlFechaEntradaVehiculo;
     public javax.swing.JLabel jlFuncionTrabajador;
@@ -1394,6 +2158,7 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
     public javax.swing.JLabel jlMatriculaVehiculo;
     public javax.swing.JLabel jlModeloVehiculo;
     public javax.swing.JLabel jlMotorVehiculo;
+    public javax.swing.JLabel jlNombreCompletoTrabajadorVehiculo;
     public javax.swing.JLabel jlNombreRepuesto;
     public javax.swing.JLabel jlNombreTrabajador;
     public javax.swing.JLabel jlNumExpedicionInforme;
@@ -1403,12 +2168,14 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
     public javax.swing.JLabel jlPotenciaVehiculo;
     public javax.swing.JLabel jlPrecioFactura;
     public javax.swing.JLabel jlReferenciaRepuesto;
-    public javax.swing.JLabel jlRpmAvgObd;
     public javax.swing.JLabel jlRpmInstObd;
+    public javax.swing.JLabel jlSensores;
     public javax.swing.JLabel jlTareasInforme;
     public javax.swing.JLabel jlTemperaturaAceiteObd;
     public javax.swing.JLabel jlTemperaturaAguaObd;
+    public javax.swing.JLabel jlTiempoDedicado;
     public javax.swing.JLabel jlTiendaRepuesto;
+    public javax.swing.JLabel jlTrabajadorAsignado;
     public javax.swing.JLabel jlUsoRepuesto;
     public javax.swing.JLabel jlnumExpedicionInformeFactura;
     public javax.swing.JTextField jtfAceiteVehiculo;
@@ -1419,9 +2186,8 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
     public javax.swing.JTextField jtfBastidorVehiculoRepuestos;
     public javax.swing.JTextField jtfCarburanteVehiculo;
     public javax.swing.JTextField jtfCodigoSalidaObd;
-    public javax.swing.JTextField jtfConsumoInstObd;
-    public javax.swing.JTextField jtfConsumoMedioOBD;
     public javax.swing.JTextField jtfConsumoVehiculo;
+    public javax.swing.JTextField jtfDNITrabajadorVehiculo;
     public javax.swing.JTextField jtfDniTrabajador;
     public javax.swing.JTextField jtfDniTrabajadorInforme;
     public javax.swing.JTextField jtfFechaCompraRepuesto;
@@ -1434,23 +2200,25 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
     public javax.swing.JTextField jtfMatriculaVehiculo;
     public javax.swing.JTextField jtfModeloVehiculo;
     public javax.swing.JTextField jtfMotorVehiculo;
+    public javax.swing.JTextField jtfNombreCompletoTrabajadorVehiculo;
     public javax.swing.JTextField jtfNombreRepuesto;
     public javax.swing.JTextField jtfNombreTrabajador;
     public javax.swing.JTextField jtfNumExpedicionInforme;
     public javax.swing.JTextField jtfNumFactura;
+    public javax.swing.JTextField jtfNumFacturaRepuestos;
     public javax.swing.JTextField jtfNumSerieRepuesto;
     public javax.swing.JTextField jtfPotenciaVehiculo;
     public javax.swing.JTextField jtfPrecioFactura;
     public javax.swing.JTextField jtfReferenciaRepuesto;
-    public javax.swing.JTextField jtfRpmAvgObd;
     public javax.swing.JTextField jtfRpmInstObd;
+    public javax.swing.JTextField jtfSensores;
     public javax.swing.JTextField jtfTareasInforme;
     public javax.swing.JTextField jtfTemperaturaAceiteObd;
     public javax.swing.JTextField jtfTemperaturaAguaObd;
+    public javax.swing.JTextField jtfTiempoDedicado;
     public javax.swing.JTextField jtfTiendaRepuesto;
     public javax.swing.JTextField jtfUsoRepuesto;
     public javax.swing.JTextField jtfnumExpedicionInformeFactura;
-    public javax.swing.JTextField jtfnumeroFacturaRepuestos;
     public javax.swing.JTabbedPane jtpTablaPrincipal;
     public javax.swing.JLabel lblTitle;
     public javax.swing.JPanel pTrabajadores;

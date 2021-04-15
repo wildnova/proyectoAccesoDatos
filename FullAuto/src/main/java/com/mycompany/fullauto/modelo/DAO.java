@@ -28,44 +28,42 @@ public interface DAO {
     
     //Interfaz para trabajador
     ArrayList<Trabajador> getListadoTrabajadores() throws DAOTrabajadorExcepcion;
-    void insertarTrabajador(Trabajador tr) throws DAOTrabajadorExcepcion;
-    void modificarTrabajador(Trabajador tr, String dniOriginal) throws DAOTrabajadorExcepcion;
-    void eliminarTrabajador(Trabajador tr) throws DAOTrabajadorExcepcion;
+    Trabajador comprobarTrabajador(String dniTrabajador) throws DAOTrabajadorExcepcion;
+    void insertarTrabajador(Trabajador trabajador) throws DAOTrabajadorExcepcion;
+    void modificarTrabajador(Trabajador trabajador) throws DAOTrabajadorExcepcion;
+    void eliminarTrabajador(Trabajador trabajador) throws DAOTrabajadorExcepcion;
     
 
     //Interfaz para vehículo
     ArrayList<Vehiculo> getListadoVehiculos() throws DAOVehiculoExcepcion;
-    void insertarVehiculo(Vehiculo vh) throws DAOVehiculoExcepcion;
-    void modificarVehiculo(Vehiculo vh, String bastidorOriginal) throws DAOVehiculoExcepcion;
-    void eliminarVehiculo(Vehiculo vh) throws DAOVehiculoExcepcion;
+    void insertarVehiculo(Vehiculo vehiculo) throws DAOVehiculoExcepcion;
+    void modificarVehiculo(Vehiculo vehiculo) throws DAOVehiculoExcepcion;
+    void eliminarVehiculo(Vehiculo vehiculo) throws DAOVehiculoExcepcion;
    
     //Interfaz para Informe
     ArrayList<Informe> getListadoInformes() throws DAOInformeExcepcion;
-    void insertarInforme (Informe inf) throws DAOInformeExcepcion;
-    void modificarInforme(Informe inf,int numExpedicionOriginal) throws DAOInformeExcepcion;
-    void eliminarInforme(Informe inf) throws DAOInformeExcepcion;
+    void insertarInforme (Informe informe) throws DAOInformeExcepcion;
+    void modificarInforme(Informe informe) throws DAOInformeExcepcion;
+    void eliminarInforme(Informe informe) throws DAOInformeExcepcion;
     
     //Interfaz para Factura
     ArrayList<Factura> getListadoFacturas() throws DAOFacturaExcepcion;
-    void insertFactura (Factura fac) throws DAOFacturaExcepcion;
-    void deleteFactura(Factura fac, int numFacturaOriginal) throws DAOFacturaExcepcion;
-    void updateFactura(Factura fac) throws DAOFacturaExcepcion;
+    void insertarFactura(Factura factura) throws DAOFacturaExcepcion;
+    void modificarFactura(Factura factura) throws DAOFacturaExcepcion;
+    void eliminarFactura(Factura factura) throws DAOFacturaExcepcion;
+    
     
     //Interfaz para Repuestos
     ArrayList<Repuestos> getListadoRepuestos() throws DAORepuestoExcepcion;
-    void insertarRepuesto (Repuestos rep)  throws DAORepuestoExcepcion;
-    void modificarRepuesto(Repuestos rep, int numSerieOriginal) throws DAORepuestoExcepcion;
-    void eliminarRepuesto(Repuestos rep) throws DAORepuestoExcepcion;
+    void insertarRepuesto(Repuestos repuestos)  throws DAORepuestoExcepcion;
+    void modificarRepuesto(Repuestos repuestos) throws DAORepuestoExcepcion;
+    void eliminarRepuesto(Repuestos repuestos) throws DAORepuestoExcepcion;
     
     
     //Interfaz para OBD
     ArrayList<Obd> getListadoObd() throws DAOObdExcepcion;
     void insertarObd (Obd obd) throws DAOObdExcepcion;
-    void modificarObd(Obd obd, int idOriginal) throws DAOObdExcepcion;
+    void modificarObd(Obd obd)throws DAOObdExcepcion;
     void eliminarObd(Obd obd) throws DAOObdExcepcion;
-    
-    
-   
-    
     
 }

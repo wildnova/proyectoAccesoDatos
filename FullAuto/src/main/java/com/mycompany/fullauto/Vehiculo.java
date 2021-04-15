@@ -47,6 +47,8 @@ public class Vehiculo{
     private Date fechaEntrada;
     @Column(name="tiempo_dedicado")
     private String tiempoDedicado;
+    @Column(name="dni_trabajador")
+    private String dniTrabajador;
     
     @ManyToOne(cascade=CascadeType.DETACH)
     @JoinColumn(name="dni")
@@ -61,8 +63,8 @@ public class Vehiculo{
     
     public Vehiculo() {
     }
-
-    public Vehiculo(String bastidor, String matricula, String marca, String modelo, String motor, String potenciaCv, String carburante, String aceite, String consumo, Date fechaEntrada, String tiempoDedicado, Trabajador trabajador, Obd obd, Set<Repuestos> repuestos) {
+    
+    public Vehiculo(String bastidor, String matricula, String marca, String modelo, String motor, String potenciaCv, String carburante, String aceite, String consumo, Date fechaEntrada, String tiempoDedicado,String dniTrabajador) {
         this.bastidor = bastidor;
         this.matricula = matricula;
         this.marca = marca;
@@ -74,6 +76,21 @@ public class Vehiculo{
         this.consumo = consumo;
         this.fechaEntrada = fechaEntrada;
         this.tiempoDedicado = tiempoDedicado;
+        this.dniTrabajador = dniTrabajador;
+    }
+    public Vehiculo(String bastidor, String matricula, String marca, String modelo, String motor, String potenciaCv, String carburante, String aceite, String consumo, Date fechaEntrada, String tiempoDedicado,String dniTrabajador, Trabajador trabajador, Obd obd, Set<Repuestos> repuestos) {
+        this.bastidor = bastidor;
+        this.matricula = matricula;
+        this.marca = marca;
+        this.modelo = modelo;
+        this.motor = motor;
+        this.potenciaCv = potenciaCv;
+        this.carburante = carburante;
+        this.aceite = aceite;
+        this.consumo = consumo;
+        this.fechaEntrada = fechaEntrada;
+        this.tiempoDedicado = tiempoDedicado;
+        this.dniTrabajador = dniTrabajador;
         this.trabajador = trabajador;
         this.obd = obd;
         this.repuestos = repuestos;
@@ -167,6 +184,13 @@ public class Vehiculo{
         this.tiempoDedicado = tiempoDedicado;
     }
 
+    public String getDniTrabajador() {
+        return dniTrabajador;
+    }
+
+    public void setDniTrabajador(String dniTrabajador) {
+        this.dniTrabajador = dniTrabajador;
+    }
     public Trabajador getTrabajador() {
         return trabajador;
     }

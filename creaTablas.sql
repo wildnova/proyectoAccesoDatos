@@ -1,5 +1,4 @@
 DROP TABLE IF EXISTS trabajador_repuestos;
-DROP TABLE IF EXISTS trabajador_vehiculo;
 DROP TABLE IF EXISTS repuestos;
 DROP TABLE IF EXISTS factura;
 DROP TABLE IF EXISTS informe;
@@ -78,12 +77,10 @@ CREATE TABLE obd
 (
     id              INT(10) PRIMARY KEY,
     rpm_inst        INT(5), 
-    rpm_avg         INT(5),
-    consumo_inst    FLOAT(6,4),
-    consumo_avg     FLOAT(6,4),  
     temp_aceite     FLOAT(5,2),
     temp_agua       FLOAT(5,2),
     cod_salida      VARCHAR(10),
+    sensores        VARCHAR(25),
 
     bastidor_vehiculo VARCHAR(40),
     FOREIGN KEY (bastidor_vehiculo) REFERENCES vehiculo(bastidor)

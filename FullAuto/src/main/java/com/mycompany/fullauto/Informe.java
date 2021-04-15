@@ -28,7 +28,9 @@ public class Informe {
     private int numExpedicion;
     @Column(name="tareas")
     private String tareas;
+
     
+    private String dniTrabajadorInforme;
     
     @OneToOne(mappedBy="informe")
     private Factura factura;
@@ -46,6 +48,12 @@ public class Informe {
         this.tareas = tareas;
         this.factura = factura;
         this.trabajador = trabajador;
+    }
+    public Informe(int numExpedicion, String tareas, String dniTrabajadorInforme) {
+        this.numExpedicion = numExpedicion;
+        this.tareas = tareas;
+        this.dniTrabajadorInforme = dniTrabajadorInforme;
+        
     }
 
     public int getNumExpedicion() {
@@ -79,6 +87,12 @@ public class Informe {
     public void setTrabajador(Trabajador trabajador) {
         this.trabajador = trabajador;
     }
+    public String getDniTrabajadorInforme() {
+        return dniTrabajadorInforme;
+    }
 
+    public void setDniTrabajadorInforme(String dniTrabajadorInforme) {
+        this.dniTrabajadorInforme = dniTrabajadorInforme;
+    }
     
 }

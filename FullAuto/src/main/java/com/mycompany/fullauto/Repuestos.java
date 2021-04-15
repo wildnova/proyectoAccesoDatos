@@ -39,6 +39,9 @@ public class Repuestos {
     private String tienda;
     @Column(name="fecha_compra")
     private Date fechaCompra;
+
+    private String BastidorVehiculoRepuestos;
+    private String NumFacturaRepuestos;
     
     @ManyToOne(cascade=CascadeType.DETACH)
     @JoinColumn(name="repuestos")
@@ -65,7 +68,18 @@ public class Repuestos {
         this.factura = factura;
         this.trabajador = trabajador;
     }
-
+    public Repuestos(String numSerie, String referencia, String nombre, String marca, String uso, String tienda, Date fechaCompra, String bastidorVehiculoRepuestos,String numFacturaRepuestos) {
+        this.numSerie = numSerie;
+        this.referencia = referencia;
+        this.nombre = nombre;
+        this.marca = marca;
+        this.uso = uso;
+        this.tienda = tienda;
+        this.fechaCompra = fechaCompra;
+        this.BastidorVehiculoRepuestos = bastidorVehiculoRepuestos;
+        this.NumFacturaRepuestos = numFacturaRepuestos;
+        
+    }
     public String getNumSerie() {
         return numSerie;
     }
@@ -121,7 +135,21 @@ public class Repuestos {
     public void setFechaCompra(Date fechaCompra) {
         this.fechaCompra = fechaCompra;
     }
+    public String getBastidorVehiculoRepuestos() {
+        return BastidorVehiculoRepuestos;
+    }
 
+    public void setBastidorVehiculoRepuestos(String BastidorVehiculoRepuestos) {
+        this.BastidorVehiculoRepuestos = BastidorVehiculoRepuestos;
+    }
+
+    public String getNumFacturaRepuestos() {
+        return NumFacturaRepuestos;
+    }
+
+    public void setNumFacturaRepuestos(String NumFacturaRepuestos) {
+        this.NumFacturaRepuestos = NumFacturaRepuestos;
+    }
     public Vehiculo getVehiculo() {
         return vehiculo;
     }

@@ -6,7 +6,12 @@
 package com.mycompany.fullauto.controlador;
 
 import com.mycompany.fullauto.Exceptions.DAOConexionExcepcion;
+import com.mycompany.fullauto.Exceptions.DAOFacturaExcepcion;
+import com.mycompany.fullauto.Exceptions.DAOInformeExcepcion;
+import com.mycompany.fullauto.Exceptions.DAOObdExcepcion;
+import com.mycompany.fullauto.Exceptions.DAORepuestoExcepcion;
 import com.mycompany.fullauto.Exceptions.DAOTrabajadorExcepcion;
+import com.mycompany.fullauto.Exceptions.DAOVehiculoExcepcion;
 import com.mycompany.fullauto.Factura;
 import com.mycompany.fullauto.Informe;
 import com.mycompany.fullauto.Obd;
@@ -23,6 +28,8 @@ import com.mycompany.fullauto.vista.FormularioTrabajador;
 import com.mycompany.fullauto.vista.Vista;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 
@@ -34,39 +41,40 @@ import java.util.List;
 public class Controlador 
 {
     private DAO modelo;
-    private ModeloJdbc modeloJdbc;
-    private ModeloHibernate modeloHibernate;
-    private ModeloObjectDB modeloObjectDB;
-    private ModeloMongo modeloMongo;
     private Vista vista;
-    
-    /*private ArrayList<Trabajador> listaTrabajadores;
-    private ArrayList<Vehiculo> listaVehiculos;
-    private ArrayList<Obd> listaObd;
-    private ArrayList<Repuestos> listaRepuestos;
-    private ArrayList<Informe> listaInformes;
-    private ArrayList<Factura> listaFacturas;
-    
-    private int contadorTrabajador;
-    private int contadorVehiculo;*/
-   
-    
-    public Controlador(Vista vista)
+
+    public Controlador(Vista vista, int seleccionModelo)
     {
         this.vista=vista;
-        this.modeloJdbc= new ModeloJdbc();
-        this.modeloHibernate = new ModeloHibernate();
-        this.modeloObjectDB = new ModeloObjectDB();
-        this.modeloMongo = new ModeloMongo();
+
+        switch(seleccionModelo)
+        {
+            case 1:
+                this.modelo= new ModeloJdbc();
+                break;
+
+            case 2:
+                this.modelo = new ModeloHibernate();
+                break;
+
+            case 3:
+                this.modelo = new ModeloObjectDB();
+                break;
+
+            case 4:
+                this.modelo = new ModeloMongo();
+                break;
+        }
 
     }
-   
+    
+   //Funciones de trabajador
     public ArrayList<Trabajador> getListadoTrabajadores()
     {
         ArrayList<Trabajador> listaTrabajadores = null;
         try 
         {
-            listaTrabajadores = modeloJdbc.getListadoTrabajadores();
+            listaTrabajadores = modelo.getListadoTrabajadores();
         }
         catch (DAOTrabajadorExcepcion ex) 
         {
@@ -80,7 +88,7 @@ public class Controlador
     {
         try 
         {
-            modeloJdbc.insertarTrabajador(trabajador);
+            modelo.insertarTrabajador(trabajador);
             //mostrarDatosTrabajador();
         } 
         catch (DAOTrabajadorExcepcion ex) 
@@ -90,11 +98,11 @@ public class Controlador
         } 
     }
     
-    public void modificarTrabajador(Trabajador trabajador, String dniOriginal)
+    public void modificarTrabajador(Trabajador trabajador)
     {
    
         try {
-            modeloJdbc.modificarTrabajador(trabajador,dniOriginal);
+            modelo.modificarTrabajador(trabajador);
         } 
         catch (DAOTrabajadorExcepcion ex) 
         {
@@ -109,7 +117,7 @@ public class Controlador
   
         try 
         {
-            modeloJdbc.eliminarTrabajador(trabajador);
+            modelo.eliminarTrabajador(trabajador);
         }
         catch (DAOTrabajadorExcepcion ex) 
         {
@@ -119,16 +127,301 @@ public class Controlador
  
     }
     
-    /*
-    
-    //Funciones para la pestaña vehículo que utiliza hibernate
-    public void mostrarDatosVehiculo() throws DAOConexionExcepcion
+    //Funciones de vehículo
+    public ArrayList<Vehiculo> getListadoVehiculos()
     {
-  
-        listaVehiculos = modeloHibernate.getListadoVehiculos();
-        /*String[] datosVehiculo = new String[10];
-        System.out.println(listaVehiculos.get(contadorVehiculo).getMarca());
-        vista.cargarCamposVehiculo(datosVehiculo);
-    }*/
+        ArrayList<Vehiculo> listaVehiculos = null;
+        try 
+        {
+            listaVehiculos = modelo.getListadoVehiculos();
+        }
+        catch (DAOVehiculoExcepcion ex) 
+        {
+            System.out.println("Error obteniendo la lista de vehículos");
+            ex.getMessage();
+        }
+        return listaVehiculos;
+        
+    }
+    public String comprobarTrabajadorAsignado(Vehiculo vehiculo)
+    {
+        
+        String dniTrabajadorAsignado=vehiculo.getDniTrabajador();
+        
+        Trabajador trabajador=null;
+        try 
+        {
+            trabajador = modelo.comprobarTrabajador(dniTrabajadorAsignado);
+            System.out.println("dniTrabajador asignado en controlador: ------------------------------------------------"+ dniTrabajadorAsignado);
+        } 
+        catch (DAOTrabajadorExcepcion ex) 
+        {
+            System.err.println("Error al comprobar el trabajador");
+            ex.getMessage();
+            ex.printStackTrace();
+        }
+        String nombreCompleto=trabajador.getNombre()+" "+trabajador.getApellido1()+" "+trabajador.getApellido2();
+        return nombreCompleto;
+    }
+    public void insertarVehiculo(Vehiculo vehiculo)
+    {
+        try 
+        {
+            modelo.insertarVehiculo(vehiculo);
+            
+        } 
+        catch (DAOVehiculoExcepcion ex) 
+        {
+            System.out.println("Error insertando el vehículo");
+            ex.getMessage();
+        } 
+    }
+    
+    public void modificarVehiculo(Vehiculo vehiculo)
+    {
+   
+        try {
+            modelo.modificarVehiculo(vehiculo);
+        } 
+        catch (DAOVehiculoExcepcion ex) 
+        {
+            System.out.println("Error al modificar el vehículo");
+            ex.getMessage();
+        }
+        
+    }
+    
+    public void eliminarVehiculo(Vehiculo vehiculo)
+    {
+        try 
+        {
+            modelo.eliminarVehiculo(vehiculo);
+        }
+        catch (DAOVehiculoExcepcion ex) 
+        {
+            System.out.println("Error al eliminar el vehículo");
+            ex.getMessage();
+        }
+ 
+    }
+    
+    //Funciones de informe
+    
+    public ArrayList<Informe> getListadoInformes()
+    {
+        ArrayList<Informe> listaInformes = null;
+        try 
+        {
+            listaInformes = modelo.getListadoInformes();
+        }
+        catch (DAOInformeExcepcion ex) 
+        {
+            System.out.println("Error obteniendo la lista de informes");
+            ex.getMessage();
+        }
+        return listaInformes;
+        
+    }
+     public void insertarInforme(Informe informe)
+    {
+        try 
+        {
+            modelo.insertarInforme(informe);
+            
+        } 
+        catch (DAOInformeExcepcion ex) 
+        {
+            System.out.println("Error insertando el informe");
+            ex.getMessage();
+        } 
+    }
+     public void modificarInforme(Informe informe)
+     {
+         try {
+            modelo.modificarInforme(informe);
+        } 
+        catch (DAOInformeExcepcion ex) 
+        {
+            System.out.println("Error al modificar el informe");
+            ex.getMessage();
+        }
+     }
+     public void eliminarInforme(Informe informe)
+    {
+        try 
+        {
+            modelo.eliminarInforme(informe);
+        }
+        catch (DAOInformeExcepcion ex) 
+        {
+            System.out.println("Error al eliminar el informe");
+            ex.getMessage();
+        }
+ 
+    }
+     
+     //Funciones de Factura
+      public ArrayList<Factura> getListadoFacturas()
+    {
+        ArrayList<Factura> listaFacturas = null;
+        try 
+        {
+            listaFacturas = modelo.getListadoFacturas();
+        }
+        catch (DAOFacturaExcepcion ex) 
+        {
+            System.out.println("Error obteniendo la lista de facturas");
+            ex.getMessage();
+        }
+        return listaFacturas;
+        
+    }
+      public void insertarFactura(Factura factura)
+      {
+      try 
+        {
+            modelo.insertarFactura(factura);
+            
+        } 
+        catch (DAOFacturaExcepcion ex) 
+        {
+            System.out.println("Error insertando la factura");
+            ex.getMessage();
+        } 
+      }
+      public void modificarFactura(Factura factura)
+     {
+         try {
+            modelo.modificarFactura(factura);
+        } 
+        catch (DAOFacturaExcepcion ex) 
+        {
+            System.out.println("Error al modificar la factura");
+            ex.getMessage();
+        }
+     }
+      public void eliminarFactura(Factura factura)
+    {
+        try 
+        {
+            modelo.eliminarFactura(factura);
+        }
+        catch (DAOFacturaExcepcion ex) 
+        {
+            System.out.println("Error al eliminar la factura");
+            ex.getMessage();
+        }
+ 
+    }
+    
+      //Funciones de repuestos
+    public ArrayList<Repuestos> getListadoRepuestos()
+    {
+        ArrayList<Repuestos> listaRepuestos = null;
+        try 
+        {
+            listaRepuestos = modelo.getListadoRepuestos();
+        }
+        catch (DAORepuestoExcepcion ex) 
+        {
+            System.out.println("Error obteniendo la lista de repuestos");
+            ex.getMessage();
+        }
+        return listaRepuestos;
+        
+    }
+      public void insertarRepuesto(Repuestos repuesto)
+      {
+      try 
+        {
+            modelo.insertarRepuesto(repuesto);
+            
+        } 
+        catch (DAORepuestoExcepcion ex) 
+        {
+            System.out.println("Error insertando el repuesto");
+            ex.getMessage();
+        } 
+      }
+      public void modificarRepuesto(Repuestos repuesto)
+     {
+         try {
+            modelo.modificarRepuesto(repuesto);
+        } 
+        catch (DAORepuestoExcepcion ex) 
+        {
+            System.out.println("Error al modificar el repuesto");
+            ex.getMessage();
+        }
+     }
+      public void eliminarRepuesto(Repuestos repuesto)
+    {
+        try 
+        {
+            modelo.eliminarRepuesto(repuesto);
+        }
+        catch (DAORepuestoExcepcion ex) 
+        {
+            System.out.println("Error al eliminar el repuesto");
+            ex.getMessage();
+        }
+ 
+    }
+    
+      //Funciones de Obd
+      
+      public ArrayList<Obd> getListadoObd()
+    {
+        ArrayList<Obd> listaObd = null;
+        try 
+        {
+            listaObd = modelo.getListadoObd();
+        }
+        catch (DAOObdExcepcion ex) 
+        {
+            System.out.println("Error obteniendo la lista Obd");
+            ex.getMessage();
+        }
+        return listaObd;
+        
+    }
+      public void insertarObd(Obd obd)
+      {
+      try 
+        {
+            modelo.insertarObd(obd);
+            
+        } 
+        catch (DAOObdExcepcion ex) 
+        {
+            System.out.println("Error insertando este registro Obd");
+            ex.getMessage();
+        } 
+      }
+      public void modificarObd(Obd obd)
+     {
+         try {
+            modelo.modificarObd(obd);
+        } 
+        catch (DAOObdExcepcion ex) 
+        {
+            System.out.println("Error al modificar el registro Obd");
+            ex.getMessage();
+        }
+     }
+    public void eliminarObd(Obd obd)
+    {
+        try 
+        {
+            modelo.eliminarObd(obd);
+        }
+        catch (DAOObdExcepcion ex) 
+        {
+            System.out.println("Error al eliminar el registro Obd");
+            ex.getMessage();
+        }
+ 
+    }
+    
     
 }

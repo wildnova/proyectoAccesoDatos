@@ -28,9 +28,12 @@ public class Factura {
     @Column(name="num_factura")
     private int numFactura;
     @Column(name="precio")
-    private int precio;
+    private double precio;
     @Column(name="lineaFactura")
     private String lineaFactura;
+
+    
+    private String numExpedicionInforme;
     
     @OneToOne(cascade=CascadeType.PERSIST)
     @JoinColumn(name="num_expedicion")
@@ -42,12 +45,18 @@ public class Factura {
     public Factura() {
     }
 
-    public Factura(int numFactura, int precio, String lineaFactura, Informe informe, Set<Repuestos> repuestos) {
+    public Factura(int numFactura, double precio, String lineaFactura, Informe informe, Set<Repuestos> repuestos) {
         this.numFactura = numFactura;
         this.precio = precio;
         this.lineaFactura = lineaFactura;
         this.informe = informe;
         this.repuestos = repuestos;
+    }
+    public Factura(int numFactura, double precio, String lineaFactura, String numExpedicionInforme){
+        this.numFactura = numFactura;
+        this.precio = precio;
+        this.lineaFactura = lineaFactura;
+        this.numExpedicionInforme = numExpedicionInforme;
     }
 
     public int getNumFactura() {
@@ -58,11 +67,11 @@ public class Factura {
         this.numFactura = numFactura;
     }
 
-    public int getPrecio() {
+    public double getPrecio() {
         return precio;
     }
 
-    public void setPrecio(int precio) {
+    public void setPrecio(double precio) {
         this.precio = precio;
     }
 
@@ -90,7 +99,13 @@ public class Factura {
         this.repuestos = repuestos;
     }
 
-    
+    public String getNumExpedicionInforme() {
+        return numExpedicionInforme;
+    }
+
+    public void setNumExpedicionInforme(String numExpedicionInforme) {
+        this.numExpedicionInforme = numExpedicionInforme;
+    }
     
     
     

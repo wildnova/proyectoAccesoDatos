@@ -37,6 +37,9 @@ public class FormularioTrabajador extends javax.swing.JDialog implements ActionL
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jlApellido2 = new javax.swing.JLabel();
+        jlFuncion = new javax.swing.JLabel();
         jlFormularioTrabajador = new javax.swing.JLabel();
         jtfDni = new javax.swing.JTextField();
         jtfNombre = new javax.swing.JTextField();
@@ -46,64 +49,72 @@ public class FormularioTrabajador extends javax.swing.JDialog implements ActionL
         jlDni = new javax.swing.JLabel();
         jlNombre = new javax.swing.JLabel();
         jlApellido1 = new javax.swing.JLabel();
-        jlApellido2 = new javax.swing.JLabel();
-        jlFuncion = new javax.swing.JLabel();
         jbAceptar = new javax.swing.JButton();
         jbCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
 
-        jlFormularioTrabajador.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jlFormularioTrabajador.setText("Insertar trabajador");
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jlDni.setText("DNI");
-
-        jlNombre.setText("Nombre");
-
-        jlApellido1.setText("Primer Apellido");
-
+        jlApellido2.setForeground(new java.awt.Color(0, 102, 204));
         jlApellido2.setText("Segundo Apellido");
 
+        jlFuncion.setForeground(new java.awt.Color(0, 102, 204));
         jlFuncion.setText("Función");
+
+        jlFormularioTrabajador.setBackground(new java.awt.Color(255, 255, 255));
+        jlFormularioTrabajador.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jlFormularioTrabajador.setForeground(new java.awt.Color(0, 102, 204));
+        jlFormularioTrabajador.setText("Insertar trabajador");
+
+        jlDni.setBackground(new java.awt.Color(255, 255, 255));
+        jlDni.setForeground(new java.awt.Color(0, 102, 204));
+        jlDni.setText("DNI");
+
+        jlNombre.setForeground(new java.awt.Color(0, 102, 204));
+        jlNombre.setText("Nombre");
+
+        jlApellido1.setForeground(new java.awt.Color(0, 102, 204));
+        jlApellido1.setText("Primer Apellido");
 
         jbAceptar.setText("Aceptar");
 
         jbCancelar.setText("Cancelar");
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(35, 35, 35)
                 .addComponent(jbCancelar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jbAceptar)
-                .addGap(48, 48, 48))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(53, 53, 53)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jlFuncion)
-                    .addComponent(jtfFuncion, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlApellido2)
-                    .addComponent(jtfApellido1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlApellido1)
-                    .addComponent(jtfApellido2, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlNombre)
-                    .addComponent(jtfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlDni)
-                    .addComponent(jtfDni, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(jlFormularioTrabajador)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(31, 31, 31))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(78, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jlFormularioTrabajador)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jlFuncion)
+                        .addComponent(jtfFuncion, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jlApellido2)
+                        .addComponent(jtfApellido1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jtfApellido2, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jlDni)
+                        .addComponent(jlApellido1)
+                        .addComponent(jlNombre)
+                        .addComponent(jtfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jtfDni, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(69, 69, 69))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jlFormularioTrabajador)
-                .addGap(13, 13, 13)
+                .addGap(18, 18, 18)
                 .addComponent(jlDni)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jtfDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -123,11 +134,22 @@ public class FormularioTrabajador extends javax.swing.JDialog implements ActionL
                 .addComponent(jlFuncion)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jtfFuncion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbCancelar)
                     .addComponent(jbAceptar))
-                .addGap(14, 14, 14))
+                .addGap(23, 23, 23))
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -214,6 +236,10 @@ public class FormularioTrabajador extends javax.swing.JDialog implements ActionL
     public void setTextoFuncion(String texto){
         jtfFuncion.setText(texto);
     }
+    public void desactivarDni()
+    {
+        jtfDni.setEditable(false);
+    }
     
     //Funciones para extraer los datos del formulario.
      public String getDni() {
@@ -237,6 +263,7 @@ public class FormularioTrabajador extends javax.swing.JDialog implements ActionL
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JButton jbAceptar;
     private javax.swing.JButton jbCancelar;
     private javax.swing.JLabel jlApellido1;

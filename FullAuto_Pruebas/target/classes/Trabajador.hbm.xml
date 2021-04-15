@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.mycompany.fullauto.Trabajador" table="trabajador">
+    <id name="dni" type="string" column="dni">
+        <generator class="assigned"/>
+    </id>
+    <property name="nombre" type="string" column="nombre"/>
+    <property name="apellido1" type="string" column="apellido1"/>
+    <property name="apellido2" type="string" column="apellido2"/>
+    <property name="funcion" type="string" column="funcion"/>
+    
+    <set name="vehiculo"  inverse="true" lazy="true" cascade="save-update" fetch="select">
+        <key column="dni" not-null="true"/>
+        <one-to-many class="com.mycompany.fullauto.Vehiculo"/>
+    </set>
+    <set name="informe" inverse="true" lazy="true" cascade="save-update" fetch="select">
+        <key column="dni" not-null="true"/>
+        <one-to-many class="com.mycompany.fullauto.Informe"/>
+    </set>
+    <set name="repuestos"  cascade="save-update" table="trabajador_repuestos" >
+        <key column="dni_trabajador"/>
+        <many-to-many class="com.mycompany.fullauto.Repuestos" column="num_serie"/>
+    </set>
+    </class>
+    
+    
+    
+</hibernate-mapping>

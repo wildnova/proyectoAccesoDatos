@@ -24,18 +24,18 @@ public class Obd implements Serializable {
     private int id;
     @Column(name="rpm_inst")
     private int rpm_inst;
-    @Column(name="rpm_avg")
-    private int rpm_avg;
-    @Column(name="consumo_inst")
-    private float consumo_inst;
-    @Column(name="consumo_avg")
-    private float consumo_avg;
     @Column(name="temp_aceite")
-    private float temp_aceite;
+    private double temp_aceite;
     @Column(name="temp_agua")
-    private float temp_agua;
+    private double temp_agua;
     @Column(name="cod_salida")
     private String cod_salida;
+    @Column(name="sensores")
+    private String sensores;
+
+    private String bastidorVehiculoObd;
+
+    
     
     @OneToOne(mappedBy="obd")
     private Vehiculo vehiculo;
@@ -44,18 +44,24 @@ public class Obd implements Serializable {
     public Obd(){
     }
 
-    public Obd(int id, int rpm_inst, int rpm_avg, float consumo_inst, float consumo_avg, float temp_aceite, float temp_agua, String cod_salida, Vehiculo vehiculo) {
+    public Obd(int id, int rpm_inst, double temp_aceite, double temp_agua, String cod_salida, String sensores, Vehiculo vehiculo) {
         this.id = id;
         this.rpm_inst = rpm_inst;
-        this.rpm_avg = rpm_avg;
-        this.consumo_inst = consumo_inst;
-        this.consumo_avg = consumo_avg;
         this.temp_aceite = temp_aceite;
         this.temp_agua = temp_agua;
         this.cod_salida = cod_salida;
+        this.sensores = sensores;
         this.vehiculo = vehiculo;
     }
-
+    public Obd(int id, int rpm_inst, double temp_aceite, double temp_agua, String cod_salida, String sensores,String bastidorVehiculoObd) {
+        this.id = id;
+        this.rpm_inst = rpm_inst;
+        this.temp_aceite = temp_aceite;
+        this.temp_agua = temp_agua;
+        this.cod_salida = cod_salida;
+        this.sensores = sensores;
+        this.bastidorVehiculoObd=bastidorVehiculoObd;
+    }
     public int getId() {
         return id;
     }
@@ -72,43 +78,19 @@ public class Obd implements Serializable {
         this.rpm_inst = rpm_inst;
     }
 
-    public int getRpm_avg() {
-        return rpm_avg;
-    }
-
-    public void setRpm_avg(int rpm_avg) {
-        this.rpm_avg = rpm_avg;
-    }
-
-    public float getConsumo_inst() {
-        return consumo_inst;
-    }
-
-    public void setConsumo_inst(float consumo_inst) {
-        this.consumo_inst = consumo_inst;
-    }
-
-    public float getConsumo_avg() {
-        return consumo_avg;
-    }
-
-    public void setConsumo_avg(float consumo_avg) {
-        this.consumo_avg = consumo_avg;
-    }
-
-    public float getTemp_aceite() {
+    public double getTemp_aceite() {
         return temp_aceite;
     }
 
-    public void setTemp_aceite(float temp_aceite) {
+    public void setTemp_aceite(double temp_aceite) {
         this.temp_aceite = temp_aceite;
     }
 
-    public float getTemp_agua() {
+    public double getTemp_agua() {
         return temp_agua;
     }
 
-    public void setTemp_agua(float temp_agua) {
+    public void setTemp_agua(double temp_agua) {
         this.temp_agua = temp_agua;
     }
 
@@ -119,7 +101,20 @@ public class Obd implements Serializable {
     public void setCod_salida(String cod_salida) {
         this.cod_salida = cod_salida;
     }
+    public String getSensores() {
+        return sensores;
+    }
 
+    public void setSensores(String sensores) {
+        this.sensores = sensores;
+    }
+    public String getBastidorVehiculoObd() {
+        return bastidorVehiculoObd;
+    }
+
+    public void setBastidorVehiculoObd(String bastidorVehiculoObd) {
+        this.bastidorVehiculoObd = bastidorVehiculoObd;
+    }
     public Vehiculo getVehiculo() {
         return vehiculo;
     }
