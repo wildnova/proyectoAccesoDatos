@@ -8,9 +8,10 @@
         <generator class="assigned"/>
     </id>
     <property name="tareas" type="string" column="tareas"/>    
+    <property name="dniTrabajadorInforme" type="string" column="dni_trabajador" update="false" insert="false"/>   
     
-    <many-to-one name="trabajador" class="com.mycompany.fullauto.Trabajador" cascade="save-update"/>
-    <one-to-one name="factura" class="com.mycompany.fullauto.Factura" property-ref="numFactura"/>
+    <many-to-one name="trabajador" class="com.mycompany.fullauto.Trabajador" column="dni_trabajador" cascade="save-update"/>
+    <one-to-one name="factura" class="com.mycompany.fullauto.Factura" property-ref="informe"/>
     </class>
     
     

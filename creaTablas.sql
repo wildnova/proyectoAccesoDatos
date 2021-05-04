@@ -30,8 +30,8 @@ CREATE TABLE vehiculo
     fecha_entrada   DATE,
     tiempo_dedicado VARCHAR(30),
     
-    dni_trabajador  VARCHAR(9),
-    FOREIGN KEY (dni_trabajador) REFERENCES trabajador(dni)
+    dni_trabajador  VARCHAR(9) DEFAULT '00000000X',
+    FOREIGN KEY (dni_trabajador) REFERENCES trabajador(dni) ON DELETE SET DEFAULT
    
 );
 
@@ -40,8 +40,8 @@ CREATE TABLE informe
     num_expedicion       INT(30) PRIMARY KEY,
     tareas              TEXT(500),
 
-    dni_trabajador VARCHAR(9),
-    FOREIGN KEY (dni_trabajador) REFERENCES trabajador(dni)
+    dni_trabajador VARCHAR(9) DEFAULT '00000000X',
+    FOREIGN KEY (dni_trabajador) REFERENCES trabajador(dni) ON DELETE SET DEFAULT
 );
 
 CREATE TABLE factura
@@ -50,8 +50,8 @@ CREATE TABLE factura
     precio          FLOAT(8,2)  NOT NULL,
     lineaFactura    TEXT(300),
 
-    num_expedicion_informe INT(30),
-    FOREIGN KEY (num_expedicion_informe) REFERENCES informe(num_expedicion)
+    num_expedicion_informe INT(30) DEFAULT '0000',
+    FOREIGN KEY (num_expedicion_informe) REFERENCES informe(num_expedicion) ON DELETE SET DEFAULT
 );
 
 CREATE TABLE repuestos
@@ -64,11 +64,11 @@ CREATE TABLE repuestos
     tienda          VARCHAR(30),
     fecha_compra    DATE,
 
-    bastidor_vehiculo VARCHAR(40),
-    num_factura       INT(30),
+    bastidor_vehiculo VARCHAR(40) DEFAULT '000000000000000',
+    num_factura       INT(30) DEFAULT '000',
 
-    FOREIGN KEY (bastidor_vehiculo) REFERENCES vehiculo(bastidor),
-    FOREIGN KEY (num_factura) REFERENCES factura(num_factura)
+    FOREIGN KEY (bastidor_vehiculo) REFERENCES vehiculo(bastidor) ON DELETE SET DEFAULT,
+    FOREIGN KEY (num_factura) REFERENCES factura(num_factura) ON DELETE SET DEFAULT
 );
 
 
@@ -82,17 +82,17 @@ CREATE TABLE obd
     cod_salida      VARCHAR(10),
     sensores        VARCHAR(25),
 
-    bastidor_vehiculo VARCHAR(40),
-    FOREIGN KEY (bastidor_vehiculo) REFERENCES vehiculo(bastidor)
+    bastidor_vehiculo VARCHAR(40) DEFAULT '000000000000000',
+    FOREIGN KEY (bastidor_vehiculo) REFERENCES vehiculo(bastidor) ON DELETE SET DEFAULT
 );
 
 CREATE TABLE trabajador_repuestos
 (
 
-    dni_trabajador  VARCHAR(9),
-    num_serie       VARCHAR(30),
+    dni_trabajador  VARCHAR(9) DEFAULT '00000000X',
+    num_serie       VARCHAR(30) DEFAULT '00',
 
-    FOREIGN KEY (dni_trabajador) REFERENCES trabajador(dni),
-    FOREIGN KEY (num_serie) REFERENCES repuestos(num_serie)
+    FOREIGN KEY (dni_trabajador) REFERENCES trabajador(dni) ON DELETE SET DEFAULT,
+    FOREIGN KEY (num_serie) REFERENCES repuestos(num_serie) ON DELETE SET DEFAULT
 );
 

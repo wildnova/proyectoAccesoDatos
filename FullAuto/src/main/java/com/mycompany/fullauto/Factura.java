@@ -32,14 +32,14 @@ public class Factura {
     @Column(name="lineaFactura")
     private String lineaFactura;
 
-    
+    @Column(name="num_expedicion_informe", updatable = false)
     private String numExpedicionInforme;
     
     @OneToOne(cascade=CascadeType.PERSIST)
     @JoinColumn(name="num_expedicion")
     private Informe informe;
     
-    @OneToMany(mappedBy="factura")
+    @OneToMany(targetEntity=com.mycompany.fullauto.Repuestos.class,mappedBy="factura")
     private Set<Repuestos> repuestos;
     
     public Factura() {

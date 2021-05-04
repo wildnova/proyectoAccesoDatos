@@ -29,14 +29,14 @@ public class Informe {
     @Column(name="tareas")
     private String tareas;
 
-    
+    @Column(name="dni_trabajador_informe", updatable = false)
     private String dniTrabajadorInforme;
     
-    @OneToOne(mappedBy="informe")
+    @OneToOne(targetEntity=com.mycompany.fullauto.Factura.class,mappedBy="informe")
     private Factura factura;
     
     @ManyToOne(cascade=CascadeType.PERSIST)
-    @JoinColumn(name="informe")
+    @JoinColumn(name="dni")
     private Trabajador trabajador;
     
     

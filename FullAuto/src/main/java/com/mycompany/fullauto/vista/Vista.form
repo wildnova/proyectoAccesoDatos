@@ -662,6 +662,9 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Anterior"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbAnteriorVehiculoActionPerformed"/>
+                      </Events>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                       </AuxValues>
@@ -1135,11 +1138,17 @@
                   </AuxValues>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jtfNumFactura">
+                  <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
+                  </Properties>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                   </AuxValues>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jtfPrecioFactura">
+                  <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
+                  </Properties>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                   </AuxValues>
@@ -1161,6 +1170,9 @@
                   </AuxValues>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jtfLineaFactura">
+                  <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
+                  </Properties>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                   </AuxValues>
@@ -1209,6 +1221,9 @@
                   </AuxValues>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jtfnumExpedicionInformeFactura">
+                  <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
+                  </Properties>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                   </AuxValues>
@@ -1413,6 +1428,9 @@
                       </AuxValues>
                     </Component>
                     <Component class="javax.swing.JTextField" name="jtfNumSerieRepuesto">
+                      <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
+                      </Properties>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                       </AuxValues>
@@ -1426,6 +1444,9 @@
                       </AuxValues>
                     </Component>
                     <Component class="javax.swing.JTextField" name="jtfReferenciaRepuesto">
+                      <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
+                      </Properties>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                       </AuxValues>
@@ -1439,6 +1460,9 @@
                       </AuxValues>
                     </Component>
                     <Component class="javax.swing.JTextField" name="jtfNombreRepuesto">
+                      <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
+                      </Properties>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                       </AuxValues>
@@ -1452,6 +1476,9 @@
                       </AuxValues>
                     </Component>
                     <Component class="javax.swing.JTextField" name="jtfMarcaRepuesto">
+                      <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
+                      </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtfMarcaRepuestoActionPerformed"/>
                       </Events>
@@ -1468,6 +1495,9 @@
                       </AuxValues>
                     </Component>
                     <Component class="javax.swing.JTextField" name="jtfUsoRepuesto">
+                      <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
+                      </Properties>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                       </AuxValues>
@@ -1519,6 +1549,9 @@
                       </AuxValues>
                     </Component>
                     <Component class="javax.swing.JTextField" name="jtfNumFacturaRepuestos">
+                      <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
+                      </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtfNumFacturaRepuestosActionPerformed"/>
                       </Events>
@@ -1527,16 +1560,25 @@
                       </AuxValues>
                     </Component>
                     <Component class="javax.swing.JTextField" name="jtfBastidorVehiculoRepuestos">
+                      <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
+                      </Properties>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                       </AuxValues>
                     </Component>
                     <Component class="javax.swing.JTextField" name="jtfFechaCompraRepuesto">
+                      <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
+                      </Properties>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                       </AuxValues>
                     </Component>
                     <Component class="javax.swing.JTextField" name="jtfTiendaRepuesto">
+                      <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
+                      </Properties>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                       </AuxValues>
@@ -1749,6 +1791,9 @@
                       </AuxValues>
                     </Component>
                     <Component class="javax.swing.JTextField" name="jtfIdObd">
+                      <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
+                      </Properties>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                       </AuxValues>
@@ -1762,6 +1807,9 @@
                       </AuxValues>
                     </Component>
                     <Component class="javax.swing.JTextField" name="jtfRpmInstObd">
+                      <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
+                      </Properties>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                       </AuxValues>
@@ -1813,6 +1861,9 @@
                       </AuxValues>
                     </Component>
                     <Component class="javax.swing.JTextField" name="jtfBastidorVehiculoObd">
+                      <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
+                      </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtfBastidorVehiculoObdActionPerformed"/>
                       </Events>
@@ -1821,16 +1872,25 @@
                       </AuxValues>
                     </Component>
                     <Component class="javax.swing.JTextField" name="jtfCodigoSalidaObd">
+                      <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
+                      </Properties>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                       </AuxValues>
                     </Component>
                     <Component class="javax.swing.JTextField" name="jtfTemperaturaAguaObd">
+                      <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
+                      </Properties>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                       </AuxValues>
                     </Component>
                     <Component class="javax.swing.JTextField" name="jtfTemperaturaAceiteObd">
+                      <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
+                      </Properties>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                       </AuxValues>
@@ -1876,6 +1936,9 @@
                       </AuxValues>
                     </Component>
                     <Component class="javax.swing.JTextField" name="jtfSensores">
+                      <Properties>
+                        <Property name="editable" type="boolean" value="false"/>
+                      </Properties>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                       </AuxValues>

@@ -14,9 +14,11 @@
     <property name="tienda" type="string" column="tienda"/>
     <property name="fechaCompra" type="java.util.Date" column="fecha_compra"/>
     
+    <property name="BastidorVehiculoRepuestos" type="string" column="bastidor_vehiculo" update="false" insert="false"/>
+    <property name="NumFacturaRepuestos" type="string" column="bastidor_vehiculo" update="false" insert="false"/>
     
-    <many-to-one name="vehiculo" class="com.mycompany.fullauto.Vehiculo" cascade="save-update"/>
-    <many-to-one name="factura" class="com.mycompany.fullauto.Factura" cascade="save-update"/>
+    <many-to-one name="vehiculo" class="com.mycompany.fullauto.Vehiculo" column="bastidor_vehiculo" cascade="save-update"/>
+    <many-to-one name="factura" class="com.mycompany.fullauto.Factura" column="num_factura" cascade="save-update"/>
     <set name="trabajador"  cascade="save-update" table="trabajador_repuestos">
         <key column="num_serie"/>
         <many-to-many class="com.mycompany.fullauto.Trabajador" column="dni_trabajador"/>

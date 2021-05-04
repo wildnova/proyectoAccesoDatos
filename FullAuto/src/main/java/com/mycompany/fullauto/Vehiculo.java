@@ -47,18 +47,19 @@ public class Vehiculo{
     private Date fechaEntrada;
     @Column(name="tiempo_dedicado")
     private String tiempoDedicado;
-    @Column(name="dni_trabajador")
+    
+    @Column(name="dni_trabajador_vehiculo",updatable = false)
     private String dniTrabajador;
     
-    @ManyToOne(cascade=CascadeType.DETACH)
+    @ManyToOne(cascade=CascadeType.PERSIST)
     @JoinColumn(name="dni")
     private Trabajador trabajador;
     
-    @OneToOne (cascade=CascadeType.ALL)
-    @JoinColumn(name="id")
+    @OneToOne (targetEntity=com.mycompany.fullauto.Obd.class,mappedBy = "vehiculo",cascade=CascadeType.REMOVE)
+    
     private Obd obd;
     
-    @OneToMany(mappedBy="vehiculo",cascade=CascadeType.DETACH)
+    @OneToMany(targetEntity=com.mycompany.fullauto.Repuestos.class,mappedBy="vehiculo",cascade=CascadeType.DETACH)
     private Set<Repuestos> repuestos;
     
     public Vehiculo() {

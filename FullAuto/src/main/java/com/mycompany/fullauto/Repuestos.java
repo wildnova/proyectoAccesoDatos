@@ -40,17 +40,19 @@ public class Repuestos {
     @Column(name="fecha_compra")
     private Date fechaCompra;
 
+    @Column(name="bastidor_vehiculo_repuestos", updatable = false)
     private String BastidorVehiculoRepuestos;
+    @Column(name="num_factura_repuestos", updatable = false)
     private String NumFacturaRepuestos;
     
     @ManyToOne(cascade=CascadeType.DETACH)
-    @JoinColumn(name="repuestos")
+    @JoinColumn(name="bastidor")
     private Vehiculo vehiculo;
     @ManyToOne(cascade=CascadeType.DETACH)
     @JoinColumn(name="num_factura")
     private Factura factura;
     
-    @ManyToMany(mappedBy="repuestos")
+    @ManyToMany(targetEntity=com.mycompany.fullauto.Trabajador.class,mappedBy = "repuestos")
     private Set<Trabajador> trabajador;
     
     public Repuestos() {

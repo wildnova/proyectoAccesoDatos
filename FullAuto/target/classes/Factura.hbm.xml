@@ -9,8 +9,9 @@
     </id>
     <property name="precio" type="double" column="precio"/>
     <property name="lineaFactura" type="string" column="lineaFactura"/>
-
-    <one-to-one name="informe" class="com.mycompany.fullauto.Informe" property-ref="numExpedicion"/>
+    <property name="numExpedicionInforme" type="string" column="num_expedicion_informe" update="false" insert="false"/>
+    
+    <many-to-one name="informe" class="com.mycompany.fullauto.Informe" column="num_expedicion_informe"/>
     <set name="repuestos" inverse="true" lazy="true" cascade="save-update" fetch="select">
         <key column="num_factura" not-null="true"/>
         <one-to-many class="com.mycompany.fullauto.Repuestos"/>

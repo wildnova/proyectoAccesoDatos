@@ -22,6 +22,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.hibernate.ObjectNotFoundException;
 
 import org.hibernate.Query;
@@ -38,6 +40,17 @@ public class ModeloHibernate implements DAO{
 
     private Session sesion=null;
     private SessionFactory factory;
+
+    public ModeloHibernate() {
+        
+        try {
+            crearConexionHibernate();
+        } catch (DAOConexionExcepcion ex) {
+            Logger.getLogger(ModeloHibernate.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    
     
     private void crearConexionHibernate() throws DAOConexionExcepcion{
         
@@ -71,24 +84,11 @@ public class ModeloHibernate implements DAO{
     @Override
     public ArrayList<Trabajador> getListadoTrabajadores() throws DAOTrabajadorExcepcion {
         ArrayList<Trabajador> listadoTrabajadores=null;
-          try {
-                crearConexionHibernate();
 
-            } catch (DAOConexionExcepcion ex) {
-                System.err.println("Error en la conexión a hibernate");
-                ex.printStackTrace();
-            }
-        if (sesion!=null)
-        {
-        
         String sql="FROM Trabajador";
         Query q = sesion.createQuery(sql);
         listadoTrabajadores =(ArrayList) q.list();
-        }
-        
-       
-       
-        
+
         return listadoTrabajadores;
     }
     @Override
@@ -98,12 +98,6 @@ public class ModeloHibernate implements DAO{
         if (sesion!=null)
         {
             trabajador = sesion.load(Trabajador.class,dniTrabajador);
-            /*String sql="FROM Trabajador WHERE dni=?";
-            Query q = sesion.createQuery(sql);
-            q.setString(0, dniTrabajador);
-            ArrayList<Trabajador> listadoTrabajadores =(ArrayList) q.list();
-            trabajador= listadoTrabajadores.get(0);
-            System.out.println(trabajador.getDni()+ trabajador.getNombre());*/
     
         }
         
@@ -148,18 +142,11 @@ public class ModeloHibernate implements DAO{
     public ArrayList<Vehiculo> getListadoVehiculos() throws DAOVehiculoExcepcion {
         
         ArrayList<Vehiculo> listadoVehiculos=null;
-        try {
-            crearConexionHibernate();
-        } catch (DAOConexionExcepcion ex) {
-            
-        }
-        if (sesion!=null)
-        {
+
         
         String sql="FROM Vehiculo";
         Query q = sesion.createQuery(sql);
         listadoVehiculos =(ArrayList) q.list();
-        }
         return listadoVehiculos;
        
     }
@@ -193,82 +180,154 @@ public class ModeloHibernate implements DAO{
     
     @Override
     public ArrayList<Informe> getListadoInformes() throws DAOInformeExcepcion {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<Informe> listadoInformes=null;
+
+        
+        String sql="FROM Informe";
+        Query q = sesion.createQuery(sql);
+        listadoInformes =(ArrayList) q.list();
+        return listadoInformes;
     }
 
     @Override
     public void insertarInforme(Informe informe) throws DAOInformeExcepcion {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Transaction tx = sesion.beginTransaction();
+        
+        sesion.save(informe);
+        
+        tx.commit();
     }
 
     @Override
     public void modificarInforme(Informe informe) throws DAOInformeExcepcion {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Transaction tx = sesion.beginTransaction();
+        
+        sesion.update(informe);
+        
+        tx.commit();
     }
 
     @Override
     public void eliminarInforme(Informe informe) throws DAOInformeExcepcion {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Transaction tx = sesion.beginTransaction();
+        
+        sesion.delete(informe);
+        
+        tx.commit();
     }
 
     @Override
     public ArrayList<Factura> getListadoFacturas() throws DAOFacturaExcepcion {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<Factura> listadoFacturas=null;
+
+        
+        String sql="FROM Factura";
+        Query q = sesion.createQuery(sql);
+        listadoFacturas =(ArrayList) q.list();
+        return listadoFacturas;
     }
 
     @Override
     public void insertarFactura(Factura factura) throws DAOFacturaExcepcion {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Transaction tx = sesion.beginTransaction();
+        
+        sesion.save(factura);
+        
+        tx.commit();
     }
 
     @Override
     public void modificarFactura(Factura factura) throws DAOFacturaExcepcion {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       Transaction tx = sesion.beginTransaction();
+        
+        sesion.update(factura);
+        
+        tx.commit();
     }
 
     @Override
     public void eliminarFactura(Factura factura) throws DAOFacturaExcepcion {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Transaction tx = sesion.beginTransaction();
+        
+        sesion.delete(factura);
+        
+        tx.commit();
     }
 
     @Override
     public ArrayList<Repuestos> getListadoRepuestos() throws DAORepuestoExcepcion {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<Repuestos> listadoRepuestos=null;
+
+        
+        String sql="FROM Repuestos";
+        Query q = sesion.createQuery(sql);
+        listadoRepuestos =(ArrayList) q.list();
+        return listadoRepuestos;
     }
 
     @Override
     public void insertarRepuesto(Repuestos repuestos) throws DAORepuestoExcepcion {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         Transaction tx = sesion.beginTransaction();
+        
+        sesion.save(repuestos);
+        
+        tx.commit();
     }
 
     @Override
     public void modificarRepuesto(Repuestos repuestos) throws DAORepuestoExcepcion {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Transaction tx = sesion.beginTransaction();
+        
+        sesion.update(repuestos);
+        
+        tx.commit();
     }
 
     @Override
     public void eliminarRepuesto(Repuestos repuestos) throws DAORepuestoExcepcion {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         Transaction tx = sesion.beginTransaction();
+        
+        sesion.delete(repuestos);
+        
+        tx.commit();
     }
 
     @Override
     public ArrayList<Obd> getListadoObd() throws DAOObdExcepcion {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<Obd> listadoObd=null;
+
+        
+        String sql="FROM Obd";
+        Query q = sesion.createQuery(sql);
+        listadoObd =(ArrayList) q.list();
+        return listadoObd;
     }
 
     @Override
     public void insertarObd(Obd obd) throws DAOObdExcepcion {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Transaction tx = sesion.beginTransaction();
+        
+        sesion.save(obd);
+        
+        tx.commit();
     }
 
     @Override
     public void modificarObd(Obd obd) throws DAOObdExcepcion {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         Transaction tx = sesion.beginTransaction();
+        
+        sesion.update(obd);
+        
+        tx.commit();
     }
 
     @Override
     public void eliminarObd(Obd obd) throws DAOObdExcepcion {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         Transaction tx = sesion.beginTransaction();
+        
+        sesion.delete(obd);
+        
+        tx.commit();
     }
 
 }

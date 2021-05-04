@@ -1,0 +1,98 @@
+------------------------------------------------------------------------------------------------------------------------
+
+[2021-04-20 20:19:09 #1 store.file] 
+readTextFile error.
+
+[2021-04-20 20:19:09 #2 store.file] 
+java.io.FileNotFoundException: C:\Users\novad\.objectdb\exolorer.xml (El sistema no puede encontrar el archivo especificado)
+	at java.io.FileInputStream.open0(Native Method)
+	at java.io.FileInputStream.open(FileInputStream.java:195)
+	at java.io.FileInputStream.<init>(FileInputStream.java:138)
+	at java.io.FileInputStream.<init>(FileInputStream.java:93)
+	at com.objectdb.o.STH.B(STH.java:731)
+	at com.objectdb.o.STH.A(STH.java:715)
+	at com.objectdb.o.CNF.<init>(CNF.java:106)
+	at com.objectdb.o.CNF.<clinit>(CNF.java:32)
+	at com.objectdb.o.MainFrame.init(MainFrame.java:132)
+	at com.objectdb.o.EXA.<init>(EXA.java:77)
+	at com.objectdb.Explorer$1.run(Explorer.java:57)
+	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:311)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:758)
+	at java.awt.EventQueue.access$500(EventQueue.java:97)
+	at java.awt.EventQueue$3.run(EventQueue.java:709)
+	at java.awt.EventQueue$3.run(EventQueue.java:703)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:74)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:728)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:205)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
+
+[2021-04-20 20:19:09 #3 store] 
+Database 'C:\Users\novad\.m2\db\p2.odb' is opened by 7664@DESKTOP-4IJIUIF
+
+[2021-04-20 20:19:09 #4 store] 
+Configuration path: C:\Users\novad\Documents\sincEstudios\estudios\DAM2\AD\proyecto\objectdb-2.8.5\objectdb.conf
+
+[2021-04-20 20:19:09 #5 store.file] 
+readTextFile error.
+
+[2021-04-20 20:19:09 #6 store.file] 
+java.io.FileNotFoundException: C:\Users\novad\.objectdb\exolorer.xml (El sistema no puede encontrar el archivo especificado)
+	at java.io.FileInputStream.open0(Native Method)
+	at java.io.FileInputStream.open(FileInputStream.java:195)
+	at java.io.FileInputStream.<init>(FileInputStream.java:138)
+	at java.io.FileInputStream.<init>(FileInputStream.java:93)
+	at com.objectdb.o.STH.B(STH.java:731)
+	at com.objectdb.o.STH.A(STH.java:715)
+	at com.objectdb.o.CNF.<init>(CNF.java:106)
+	at com.objectdb.o.CNF.f(CNF.java:130)
+	at com.objectdb.o.CNC.s(CNC.java:119)
+	at com.objectdb.o.EXA.<init>(EXA.java:87)
+	at com.objectdb.Explorer$1.run(Explorer.java:57)
+	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:311)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:758)
+	at java.awt.EventQueue.access$500(EventQueue.java:97)
+	at java.awt.EventQueue$3.run(EventQueue.java:709)
+	at java.awt.EventQueue$3.run(EventQueue.java:703)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:74)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:728)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:205)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
+
+[2021-04-20 20:19:34 #7 store] 
+Database 'C:\Users\novad\.m2\db\p2.odb' is closed by 7664@DESKTOP-4IJIUIF
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2021-04-20 20:19:39 #1 store] 
+Database 'C:\Users\novad\.m2\db\p2.odb' is opened by 2228@DESKTOP-4IJIUIF
+
+[2021-04-20 20:19:39 #2 store] 
+Configuration path: C:\Users\novad\Documents\sincEstudios\estudios\DAM2\AD\proyecto\objectdb-2.8.5\objectdb.conf
+
+[2021-04-20 20:19:46 #3 store] 
+Database 'C:\Users\novad\.m2\db\p2.odb' is closed by 2228@DESKTOP-4IJIUIF
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2021-04-20 20:30:28 #1 store] 
+Database 'C:\Users\novad\.m2\db\p2.odb' has been recovered (tr. 5-6)
+
+[2021-04-20 20:30:28 #2 store] 
+Database 'C:\Users\novad\.m2\db\p2.odb' is opened by 7196@DESKTOP-4IJIUIF
+
+[2021-04-20 20:30:28 #3 store] 
+Configuration path: C:\Users\novad\Documents\sincEstudios\estudios\DAM2\AD\proyecto\objectdb-2.8.5\objectdb.conf
+
+[2021-04-20 20:31:27 #4 store] 
+Database 'C:\Users\novad\.m2\db\p2.odb' is closed by 7196@DESKTOP-4IJIUIF
+

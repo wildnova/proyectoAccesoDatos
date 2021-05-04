@@ -35,15 +35,13 @@ public class Trabajador {
     @Column(name="funcion")
     private String funcion;
     
-    @OneToMany(mappedBy="trabajador")
+    @OneToMany(targetEntity=com.mycompany.fullauto.Vehiculo.class,mappedBy="trabajador")
     private Set<Vehiculo> vehiculo;
-    @OneToMany(mappedBy="trabajador")
+    
+    @OneToMany(targetEntity=com.mycompany.fullauto.Informe.class,mappedBy="trabajador")
     private Set<Informe> informe;
-    @ManyToMany(cascade=CascadeType.PERSIST)
-    @JoinTable(name="trabajador_repuestos",
-            joinColumns={@JoinColumn(name="dni_trabajador")},
-            inverseJoinColumns={@JoinColumn(name="num_serie")}
-            )
+    
+    @ManyToMany(targetEntity=com.mycompany.fullauto.Repuestos.class)
     private Set<Repuestos> repuestos;
  
     public Trabajador() {

@@ -6,9 +6,12 @@
 package com.mycompany.fullauto;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -32,12 +35,12 @@ public class Obd implements Serializable {
     private String cod_salida;
     @Column(name="sensores")
     private String sensores;
-
+    
+    @Column(name="bastidor_vehiculo_obd", updatable = false)
     private String bastidorVehiculoObd;
-
     
-    
-    @OneToOne(mappedBy="obd")
+    @OneToOne(cascade=CascadeType.DETACH)
+    @JoinColumn(name="bastidor")
     private Vehiculo vehiculo;
 
     

@@ -1,0 +1,949 @@
+------------------------------------------------------------------------------------------------------------------------
+
+[2021-04-24 18:24:36 #1 explorer] 
+[ObjectDB 2.8.5] javax.persistence.PersistenceException
+Attempt to open a database file 'C:\Users\novad\Documents\sincEstudios\estudios\DAM2\AD\proyecto\FullAuto\FullAutoObjectDB.odb' that is currently in use by another process (error 141)
+	at com.objectdb.Explorer$1.run(Explorer.java:57)
+	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:311)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:758)
+	at java.awt.EventQueue.access$500(EventQueue.java:97)
+	at java.awt.EventQueue$3.run(EventQueue.java:709)
+	at java.awt.EventQueue$3.run(EventQueue.java:703)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:74)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:728)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:205)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
+Caused by: com.objectdb.o.UserException: Attempt to open a database file 'C:\Users\novad\Documents\sincEstudios\estudios\DAM2\AD\proyecto\FullAuto\FullAutoObjectDB.odb' that is currently in use by another process
+	at com.objectdb.o.MSG.a(MSG.java:64)
+	at com.objectdb.o.LFL.J(LFL.java:930)
+	at com.objectdb.o.LFL.x(LFL.java:887)
+	at com.objectdb.o.LFL.x(LFL.java:797)
+	at com.objectdb.o.DFL.<init>(DFL.java:241)
+	at com.objectdb.o.DMG.<init>(DMG.java:27)
+	at com.objectdb.o.MST.<init>(MST.java:127)
+	at com.objectdb.o.MST.ap(MST.java:109)
+	at com.objectdb.o.MSF.Z0(MSF.java:190)
+	at com.objectdb.o.OMF.s(OMF.java:804)
+	at com.objectdb.jpa.EMF.s(EMF.java:130)
+	at com.objectdb.o.OMF.x(OMF.java:715)
+	at com.objectdb.jpa.EMF.createEntityManager(EMF.java:149)
+	... 17 more
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2021-04-24 18:24:57 #1 store] 
+Database 'C:\Users\novad\Documents\sincEstudios\estudios\DAM2\AD\proyecto\FullAuto\FullAutoObjectDB.odb' is opened by 8932@DESKTOP-4IJIUIF
+
+[2021-04-24 18:24:57 #2 store] 
+Configuration path: C:\Users\novad\Documents\sincEstudios\estudios\DAM2\AD\proyecto\objectdb-2.8.5\objectdb.conf
+
+[2021-04-24 18:25:41 #3 *] 
+[ObjectDB 2.8.5] java.lang.IllegalArgumentException
+Attempt to modify a primary key of a managed object [Trabajador:null]: com.mycompany.fullauto.Trabajador#null (error 635)
+	at javax.swing.JTextField.fireActionPerformed(JTextField.java:508)
+	at javax.swing.JTextField.postActionEvent(JTextField.java:721)
+	at javax.swing.JTextField$NotifyAction.actionPerformed(JTextField.java:836)
+	at javax.swing.SwingUtilities.notifyAction(SwingUtilities.java:1668)
+	at javax.swing.JComponent.processKeyBinding(JComponent.java:2882)
+	at javax.swing.JComponent.processKeyBindings(JComponent.java:2929)
+	at javax.swing.JComponent.processKeyEvent(JComponent.java:2845)
+	at java.awt.Component.processEvent(Component.java:6316)
+	at java.awt.Container.processEvent(Container.java:2239)
+	at java.awt.Component.dispatchEventImpl(Component.java:4889)
+	at java.awt.Container.dispatchEventImpl(Container.java:2297)
+	at java.awt.Component.dispatchEvent(Component.java:4711)
+	at java.awt.KeyboardFocusManager.redispatchEvent(KeyboardFocusManager.java:1954)
+	at java.awt.DefaultKeyboardFocusManager.dispatchKeyEvent(DefaultKeyboardFocusManager.java:834)
+	at java.awt.DefaultKeyboardFocusManager.preDispatchKeyEvent(DefaultKeyboardFocusManager.java:1102)
+	at java.awt.DefaultKeyboardFocusManager.typeAheadAssertions(DefaultKeyboardFocusManager.java:973)
+	at java.awt.DefaultKeyboardFocusManager.dispatchEvent(DefaultKeyboardFocusManager.java:799)
+	at java.awt.Component.dispatchEventImpl(Component.java:4760)
+	at java.awt.Container.dispatchEventImpl(Container.java:2297)
+	at java.awt.Window.dispatchEventImpl(Window.java:2746)
+	at java.awt.Component.dispatchEvent(Component.java:4711)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:760)
+	at java.awt.EventQueue.access$500(EventQueue.java:97)
+	at java.awt.EventQueue$3.run(EventQueue.java:709)
+	at java.awt.EventQueue$3.run(EventQueue.java:703)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:74)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:84)
+	at java.awt.EventQueue$4.run(EventQueue.java:733)
+	at java.awt.EventQueue$4.run(EventQueue.java:731)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:74)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:730)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:205)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
+
+[2021-04-24 18:26:23 #4 store] 
+Database 'C:\Users\novad\Documents\sincEstudios\estudios\DAM2\AD\proyecto\FullAuto\FullAutoObjectDB.odb' is closed by 8932@DESKTOP-4IJIUIF
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2021-04-24 18:26:49 #1 store] 
+Database 'C:\Users\novad\Documents\sincEstudios\estudios\DAM2\AD\proyecto\FullAuto\FullAutoObjectDB.odb' is opened by 8224@DESKTOP-4IJIUIF
+
+[2021-04-24 18:26:49 #2 store] 
+Configuration path: C:\Users\novad\Documents\sincEstudios\estudios\DAM2\AD\proyecto\objectdb-2.8.5\objectdb.conf
+
+[2021-04-24 18:27:21 #3 store] 
+Database 'C:\Users\novad\Documents\sincEstudios\estudios\DAM2\AD\proyecto\FullAuto\FullAutoObjectDB.odb' is closed by 8224@DESKTOP-4IJIUIF
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2021-04-24 18:28:47 #1 store] 
+Database 'C:\Users\novad\Documents\sincEstudios\estudios\DAM2\AD\proyecto\FullAuto\FullAutoObjectDB.odb' is opened by 3872@DESKTOP-4IJIUIF
+
+[2021-04-24 18:28:47 #2 store] 
+Configuration path: C:\Users\novad\Documents\sincEstudios\estudios\DAM2\AD\proyecto\objectdb-2.8.5\objectdb.conf
+
+[2021-04-24 18:28:59 #3 *] 
+[ObjectDB 2.8.5] java.lang.IllegalArgumentException
+Attempt to modify a primary key of a managed object [Trabajador:null]: com.mycompany.fullauto.Trabajador#null (error 635)
+	at javax.swing.JTextField.fireActionPerformed(JTextField.java:508)
+	at javax.swing.JTextField.postActionEvent(JTextField.java:721)
+	at javax.swing.JTextField$NotifyAction.actionPerformed(JTextField.java:836)
+	at javax.swing.SwingUtilities.notifyAction(SwingUtilities.java:1668)
+	at javax.swing.JComponent.processKeyBinding(JComponent.java:2882)
+	at javax.swing.JComponent.processKeyBindings(JComponent.java:2929)
+	at javax.swing.JComponent.processKeyEvent(JComponent.java:2845)
+	at java.awt.Component.processEvent(Component.java:6316)
+	at java.awt.Container.processEvent(Container.java:2239)
+	at java.awt.Component.dispatchEventImpl(Component.java:4889)
+	at java.awt.Container.dispatchEventImpl(Container.java:2297)
+	at java.awt.Component.dispatchEvent(Component.java:4711)
+	at java.awt.KeyboardFocusManager.redispatchEvent(KeyboardFocusManager.java:1954)
+	at java.awt.DefaultKeyboardFocusManager.dispatchKeyEvent(DefaultKeyboardFocusManager.java:834)
+	at java.awt.DefaultKeyboardFocusManager.preDispatchKeyEvent(DefaultKeyboardFocusManager.java:1102)
+	at java.awt.DefaultKeyboardFocusManager.typeAheadAssertions(DefaultKeyboardFocusManager.java:973)
+	at java.awt.DefaultKeyboardFocusManager.dispatchEvent(DefaultKeyboardFocusManager.java:799)
+	at java.awt.Component.dispatchEventImpl(Component.java:4760)
+	at java.awt.Container.dispatchEventImpl(Container.java:2297)
+	at java.awt.Window.dispatchEventImpl(Window.java:2746)
+	at java.awt.Component.dispatchEvent(Component.java:4711)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:760)
+	at java.awt.EventQueue.access$500(EventQueue.java:97)
+	at java.awt.EventQueue$3.run(EventQueue.java:709)
+	at java.awt.EventQueue$3.run(EventQueue.java:703)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:74)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:84)
+	at java.awt.EventQueue$4.run(EventQueue.java:733)
+	at java.awt.EventQueue$4.run(EventQueue.java:731)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:74)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:730)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:205)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
+
+[2021-04-24 18:29:14 #4 *] 
+[ObjectDB 2.8.5] java.lang.IllegalArgumentException
+Attempt to modify a primary key of a managed object [Vehiculo:null]: com.mycompany.fullauto.Vehiculo#null (error 635)
+	at javax.swing.AbstractCellEditor.fireEditingStopped(AbstractCellEditor.java:141)
+	at javax.swing.DefaultCellEditor$EditorDelegate.stopCellEditing(DefaultCellEditor.java:368)
+	at javax.swing.DefaultCellEditor.stopCellEditing(DefaultCellEditor.java:233)
+	at javax.swing.tree.DefaultTreeCellEditor.stopCellEditing(DefaultTreeCellEditor.java:305)
+	at javax.swing.plaf.basic.BasicTreeUI.stopEditing(BasicTreeUI.java:597)
+	at javax.swing.plaf.basic.BasicTreeUI$Handler.mousePressed(BasicTreeUI.java:3536)
+	at java.awt.AWTEventMulticaster.mousePressed(AWTEventMulticaster.java:279)
+	at java.awt.AWTEventMulticaster.mousePressed(AWTEventMulticaster.java:279)
+	at java.awt.Component.processMouseEvent(Component.java:6536)
+	at javax.swing.JComponent.processMouseEvent(JComponent.java:3324)
+	at java.awt.Component.processEvent(Component.java:6304)
+	at java.awt.Container.processEvent(Container.java:2239)
+	at java.awt.Component.dispatchEventImpl(Component.java:4889)
+	at java.awt.Container.dispatchEventImpl(Container.java:2297)
+	at java.awt.Component.dispatchEvent(Component.java:4711)
+	at java.awt.LightweightDispatcher.retargetMouseEvent(Container.java:4904)
+	at java.awt.LightweightDispatcher.processMouseEvent(Container.java:4532)
+	at java.awt.LightweightDispatcher.dispatchEvent(Container.java:4476)
+	at java.awt.Container.dispatchEventImpl(Container.java:2283)
+	at java.awt.Window.dispatchEventImpl(Window.java:2746)
+	at java.awt.Component.dispatchEvent(Component.java:4711)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:760)
+	at java.awt.EventQueue.access$500(EventQueue.java:97)
+	at java.awt.EventQueue$3.run(EventQueue.java:709)
+	at java.awt.EventQueue$3.run(EventQueue.java:703)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:74)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:84)
+	at java.awt.EventQueue$4.run(EventQueue.java:733)
+	at java.awt.EventQueue$4.run(EventQueue.java:731)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:74)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:730)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:205)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
+
+[2021-04-24 18:29:18 #5 store] 
+Database 'C:\Users\novad\Documents\sincEstudios\estudios\DAM2\AD\proyecto\FullAuto\FullAutoObjectDB.odb' is closed by 3872@DESKTOP-4IJIUIF
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2021-04-24 18:29:38 #1 explorer] 
+[ObjectDB 2.8.5] javax.persistence.PersistenceException
+Attempt to open a database file 'C:\Users\novad\Documents\sincEstudios\estudios\DAM2\AD\proyecto\FullAuto\FullAutoObjectDB.odb' that is currently in use by another process (error 141)
+	at com.objectdb.Explorer$1.run(Explorer.java:57)
+	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:311)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:758)
+	at java.awt.EventQueue.access$500(EventQueue.java:97)
+	at java.awt.EventQueue$3.run(EventQueue.java:709)
+	at java.awt.EventQueue$3.run(EventQueue.java:703)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:74)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:728)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:205)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
+Caused by: com.objectdb.o.UserException: Attempt to open a database file 'C:\Users\novad\Documents\sincEstudios\estudios\DAM2\AD\proyecto\FullAuto\FullAutoObjectDB.odb' that is currently in use by another process
+	at com.objectdb.o.MSG.a(MSG.java:64)
+	at com.objectdb.o.LFL.J(LFL.java:930)
+	at com.objectdb.o.LFL.x(LFL.java:887)
+	at com.objectdb.o.LFL.x(LFL.java:797)
+	at com.objectdb.o.DFL.<init>(DFL.java:241)
+	at com.objectdb.o.DMG.<init>(DMG.java:27)
+	at com.objectdb.o.MST.<init>(MST.java:127)
+	at com.objectdb.o.MST.ap(MST.java:109)
+	at com.objectdb.o.MSF.Z0(MSF.java:190)
+	at com.objectdb.o.OMF.s(OMF.java:804)
+	at com.objectdb.jpa.EMF.s(EMF.java:130)
+	at com.objectdb.o.OMF.x(OMF.java:715)
+	at com.objectdb.jpa.EMF.createEntityManager(EMF.java:149)
+	... 17 more
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2021-04-24 18:29:44 #1 store] 
+Database 'C:\Users\novad\Documents\sincEstudios\estudios\DAM2\AD\proyecto\FullAuto\FullAutoObjectDB.odb' is opened by 9496@DESKTOP-4IJIUIF
+
+[2021-04-24 18:29:44 #2 store] 
+Configuration path: C:\Users\novad\Documents\sincEstudios\estudios\DAM2\AD\proyecto\objectdb-2.8.5\objectdb.conf
+
+[2021-04-24 18:29:57 #3 store] 
+Database 'C:\Users\novad\Documents\sincEstudios\estudios\DAM2\AD\proyecto\FullAuto\FullAutoObjectDB.odb' is closed by 9496@DESKTOP-4IJIUIF
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2021-04-24 18:37:01 #1 explorer] 
+[ObjectDB 2.8.5] javax.persistence.PersistenceException
+Attempt to open a database file 'C:\Users\novad\Documents\sincEstudios\estudios\DAM2\AD\proyecto\FullAuto\FullAutoObjectDB.odb' that is currently in use by another process (error 141)
+	at com.objectdb.Explorer$1.run(Explorer.java:57)
+	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:311)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:758)
+	at java.awt.EventQueue.access$500(EventQueue.java:97)
+	at java.awt.EventQueue$3.run(EventQueue.java:709)
+	at java.awt.EventQueue$3.run(EventQueue.java:703)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:74)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:728)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:205)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
+Caused by: com.objectdb.o.UserException: Attempt to open a database file 'C:\Users\novad\Documents\sincEstudios\estudios\DAM2\AD\proyecto\FullAuto\FullAutoObjectDB.odb' that is currently in use by another process
+	at com.objectdb.o.MSG.a(MSG.java:64)
+	at com.objectdb.o.LFL.J(LFL.java:930)
+	at com.objectdb.o.LFL.x(LFL.java:887)
+	at com.objectdb.o.LFL.x(LFL.java:797)
+	at com.objectdb.o.DFL.<init>(DFL.java:241)
+	at com.objectdb.o.DMG.<init>(DMG.java:27)
+	at com.objectdb.o.MST.<init>(MST.java:127)
+	at com.objectdb.o.MST.ap(MST.java:109)
+	at com.objectdb.o.MSF.Z0(MSF.java:190)
+	at com.objectdb.o.OMF.s(OMF.java:804)
+	at com.objectdb.jpa.EMF.s(EMF.java:130)
+	at com.objectdb.o.OMF.x(OMF.java:715)
+	at com.objectdb.jpa.EMF.createEntityManager(EMF.java:149)
+	... 17 more
+
+[2021-04-24 18:37:19 #2 store] 
+Database 'C:\Users\novad\Documents\sincEstudios\estudios\DAM2\AD\proyecto\FullAuto\FullAutoObjectDB.odb' has been recovered (tr. 13-13)
+
+[2021-04-24 18:37:19 #3 store] 
+Database 'C:\Users\novad\Documents\sincEstudios\estudios\DAM2\AD\proyecto\FullAuto\FullAutoObjectDB.odb' is opened by 3204@DESKTOP-4IJIUIF
+
+[2021-04-24 18:37:19 #4 store] 
+Configuration path: C:\Users\novad\Documents\sincEstudios\estudios\DAM2\AD\proyecto\objectdb-2.8.5\objectdb.conf
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2021-04-24 19:07:03 #1 store] 
+Database 'C:\Users\novad\Documents\sincEstudios\estudios\DAM2\AD\proyecto\FullAuto\FullAutoObjectDB.odb' has been recovered (tr. 14-14)
+
+[2021-04-24 19:07:03 #2 store] 
+Database 'C:\Users\novad\Documents\sincEstudios\estudios\DAM2\AD\proyecto\FullAuto\FullAutoObjectDB.odb' is opened by 13256@DESKTOP-4IJIUIF
+
+[2021-04-24 19:07:03 #3 store] 
+Configuration path: C:\Users\novad\Documents\sincEstudios\estudios\DAM2\AD\proyecto\objectdb-2.8.5\objectdb.conf
+
+[2021-04-24 19:08:12 #4 *] 
+[ObjectDB 2.8.5] java.lang.IllegalArgumentException
+Attempt to modify a primary key of a managed object [Repuestos:null]: com.mycompany.fullauto.Repuestos#null (error 635)
+	at javax.swing.AbstractCellEditor.fireEditingStopped(AbstractCellEditor.java:141)
+	at javax.swing.DefaultCellEditor$EditorDelegate.stopCellEditing(DefaultCellEditor.java:368)
+	at javax.swing.DefaultCellEditor.stopCellEditing(DefaultCellEditor.java:233)
+	at javax.swing.tree.DefaultTreeCellEditor.stopCellEditing(DefaultTreeCellEditor.java:305)
+	at javax.swing.plaf.basic.BasicTreeUI.stopEditing(BasicTreeUI.java:597)
+	at javax.swing.plaf.basic.BasicTreeUI$Handler.mousePressed(BasicTreeUI.java:3536)
+	at java.awt.AWTEventMulticaster.mousePressed(AWTEventMulticaster.java:279)
+	at java.awt.AWTEventMulticaster.mousePressed(AWTEventMulticaster.java:279)
+	at java.awt.Component.processMouseEvent(Component.java:6536)
+	at javax.swing.JComponent.processMouseEvent(JComponent.java:3324)
+	at java.awt.Component.processEvent(Component.java:6304)
+	at java.awt.Container.processEvent(Container.java:2239)
+	at java.awt.Component.dispatchEventImpl(Component.java:4889)
+	at java.awt.Container.dispatchEventImpl(Container.java:2297)
+	at java.awt.Component.dispatchEvent(Component.java:4711)
+	at java.awt.LightweightDispatcher.retargetMouseEvent(Container.java:4904)
+	at java.awt.LightweightDispatcher.processMouseEvent(Container.java:4532)
+	at java.awt.LightweightDispatcher.dispatchEvent(Container.java:4476)
+	at java.awt.Container.dispatchEventImpl(Container.java:2283)
+	at java.awt.Window.dispatchEventImpl(Window.java:2746)
+	at java.awt.Component.dispatchEvent(Component.java:4711)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:760)
+	at java.awt.EventQueue.access$500(EventQueue.java:97)
+	at java.awt.EventQueue$3.run(EventQueue.java:709)
+	at java.awt.EventQueue$3.run(EventQueue.java:703)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:74)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:84)
+	at java.awt.EventQueue$4.run(EventQueue.java:733)
+	at java.awt.EventQueue$4.run(EventQueue.java:731)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:74)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:730)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:205)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
+
+[2021-04-24 19:19:09 #5 store] 
+Database 'C:\Users\novad\Documents\sincEstudios\estudios\DAM2\AD\proyecto\FullAuto\FullAutoObjectDB.odb' is closed by 13256@DESKTOP-4IJIUIF
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2021-04-24 19:21:05 #1 store] 
+Database 'C:\Users\novad\Documents\sincEstudios\estudios\DAM2\AD\proyecto\FullAuto\FullAutoObjectDB.odb' is opened by 9996@DESKTOP-4IJIUIF
+
+[2021-04-24 19:21:05 #2 store] 
+Configuration path: C:\Users\novad\Documents\sincEstudios\estudios\DAM2\AD\proyecto\objectdb-2.8.5\objectdb.conf
+
+[2021-04-24 19:22:19 #3 query] 
+Error during query execution: SELECT COUNT(this) FROM com.mycompany.fullauto.Informe(null)
+
+[2021-04-24 19:22:19 #4 *] 
+java.lang.NullPointerException
+	at com.objectdb.o.PRU.y(PRU.java:187)
+	at com.objectdb.o.VLV.a(VLV.java:167)
+	at com.objectdb.o.VLV.b(VLV.java:188)
+	at com.objectdb.o.EVC.e(EVC.java:115)
+	at com.objectdb.o.STA.d(STA.java:582)
+	at com.objectdb.o.STM.a(STM.java:428)
+	at com.objectdb.o.OBM.aG(OBM.java:962)
+	at com.objectdb.jdo.PMImpl.aG(PMImpl.java:2287)
+	at com.objectdb.o.OBM.aU(OBM.java:873)
+	at com.objectdb.o.OBM.aJ(OBM.java:818)
+	at com.objectdb.o.QRR.i(QRR.java:140)
+	at com.objectdb.jpa.JpaQuery.getSingleResult(JpaQuery.java:760)
+	at com.objectdb.o.ETI.<init>(ETI.java:53)
+	at com.objectdb.o.SchemaPanel.n(SchemaPanel.java:260)
+	at com.objectdb.o.SchemaPanel.ZK(SchemaPanel.java:201)
+	at com.objectdb.o.RTR.ZK(RTR.java:71)
+	at com.objectdb.o.Command.actionPerformed(Command.java:471)
+	at javax.swing.AbstractButton.fireActionPerformed(AbstractButton.java:2022)
+	at javax.swing.AbstractButton$Handler.actionPerformed(AbstractButton.java:2348)
+	at javax.swing.DefaultButtonModel.fireActionPerformed(DefaultButtonModel.java:402)
+	at javax.swing.DefaultButtonModel.setPressed(DefaultButtonModel.java:259)
+	at javax.swing.AbstractButton.doClick(AbstractButton.java:376)
+	at javax.swing.plaf.basic.BasicMenuItemUI.doClick(BasicMenuItemUI.java:842)
+	at javax.swing.plaf.basic.BasicMenuItemUI$Handler.mouseReleased(BasicMenuItemUI.java:886)
+	at java.awt.Component.processMouseEvent(Component.java:6539)
+	at javax.swing.JComponent.processMouseEvent(JComponent.java:3324)
+	at java.awt.Component.processEvent(Component.java:6304)
+	at java.awt.Container.processEvent(Container.java:2239)
+	at java.awt.Component.dispatchEventImpl(Component.java:4889)
+	at java.awt.Container.dispatchEventImpl(Container.java:2297)
+	at java.awt.Component.dispatchEvent(Component.java:4711)
+	at java.awt.LightweightDispatcher.retargetMouseEvent(Container.java:4904)
+	at java.awt.LightweightDispatcher.processMouseEvent(Container.java:4535)
+	at java.awt.LightweightDispatcher.dispatchEvent(Container.java:4476)
+	at java.awt.Container.dispatchEventImpl(Container.java:2283)
+	at java.awt.Window.dispatchEventImpl(Window.java:2746)
+	at java.awt.Component.dispatchEvent(Component.java:4711)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:760)
+	at java.awt.EventQueue.access$500(EventQueue.java:97)
+	at java.awt.EventQueue$3.run(EventQueue.java:709)
+	at java.awt.EventQueue$3.run(EventQueue.java:703)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:74)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:84)
+	at java.awt.EventQueue$4.run(EventQueue.java:733)
+	at java.awt.EventQueue$4.run(EventQueue.java:731)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:74)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:730)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:205)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
+
+[2021-04-24 19:22:20 #5 explorer] 
+java.lang.NullPointerException
+	at com.objectdb.o.PRU.y(PRU.java:187)
+	at com.objectdb.o.VLV.a(VLV.java:167)
+	at com.objectdb.o.VLV.b(VLV.java:188)
+	at com.objectdb.o.EVC.e(EVC.java:115)
+	at com.objectdb.o.STA.d(STA.java:582)
+	at com.objectdb.o.STM.a(STM.java:428)
+	at com.objectdb.o.OBM.aG(OBM.java:962)
+	at com.objectdb.jdo.PMImpl.aG(PMImpl.java:2287)
+	at com.objectdb.o.OBM.aU(OBM.java:873)
+	at com.objectdb.o.OBM.aJ(OBM.java:818)
+	at com.objectdb.o.QRR.i(QRR.java:140)
+	at com.objectdb.jpa.JpaQuery.getSingleResult(JpaQuery.java:760)
+	at com.objectdb.o.ETI.<init>(ETI.java:53)
+	at com.objectdb.o.SchemaPanel.n(SchemaPanel.java:260)
+	at com.objectdb.o.SchemaPanel.ZK(SchemaPanel.java:201)
+	at com.objectdb.o.RTR.ZK(RTR.java:71)
+	at com.objectdb.o.Command.actionPerformed(Command.java:471)
+	at javax.swing.AbstractButton.fireActionPerformed(AbstractButton.java:2022)
+	at javax.swing.AbstractButton$Handler.actionPerformed(AbstractButton.java:2348)
+	at javax.swing.DefaultButtonModel.fireActionPerformed(DefaultButtonModel.java:402)
+	at javax.swing.DefaultButtonModel.setPressed(DefaultButtonModel.java:259)
+	at javax.swing.AbstractButton.doClick(AbstractButton.java:376)
+	at javax.swing.plaf.basic.BasicMenuItemUI.doClick(BasicMenuItemUI.java:842)
+	at javax.swing.plaf.basic.BasicMenuItemUI$Handler.mouseReleased(BasicMenuItemUI.java:886)
+	at java.awt.Component.processMouseEvent(Component.java:6539)
+	at javax.swing.JComponent.processMouseEvent(JComponent.java:3324)
+	at java.awt.Component.processEvent(Component.java:6304)
+	at java.awt.Container.processEvent(Container.java:2239)
+	at java.awt.Component.dispatchEventImpl(Component.java:4889)
+	at java.awt.Container.dispatchEventImpl(Container.java:2297)
+	at java.awt.Component.dispatchEvent(Component.java:4711)
+	at java.awt.LightweightDispatcher.retargetMouseEvent(Container.java:4904)
+	at java.awt.LightweightDispatcher.processMouseEvent(Container.java:4535)
+	at java.awt.LightweightDispatcher.dispatchEvent(Container.java:4476)
+	at java.awt.Container.dispatchEventImpl(Container.java:2283)
+	at java.awt.Window.dispatchEventImpl(Window.java:2746)
+	at java.awt.Component.dispatchEvent(Component.java:4711)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:760)
+	at java.awt.EventQueue.access$500(EventQueue.java:97)
+	at java.awt.EventQueue$3.run(EventQueue.java:709)
+	at java.awt.EventQueue$3.run(EventQueue.java:703)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:74)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:84)
+	at java.awt.EventQueue$4.run(EventQueue.java:733)
+	at java.awt.EventQueue$4.run(EventQueue.java:731)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:74)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:730)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:205)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
+
+[2021-04-24 19:22:22 #6 query] 
+Error during query execution: SELECT COUNT(this) FROM com.mycompany.fullauto.Informe(null)
+
+[2021-04-24 19:22:22 #7 *] 
+java.lang.NullPointerException
+	at com.objectdb.o.PRU.y(PRU.java:187)
+	at com.objectdb.o.VLV.a(VLV.java:167)
+	at com.objectdb.o.VLV.b(VLV.java:188)
+	at com.objectdb.o.EVC.e(EVC.java:115)
+	at com.objectdb.o.STA.d(STA.java:582)
+	at com.objectdb.o.STM.a(STM.java:428)
+	at com.objectdb.o.OBM.aG(OBM.java:962)
+	at com.objectdb.jdo.PMImpl.aG(PMImpl.java:2287)
+	at com.objectdb.o.OBM.aU(OBM.java:873)
+	at com.objectdb.o.OBM.aJ(OBM.java:818)
+	at com.objectdb.o.QRR.i(QRR.java:140)
+	at com.objectdb.jpa.JpaQuery.getSingleResult(JpaQuery.java:760)
+	at com.objectdb.o.ETI.<init>(ETI.java:53)
+	at com.objectdb.o.SchemaPanel.n(SchemaPanel.java:260)
+	at com.objectdb.o.SchemaPanel.ZK(SchemaPanel.java:201)
+	at com.objectdb.o.RTR.ZK(RTR.java:71)
+	at com.objectdb.o.Command.actionPerformed(Command.java:471)
+	at javax.swing.AbstractButton.fireActionPerformed(AbstractButton.java:2022)
+	at javax.swing.AbstractButton$Handler.actionPerformed(AbstractButton.java:2348)
+	at javax.swing.DefaultButtonModel.fireActionPerformed(DefaultButtonModel.java:402)
+	at javax.swing.DefaultButtonModel.setPressed(DefaultButtonModel.java:259)
+	at javax.swing.AbstractButton.doClick(AbstractButton.java:376)
+	at javax.swing.plaf.basic.BasicMenuItemUI.doClick(BasicMenuItemUI.java:842)
+	at javax.swing.plaf.basic.BasicMenuItemUI$Handler.mouseReleased(BasicMenuItemUI.java:886)
+	at java.awt.Component.processMouseEvent(Component.java:6539)
+	at javax.swing.JComponent.processMouseEvent(JComponent.java:3324)
+	at java.awt.Component.processEvent(Component.java:6304)
+	at java.awt.Container.processEvent(Container.java:2239)
+	at java.awt.Component.dispatchEventImpl(Component.java:4889)
+	at java.awt.Container.dispatchEventImpl(Container.java:2297)
+	at java.awt.Component.dispatchEvent(Component.java:4711)
+	at java.awt.LightweightDispatcher.retargetMouseEvent(Container.java:4904)
+	at java.awt.LightweightDispatcher.processMouseEvent(Container.java:4535)
+	at java.awt.LightweightDispatcher.dispatchEvent(Container.java:4476)
+	at java.awt.Container.dispatchEventImpl(Container.java:2283)
+	at java.awt.Window.dispatchEventImpl(Window.java:2746)
+	at java.awt.Component.dispatchEvent(Component.java:4711)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:760)
+	at java.awt.EventQueue.access$500(EventQueue.java:97)
+	at java.awt.EventQueue$3.run(EventQueue.java:709)
+	at java.awt.EventQueue$3.run(EventQueue.java:703)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:74)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:84)
+	at java.awt.EventQueue$4.run(EventQueue.java:733)
+	at java.awt.EventQueue$4.run(EventQueue.java:731)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:74)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:730)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:205)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
+
+[2021-04-24 19:22:23 #8 explorer] 
+java.lang.NullPointerException
+	at com.objectdb.o.PRU.y(PRU.java:187)
+	at com.objectdb.o.VLV.a(VLV.java:167)
+	at com.objectdb.o.VLV.b(VLV.java:188)
+	at com.objectdb.o.EVC.e(EVC.java:115)
+	at com.objectdb.o.STA.d(STA.java:582)
+	at com.objectdb.o.STM.a(STM.java:428)
+	at com.objectdb.o.OBM.aG(OBM.java:962)
+	at com.objectdb.jdo.PMImpl.aG(PMImpl.java:2287)
+	at com.objectdb.o.OBM.aU(OBM.java:873)
+	at com.objectdb.o.OBM.aJ(OBM.java:818)
+	at com.objectdb.o.QRR.i(QRR.java:140)
+	at com.objectdb.jpa.JpaQuery.getSingleResult(JpaQuery.java:760)
+	at com.objectdb.o.ETI.<init>(ETI.java:53)
+	at com.objectdb.o.SchemaPanel.n(SchemaPanel.java:260)
+	at com.objectdb.o.SchemaPanel.ZK(SchemaPanel.java:201)
+	at com.objectdb.o.RTR.ZK(RTR.java:71)
+	at com.objectdb.o.Command.actionPerformed(Command.java:471)
+	at javax.swing.AbstractButton.fireActionPerformed(AbstractButton.java:2022)
+	at javax.swing.AbstractButton$Handler.actionPerformed(AbstractButton.java:2348)
+	at javax.swing.DefaultButtonModel.fireActionPerformed(DefaultButtonModel.java:402)
+	at javax.swing.DefaultButtonModel.setPressed(DefaultButtonModel.java:259)
+	at javax.swing.AbstractButton.doClick(AbstractButton.java:376)
+	at javax.swing.plaf.basic.BasicMenuItemUI.doClick(BasicMenuItemUI.java:842)
+	at javax.swing.plaf.basic.BasicMenuItemUI$Handler.mouseReleased(BasicMenuItemUI.java:886)
+	at java.awt.Component.processMouseEvent(Component.java:6539)
+	at javax.swing.JComponent.processMouseEvent(JComponent.java:3324)
+	at java.awt.Component.processEvent(Component.java:6304)
+	at java.awt.Container.processEvent(Container.java:2239)
+	at java.awt.Component.dispatchEventImpl(Component.java:4889)
+	at java.awt.Container.dispatchEventImpl(Container.java:2297)
+	at java.awt.Component.dispatchEvent(Component.java:4711)
+	at java.awt.LightweightDispatcher.retargetMouseEvent(Container.java:4904)
+	at java.awt.LightweightDispatcher.processMouseEvent(Container.java:4535)
+	at java.awt.LightweightDispatcher.dispatchEvent(Container.java:4476)
+	at java.awt.Container.dispatchEventImpl(Container.java:2283)
+	at java.awt.Window.dispatchEventImpl(Window.java:2746)
+	at java.awt.Component.dispatchEvent(Component.java:4711)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:760)
+	at java.awt.EventQueue.access$500(EventQueue.java:97)
+	at java.awt.EventQueue$3.run(EventQueue.java:709)
+	at java.awt.EventQueue$3.run(EventQueue.java:703)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:74)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:84)
+	at java.awt.EventQueue$4.run(EventQueue.java:733)
+	at java.awt.EventQueue$4.run(EventQueue.java:731)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:74)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:730)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:205)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
+
+[2021-04-24 19:23:34 #9 explorer] 
+java.lang.NullPointerException
+	at com.objectdb.o.PRU.y(PRU.java:187)
+	at com.objectdb.o.VLV.a(VLV.java:167)
+	at com.objectdb.o.VLV.b(VLV.java:188)
+	at com.objectdb.o.EVC.e(EVC.java:115)
+	at com.objectdb.o.STA.d(STA.java:582)
+	at com.objectdb.o.STM.a(STM.java:428)
+	at com.objectdb.o.OBM.aG(OBM.java:962)
+	at com.objectdb.jdo.PMImpl.aG(PMImpl.java:2287)
+	at com.objectdb.o.OBM.aU(OBM.java:873)
+	at com.objectdb.o.OBM.aH(OBM.java:782)
+	at com.objectdb.jpa.EMImpl.commit(EMImpl.java:291)
+	at com.objectdb.o.CNC.u(CNC.java:303)
+	at com.objectdb.o.RTR.ZK(RTR.java:92)
+	at com.objectdb.o.Command.actionPerformed(Command.java:471)
+	at javax.swing.AbstractButton.fireActionPerformed(AbstractButton.java:2022)
+	at javax.swing.AbstractButton$Handler.actionPerformed(AbstractButton.java:2348)
+	at javax.swing.DefaultButtonModel.fireActionPerformed(DefaultButtonModel.java:402)
+	at javax.swing.DefaultButtonModel.setPressed(DefaultButtonModel.java:259)
+	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(BasicButtonListener.java:252)
+	at java.awt.AWTEventMulticaster.mouseReleased(AWTEventMulticaster.java:289)
+	at java.awt.AWTEventMulticaster.mouseReleased(AWTEventMulticaster.java:289)
+	at java.awt.Component.processMouseEvent(Component.java:6539)
+	at javax.swing.JComponent.processMouseEvent(JComponent.java:3324)
+	at java.awt.Component.processEvent(Component.java:6304)
+	at java.awt.Container.processEvent(Container.java:2239)
+	at java.awt.Component.dispatchEventImpl(Component.java:4889)
+	at java.awt.Container.dispatchEventImpl(Container.java:2297)
+	at java.awt.Component.dispatchEvent(Component.java:4711)
+	at java.awt.LightweightDispatcher.retargetMouseEvent(Container.java:4904)
+	at java.awt.LightweightDispatcher.processMouseEvent(Container.java:4535)
+	at java.awt.LightweightDispatcher.dispatchEvent(Container.java:4476)
+	at java.awt.Container.dispatchEventImpl(Container.java:2283)
+	at java.awt.Window.dispatchEventImpl(Window.java:2746)
+	at java.awt.Component.dispatchEvent(Component.java:4711)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:760)
+	at java.awt.EventQueue.access$500(EventQueue.java:97)
+	at java.awt.EventQueue$3.run(EventQueue.java:709)
+	at java.awt.EventQueue$3.run(EventQueue.java:703)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:74)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:84)
+	at java.awt.EventQueue$4.run(EventQueue.java:733)
+	at java.awt.EventQueue$4.run(EventQueue.java:731)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:74)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:730)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:205)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
+
+[2021-04-24 19:23:48 #10 store] 
+Database 'C:\Users\novad\Documents\sincEstudios\estudios\DAM2\AD\proyecto\FullAuto\FullAutoObjectDB.odb' is closed by 9996@DESKTOP-4IJIUIF
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2021-04-24 19:33:31 #1 store] 
+Database 'C:\Users\novad\Documents\sincEstudios\estudios\DAM2\AD\proyecto\FullAuto\FullAutoObjectDB.odb' has been recovered (tr. 26-26)
+
+[2021-04-24 19:33:31 #2 store] 
+Database 'C:\Users\novad\Documents\sincEstudios\estudios\DAM2\AD\proyecto\FullAuto\FullAutoObjectDB.odb' is opened by 5088@DESKTOP-4IJIUIF
+
+[2021-04-24 19:33:31 #3 store] 
+Configuration path: C:\Users\novad\Documents\sincEstudios\estudios\DAM2\AD\proyecto\objectdb-2.8.5\objectdb.conf
+
+[2021-04-24 19:34:06 #4 store] 
+Database 'C:\Users\novad\Documents\sincEstudios\estudios\DAM2\AD\proyecto\FullAuto\FullAutoObjectDB.odb' is closed by 5088@DESKTOP-4IJIUIF
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2021-04-24 19:39:25 #1 explorer] 
+[ObjectDB 2.8.5] javax.persistence.PersistenceException
+Attempt to open a database file 'C:\Users\novad\Documents\sincEstudios\estudios\DAM2\AD\proyecto\FullAuto\FullAutoObjectDB.odb' that is currently in use by another process (error 141)
+	at com.objectdb.Explorer$1.run(Explorer.java:57)
+	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:311)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:758)
+	at java.awt.EventQueue.access$500(EventQueue.java:97)
+	at java.awt.EventQueue$3.run(EventQueue.java:709)
+	at java.awt.EventQueue$3.run(EventQueue.java:703)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:74)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:728)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:205)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
+Caused by: com.objectdb.o.UserException: Attempt to open a database file 'C:\Users\novad\Documents\sincEstudios\estudios\DAM2\AD\proyecto\FullAuto\FullAutoObjectDB.odb' that is currently in use by another process
+	at com.objectdb.o.MSG.a(MSG.java:64)
+	at com.objectdb.o.LFL.J(LFL.java:930)
+	at com.objectdb.o.LFL.x(LFL.java:887)
+	at com.objectdb.o.LFL.x(LFL.java:797)
+	at com.objectdb.o.DFL.<init>(DFL.java:241)
+	at com.objectdb.o.DMG.<init>(DMG.java:27)
+	at com.objectdb.o.MST.<init>(MST.java:127)
+	at com.objectdb.o.MST.ap(MST.java:109)
+	at com.objectdb.o.MSF.Z0(MSF.java:190)
+	at com.objectdb.o.OMF.s(OMF.java:804)
+	at com.objectdb.jpa.EMF.s(EMF.java:130)
+	at com.objectdb.o.OMF.x(OMF.java:715)
+	at com.objectdb.jpa.EMF.createEntityManager(EMF.java:149)
+	... 17 more
+
+[2021-04-24 19:39:38 #2 store] 
+Database 'C:\Users\novad\Documents\sincEstudios\estudios\DAM2\AD\proyecto\FullAuto\FullAutoObjectDB.odb' has been recovered (tr. 27-27)
+
+[2021-04-24 19:39:38 #3 store] 
+Database 'C:\Users\novad\Documents\sincEstudios\estudios\DAM2\AD\proyecto\FullAuto\FullAutoObjectDB.odb' is opened by 5536@DESKTOP-4IJIUIF
+
+[2021-04-24 19:39:38 #4 store] 
+Configuration path: C:\Users\novad\Documents\sincEstudios\estudios\DAM2\AD\proyecto\objectdb-2.8.5\objectdb.conf
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2021-04-24 19:42:06 #1 explorer] 
+[ObjectDB 2.8.5] javax.persistence.PersistenceException
+Attempt to open a database file 'C:\Users\novad\Documents\sincEstudios\estudios\DAM2\AD\proyecto\FullAuto\FullAutoObjectDB.odb' that is currently in use by another process (error 141)
+	at com.objectdb.Explorer$1.run(Explorer.java:57)
+	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:311)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:758)
+	at java.awt.EventQueue.access$500(EventQueue.java:97)
+	at java.awt.EventQueue$3.run(EventQueue.java:709)
+	at java.awt.EventQueue$3.run(EventQueue.java:703)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:74)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:728)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:205)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
+Caused by: com.objectdb.o.UserException: Attempt to open a database file 'C:\Users\novad\Documents\sincEstudios\estudios\DAM2\AD\proyecto\FullAuto\FullAutoObjectDB.odb' that is currently in use by another process
+	at com.objectdb.o.MSG.a(MSG.java:64)
+	at com.objectdb.o.LFL.J(LFL.java:930)
+	at com.objectdb.o.LFL.x(LFL.java:887)
+	at com.objectdb.o.LFL.x(LFL.java:797)
+	at com.objectdb.o.DFL.<init>(DFL.java:241)
+	at com.objectdb.o.DMG.<init>(DMG.java:27)
+	at com.objectdb.o.MST.<init>(MST.java:127)
+	at com.objectdb.o.MST.ap(MST.java:109)
+	at com.objectdb.o.MSF.Z0(MSF.java:190)
+	at com.objectdb.o.OMF.s(OMF.java:804)
+	at com.objectdb.jpa.EMF.s(EMF.java:130)
+	at com.objectdb.o.OMF.x(OMF.java:715)
+	at com.objectdb.jpa.EMF.createEntityManager(EMF.java:149)
+	... 17 more
+
+[2021-04-24 19:42:22 #2 store] 
+Database 'C:\Users\novad\Documents\sincEstudios\estudios\DAM2\AD\proyecto\FullAuto\FullAutoObjectDB.odb' has been recovered (tr. 1-3)
+
+[2021-04-24 19:42:22 #3 store] 
+Database 'C:\Users\novad\Documents\sincEstudios\estudios\DAM2\AD\proyecto\FullAuto\FullAutoObjectDB.odb' is opened by 11532@DESKTOP-4IJIUIF
+
+[2021-04-24 19:42:22 #4 store] 
+Configuration path: C:\Users\novad\Documents\sincEstudios\estudios\DAM2\AD\proyecto\objectdb-2.8.5\objectdb.conf
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2021-04-24 19:44:35 #1 explorer] 
+[ObjectDB 2.8.5] javax.persistence.PersistenceException
+Attempt to open a database file 'C:\Users\novad\Documents\sincEstudios\estudios\DAM2\AD\proyecto\FullAuto\FullAutoObjectDB.odb' that is currently in use by another process (error 141)
+	at com.objectdb.Explorer$1.run(Explorer.java:57)
+	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:311)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:758)
+	at java.awt.EventQueue.access$500(EventQueue.java:97)
+	at java.awt.EventQueue$3.run(EventQueue.java:709)
+	at java.awt.EventQueue$3.run(EventQueue.java:703)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:74)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:728)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:205)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
+Caused by: com.objectdb.o.UserException: Attempt to open a database file 'C:\Users\novad\Documents\sincEstudios\estudios\DAM2\AD\proyecto\FullAuto\FullAutoObjectDB.odb' that is currently in use by another process
+	at com.objectdb.o.MSG.a(MSG.java:64)
+	at com.objectdb.o.LFL.J(LFL.java:930)
+	at com.objectdb.o.LFL.x(LFL.java:887)
+	at com.objectdb.o.LFL.x(LFL.java:797)
+	at com.objectdb.o.DFL.<init>(DFL.java:241)
+	at com.objectdb.o.DMG.<init>(DMG.java:27)
+	at com.objectdb.o.MST.<init>(MST.java:127)
+	at com.objectdb.o.MST.ap(MST.java:109)
+	at com.objectdb.o.MSF.Z0(MSF.java:190)
+	at com.objectdb.o.OMF.s(OMF.java:804)
+	at com.objectdb.jpa.EMF.s(EMF.java:130)
+	at com.objectdb.o.OMF.x(OMF.java:715)
+	at com.objectdb.jpa.EMF.createEntityManager(EMF.java:149)
+	... 17 more
+
+[2021-04-24 19:44:43 #2 store] 
+Database 'C:\Users\novad\Documents\sincEstudios\estudios\DAM2\AD\proyecto\FullAuto\FullAutoObjectDB.odb' has been recovered (tr. 1-3)
+
+[2021-04-24 19:44:43 #3 store] 
+Database 'C:\Users\novad\Documents\sincEstudios\estudios\DAM2\AD\proyecto\FullAuto\FullAutoObjectDB.odb' is opened by 9364@DESKTOP-4IJIUIF
+
+[2021-04-24 19:44:43 #4 store] 
+Configuration path: C:\Users\novad\Documents\sincEstudios\estudios\DAM2\AD\proyecto\objectdb-2.8.5\objectdb.conf
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2021-04-24 19:47:41 #1 store] 
+Database 'C:\Users\novad\Documents\sincEstudios\estudios\DAM2\AD\proyecto\FullAuto\FullAutoObjectDB.odb' has been recovered (tr. 4-4)
+
+[2021-04-24 19:47:41 #2 store] 
+Database 'C:\Users\novad\Documents\sincEstudios\estudios\DAM2\AD\proyecto\FullAuto\FullAutoObjectDB.odb' is opened by 11364@DESKTOP-4IJIUIF
+
+[2021-04-24 19:47:41 #3 store] 
+Configuration path: C:\Users\novad\Documents\sincEstudios\estudios\DAM2\AD\proyecto\objectdb-2.8.5\objectdb.conf
+
+[2021-04-24 19:48:00 #4 store] 
+Database 'C:\Users\novad\Documents\sincEstudios\estudios\DAM2\AD\proyecto\FullAuto\FullAutoObjectDB.odb' is closed by 11364@DESKTOP-4IJIUIF
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2021-04-24 19:48:54 #1 store] 
+Database 'C:\Users\novad\Documents\sincEstudios\estudios\DAM2\AD\proyecto\FullAuto\FullAutoObjectDB.odb' has been recovered (tr. 1-3)
+
+[2021-04-24 19:48:54 #2 store] 
+Database 'C:\Users\novad\Documents\sincEstudios\estudios\DAM2\AD\proyecto\FullAuto\FullAutoObjectDB.odb' is opened by 12520@DESKTOP-4IJIUIF
+
+[2021-04-24 19:48:54 #3 store] 
+Configuration path: C:\Users\novad\Documents\sincEstudios\estudios\DAM2\AD\proyecto\objectdb-2.8.5\objectdb.conf
+
+[2021-04-24 19:49:07 #4 store] 
+Database 'C:\Users\novad\Documents\sincEstudios\estudios\DAM2\AD\proyecto\FullAuto\FullAutoObjectDB.odb' is closed by 12520@DESKTOP-4IJIUIF
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2021-04-24 20:38:12 #1 store] 
+Database 'C:\Users\novad\Documents\sincEstudios\estudios\DAM2\AD\proyecto\FullAuto\FullAutoObjectDB.odb' has been recovered (tr. 4-4)
+
+[2021-04-24 20:38:12 #2 store] 
+Database 'C:\Users\novad\Documents\sincEstudios\estudios\DAM2\AD\proyecto\FullAuto\FullAutoObjectDB.odb' is opened by 8744@DESKTOP-4IJIUIF
+
+[2021-04-24 20:38:12 #3 store] 
+Configuration path: C:\Users\novad\Documents\sincEstudios\estudios\DAM2\AD\proyecto\objectdb-2.8.5\objectdb.conf
+
+[2021-04-24 20:38:29 #4 *] 
+[ObjectDB 2.8.5] java.lang.IllegalArgumentException
+Attempt to modify a primary key of a managed object [Trabajador:null]: com.mycompany.fullauto.Trabajador#null (error 635)
+	at javax.swing.AbstractCellEditor.fireEditingStopped(AbstractCellEditor.java:141)
+	at javax.swing.DefaultCellEditor$EditorDelegate.stopCellEditing(DefaultCellEditor.java:368)
+	at javax.swing.DefaultCellEditor.stopCellEditing(DefaultCellEditor.java:233)
+	at javax.swing.tree.DefaultTreeCellEditor.stopCellEditing(DefaultTreeCellEditor.java:305)
+	at javax.swing.plaf.basic.BasicTreeUI.stopEditing(BasicTreeUI.java:597)
+	at javax.swing.plaf.basic.BasicTreeUI$Handler.mousePressed(BasicTreeUI.java:3536)
+	at java.awt.AWTEventMulticaster.mousePressed(AWTEventMulticaster.java:279)
+	at java.awt.AWTEventMulticaster.mousePressed(AWTEventMulticaster.java:279)
+	at java.awt.Component.processMouseEvent(Component.java:6536)
+	at javax.swing.JComponent.processMouseEvent(JComponent.java:3324)
+	at java.awt.Component.processEvent(Component.java:6304)
+	at java.awt.Container.processEvent(Container.java:2239)
+	at java.awt.Component.dispatchEventImpl(Component.java:4889)
+	at java.awt.Container.dispatchEventImpl(Container.java:2297)
+	at java.awt.Component.dispatchEvent(Component.java:4711)
+	at java.awt.LightweightDispatcher.retargetMouseEvent(Container.java:4904)
+	at java.awt.LightweightDispatcher.processMouseEvent(Container.java:4532)
+	at java.awt.LightweightDispatcher.dispatchEvent(Container.java:4476)
+	at java.awt.Container.dispatchEventImpl(Container.java:2283)
+	at java.awt.Window.dispatchEventImpl(Window.java:2746)
+	at java.awt.Component.dispatchEvent(Component.java:4711)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:760)
+	at java.awt.EventQueue.access$500(EventQueue.java:97)
+	at java.awt.EventQueue$3.run(EventQueue.java:709)
+	at java.awt.EventQueue$3.run(EventQueue.java:703)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:74)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:84)
+	at java.awt.EventQueue$4.run(EventQueue.java:733)
+	at java.awt.EventQueue$4.run(EventQueue.java:731)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:74)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:730)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:205)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
+
+[2021-04-24 20:40:09 #5 store] 
+Database 'C:\Users\novad\Documents\sincEstudios\estudios\DAM2\AD\proyecto\FullAuto\FullAutoObjectDB.odb' is closed by 8744@DESKTOP-4IJIUIF
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2021-04-24 20:50:56 #1 store] 
+Database 'C:\Users\novad\Documents\sincEstudios\estudios\DAM2\AD\proyecto\FullAuto\FullAutoObjectDB.odb' has been recovered (tr. 6-6)
+
+[2021-04-24 20:50:56 #2 store] 
+Database 'C:\Users\novad\Documents\sincEstudios\estudios\DAM2\AD\proyecto\FullAuto\FullAutoObjectDB.odb' is opened by 1404@DESKTOP-4IJIUIF
+
+[2021-04-24 20:50:56 #3 store] 
+Configuration path: C:\Users\novad\Documents\sincEstudios\estudios\DAM2\AD\proyecto\objectdb-2.8.5\objectdb.conf
+
+[2021-04-24 20:51:35 #4 store] 
+Database 'C:\Users\novad\Documents\sincEstudios\estudios\DAM2\AD\proyecto\FullAuto\FullAutoObjectDB.odb' is closed by 1404@DESKTOP-4IJIUIF
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2021-04-24 21:03:39 #1 explorer] 
+[ObjectDB 2.8.5] javax.persistence.PersistenceException
+Attempt to open a database file 'C:\Users\novad\Documents\sincEstudios\estudios\DAM2\AD\proyecto\FullAuto\FullAutoObjectDB.odb' that is currently in use by another process (error 141)
+	at com.objectdb.Explorer$1.run(Explorer.java:57)
+	at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:311)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:758)
+	at java.awt.EventQueue.access$500(EventQueue.java:97)
+	at java.awt.EventQueue$3.run(EventQueue.java:709)
+	at java.awt.EventQueue$3.run(EventQueue.java:703)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:74)
+	at java.awt.EventQueue.dispatchEvent(EventQueue.java:728)
+	at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:205)
+	at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:116)
+	at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:105)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:93)
+	at java.awt.EventDispatchThread.run(EventDispatchThread.java:82)
+Caused by: com.objectdb.o.UserException: Attempt to open a database file 'C:\Users\novad\Documents\sincEstudios\estudios\DAM2\AD\proyecto\FullAuto\FullAutoObjectDB.odb' that is currently in use by another process
+	at com.objectdb.o.MSG.a(MSG.java:64)
+	at com.objectdb.o.LFL.J(LFL.java:930)
+	at com.objectdb.o.LFL.x(LFL.java:887)
+	at com.objectdb.o.LFL.x(LFL.java:797)
+	at com.objectdb.o.DFL.<init>(DFL.java:241)
+	at com.objectdb.o.DMG.<init>(DMG.java:27)
+	at com.objectdb.o.MST.<init>(MST.java:127)
+	at com.objectdb.o.MST.ap(MST.java:109)
+	at com.objectdb.o.MSF.Z0(MSF.java:190)
+	at com.objectdb.o.OMF.s(OMF.java:804)
+	at com.objectdb.jpa.EMF.s(EMF.java:130)
+	at com.objectdb.o.OMF.x(OMF.java:715)
+	at com.objectdb.jpa.EMF.createEntityManager(EMF.java:149)
+	... 17 more
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2021-04-24 21:05:32 #1 store] 
+Database 'C:\Users\novad\Documents\sincEstudios\estudios\DAM2\AD\proyecto\FullAuto\FullAutoObjectDB.odb' has been recovered (tr. 1-3)
+
+[2021-04-24 21:05:32 #2 store] 
+Database 'C:\Users\novad\Documents\sincEstudios\estudios\DAM2\AD\proyecto\FullAuto\FullAutoObjectDB.odb' is opened by 10584@DESKTOP-4IJIUIF
+
+[2021-04-24 21:05:32 #3 store] 
+Configuration path: C:\Users\novad\Documents\sincEstudios\estudios\DAM2\AD\proyecto\objectdb-2.8.5\objectdb.conf
+
+[2021-04-24 21:06:05 #4 store] 
+Database 'C:\Users\novad\Documents\sincEstudios\estudios\DAM2\AD\proyecto\FullAuto\FullAutoObjectDB.odb' is closed by 10584@DESKTOP-4IJIUIF
+

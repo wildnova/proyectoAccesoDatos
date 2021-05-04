@@ -120,6 +120,13 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
         mostrarDatosFactura();
         mostrarDatosRepuesto();
         mostrarDatosObd();
+        
+        jbAnteriorTrabajador.setEnabled(false);
+        jbAnteriorVehiculo.setEnabled(false);
+        jbAnteriorInforme.setEnabled(false);
+        jbAnteriorFactura.setEnabled(false);
+        jbAnteriorRepuesto.setEnabled(false);
+        jbAnteriorObd.setEnabled(false);
     }
     
     //LLamadas a cada uno de los distintos botones de la interfaz
@@ -184,7 +191,7 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
         }
         
         
-          if(ae.getSource()==jbSiguienteInforme)
+        if(ae.getSource()==jbSiguienteInforme)
         {
             System.out.println("jbSiguienteInforme pulsado");
             mostrarSiguienteInforme();
@@ -302,21 +309,47 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
     public void mostrarDatosTrabajador()
     {
         listaTrabajadores= controlador.getListadoTrabajadores();
+        if(listaTrabajadores.size() == contadorTrabajador)
+        {
+            contadorTrabajador--;
+            jbSiguienteTrabajador.setEnabled(false);
+        }
         Trabajador trabajador = listaTrabajadores.get(contadorTrabajador);
         cargarCamposTrabajador(trabajador);
+        if(listaTrabajadores.size()==1)
+        {
+            jbSiguienteTrabajador.setEnabled(false);
+            jbAnteriorTrabajador.setEnabled(false);
+        }
+        if(listaTrabajadores.size()-1 > contadorTrabajador)
+        {
+            jbSiguienteTrabajador.setEnabled(true);
+        }
 
     }
     public void mostrarSiguienteTrabajador()
     {
-        contadorTrabajador++;
-        Trabajador trabajador=listaTrabajadores.get(contadorTrabajador);
-        cargarCamposTrabajador(trabajador);
+        
+            jbAnteriorTrabajador.setEnabled(true);
+            contadorTrabajador++;
+            Trabajador trabajador=listaTrabajadores.get(contadorTrabajador);
+            cargarCamposTrabajador(trabajador);
+        if(contadorTrabajador==listaTrabajadores.size()-1)
+        {
+            jbSiguienteTrabajador.setEnabled(false);
+        }
+        
     }
     public void mostrarAnteriorTrabajador()
     {
-        contadorTrabajador--;
-        Trabajador trabajador=listaTrabajadores.get(contadorTrabajador);
-        cargarCamposTrabajador(trabajador);
+            jbSiguienteTrabajador.setEnabled(true);
+            contadorTrabajador--;
+            Trabajador trabajador=listaTrabajadores.get(contadorTrabajador);
+            cargarCamposTrabajador(trabajador);
+        if(contadorTrabajador==0)
+        {
+            jbAnteriorTrabajador.setEnabled(false);
+        }
     }
     public void insertarTrabajador()
     {
@@ -393,24 +426,49 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
     public void mostrarDatosVehiculo()
     {
         listaVehiculos= controlador.getListadoVehiculos();
+        if(listaVehiculos.size()==contadorVehiculo)
+        {
+            contadorVehiculo--;
+            jbSiguienteVehiculo.setEnabled(false);
+        }
         Vehiculo vehiculo = listaVehiculos.get(contadorVehiculo);
         String nombreCompleto=controlador.comprobarTrabajadorAsignado(vehiculo);
         cargarCamposVehiculo(vehiculo,nombreCompleto);
+        
+        if(listaVehiculos.size()==1)
+        {
+            jbSiguienteVehiculo.setEnabled(false);
+            jbAnteriorVehiculo.setEnabled(false);
+        }
+        if(listaVehiculos.size()-1 > contadorVehiculo)
+        {
+            jbSiguienteVehiculo.setEnabled(true);
+        }
     }
     
     public void mostrarSiguienteVehiculo()
     {
+        jbAnteriorVehiculo.setEnabled(true);
         contadorVehiculo++;
         Vehiculo vehiculo=listaVehiculos.get(contadorVehiculo);
         String nombreCompleto=controlador.comprobarTrabajadorAsignado(vehiculo);
         cargarCamposVehiculo(vehiculo,nombreCompleto);
+        if(contadorVehiculo==listaVehiculos.size()-1)
+        {
+            jbSiguienteVehiculo.setEnabled(false);
+        }
     }
     public void mostrarAnteriorVehiculo()
     {
+        jbSiguienteVehiculo.setEnabled(true);
         contadorVehiculo--;
         Vehiculo vehiculo=listaVehiculos.get(contadorVehiculo);
         String nombreCompleto=controlador.comprobarTrabajadorAsignado(vehiculo);
         cargarCamposVehiculo(vehiculo,nombreCompleto);
+        if(contadorVehiculo==0)
+        {
+            jbAnteriorVehiculo.setEnabled(false);
+        }
     }
     public void insertarVehiculo()
     {
@@ -508,20 +566,44 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
     public void mostrarDatosInforme()
     {
         listaInformes= controlador.getListadoInformes();
+        if(listaInformes.size()==contadorInforme)
+        {
+            contadorInforme--;
+            jbSiguienteInforme.setEnabled(false);
+        }
         Informe informe = listaInformes.get(contadorInforme);
         cargarCamposInforme(informe);
+        if(listaInformes.size()==1)
+        {
+            jbSiguienteInforme.setEnabled(false);
+            jbAnteriorInforme.setEnabled(false);
+        }
+        if(listaInformes.size()-1 > contadorInforme)
+        {
+            jbSiguienteInforme.setEnabled(true);
+        }
     }
     public void mostrarSiguienteInforme()
     {
+        jbAnteriorInforme.setEnabled(true);
         contadorInforme++;
         Informe informe=listaInformes.get(contadorInforme);
         cargarCamposInforme(informe);
+        if(listaInformes.size()-1==contadorInforme)
+        {
+            jbSiguienteInforme.setEnabled(false);
+        }
     }
     public void mostrarAnteriorInforme()
     {
+        jbSiguienteInforme.setEnabled(true);
         contadorInforme--;
         Informe informe=listaInformes.get(contadorInforme);
         cargarCamposInforme(informe);
+        if(contadorInforme==0)
+        {
+            jbAnteriorInforme.setEnabled(false);
+        }
     }
     public void insertarInforme()
     {
@@ -594,20 +676,47 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
     public void mostrarDatosFactura()
     {
         listaFacturas= controlador.getListadoFacturas();
+        if(listaFacturas.size()==contadorFactura)
+        {
+            contadorFactura--;
+            jbSiguienteFactura.setEnabled(false);
+        }
+        
         Factura factura = listaFacturas.get(contadorFactura);
         cargarCamposFactura(factura);
+        if(listaFacturas.size()==1)
+        {
+            jbSiguienteFactura.setEnabled(false);
+            jbAnteriorFactura.setEnabled(false);
+        }
+        if(listaFacturas.size()-1 > contadorFactura)
+        {
+            jbSiguienteFactura.setEnabled(true);
+        }
+        
     }
     public void mostrarSiguienteFactura()
     {
+        jbAnteriorFactura.setEnabled(true);
         contadorFactura++;
         Factura factura=listaFacturas.get(contadorFactura);
         cargarCamposFactura(factura);
+        if(listaFacturas.size()-1==contadorFactura)
+        {
+            jbSiguienteFactura.setEnabled(false);
+        }
+        
     }
     public void mostrarAnteriorFactura()
     {
+        jbSiguienteFactura.setEnabled(true);
         contadorFactura--;
         Factura factura=listaFacturas.get(contadorFactura);
         cargarCamposFactura(factura);
+        if(contadorFactura==0)
+        {
+            jbAnteriorFactura.setEnabled(false);
+        }
     }
     public void insertarFactura()
     {
@@ -681,21 +790,46 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
     public void mostrarDatosRepuesto()
     {
         listaRepuestos= controlador.getListadoRepuestos();
+        if(listaRepuestos.size()==contadorRepuestos)
+        {
+            contadorRepuestos--;
+            jbSiguienteRepuesto.setEnabled(false);
+        }
+        
         Repuestos repuesto = listaRepuestos.get(contadorRepuestos);
         cargarCamposRepuestos(repuesto);
+        if(listaRepuestos.size()==1)
+        {
+            jbSiguienteRepuesto.setEnabled(false);
+            jbAnteriorRepuesto.setEnabled(false);
+        }
+        if(listaRepuestos.size()-1 > contadorRepuestos)
+        {
+            jbSiguienteRepuesto.setEnabled(true);
+        }
     }
     public void mostrarSiguienteRepuesto()
     {
+        jbAnteriorRepuesto.setEnabled(true);
         contadorRepuestos++;
         Repuestos repuesto=listaRepuestos.get(contadorRepuestos);
         cargarCamposRepuestos(repuesto);
+        if(listaRepuestos.size()-1==contadorRepuestos)
+        {
+            jbSiguienteRepuesto.setEnabled(false);
+        }
     
     }
     public void mostrarAnteriorRepuesto()
     {
+        jbSiguienteRepuesto.setEnabled(true);
         contadorRepuestos--;
         Repuestos repuesto=listaRepuestos.get(contadorRepuestos);
         cargarCamposRepuestos(repuesto);
+        if(contadorRepuestos==0)
+        {
+            jbAnteriorRepuesto.setEnabled(false);
+        }
     }
     public void insertarRepuesto()
     {
@@ -783,20 +917,46 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
     public void mostrarDatosObd()
     {
         listaObd= controlador.getListadoObd();
+        if(listaObd.size()==contadorObd)
+        {
+            contadorObd--;
+            jbSiguienteObd.setEnabled(false);
+        }
         Obd obd = listaObd.get(contadorObd);
         cargarCamposObd(obd);
+        
+        if(listaObd.size()==1)
+        {
+            jbSiguienteObd.setEnabled(false);
+            jbAnteriorObd.setEnabled(false);
+        }
+        if(listaObd.size()-1 > contadorObd)
+        {
+            jbSiguienteObd.setEnabled(true);
+        }
     }
     public void mostrarSiguienteObd()
     {
+        jbAnteriorObd.setEnabled(true);
         contadorObd++;
         Obd obd=listaObd.get(contadorObd);
         cargarCamposObd(obd);
+        if(listaObd.size()-1==contadorObd)
+        {
+            jbSiguienteObd.setEnabled(false);
+        }
     }
     public void mostrarAnteriorObd()
     {
+        jbSiguienteObd.setEnabled(true);
         contadorObd--;
         Obd obd=listaObd.get(contadorObd);
         cargarCamposObd(obd);
+        if(contadorObd==0)
+        {
+            jbAnteriorObd.setEnabled(false);
+        }
+
     }
     public void insertarObd()
     {
@@ -1233,6 +1393,11 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
         });
 
         jbAnteriorVehiculo.setText("Anterior");
+        jbAnteriorVehiculo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAnteriorVehiculoActionPerformed(evt);
+            }
+        });
 
         jbInsertarVehiculo.setText("Insertar nuevo vehículo");
 
@@ -1535,9 +1700,15 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
 
         jlNumFactura.setText("Número de factura");
 
+        jtfNumFactura.setEditable(false);
+
+        jtfPrecioFactura.setEditable(false);
+
         jlPrecioFactura.setText("Precio");
 
         jlLineaFactura.setText("Línea Factura");
+
+        jtfLineaFactura.setEditable(false);
 
         jbSiguienteFactura.setText("Siguiente");
         jbSiguienteFactura.addActionListener(new java.awt.event.ActionListener() {
@@ -1553,6 +1724,8 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
         jbModificarFactura.setText("Modificar factura");
 
         jbEliminarFactura.setText("Eliminar factura");
+
+        jtfnumExpedicionInformeFactura.setEditable(false);
 
         jlnumExpedicionInformeFactura.setText("Informe origen");
 
@@ -1633,12 +1806,19 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
 
         jlNumSerieRepuesto.setText("número de serie");
 
+        jtfNumSerieRepuesto.setEditable(false);
+
         jlReferenciaRepuesto.setText("referencia");
+
+        jtfReferenciaRepuesto.setEditable(false);
 
         jlNombreRepuesto.setText("nombre");
 
+        jtfNombreRepuesto.setEditable(false);
+
         jlMarcaRepuesto.setText("marca");
 
+        jtfMarcaRepuesto.setEditable(false);
         jtfMarcaRepuesto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtfMarcaRepuestoActionPerformed(evt);
@@ -1646,6 +1826,8 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
         });
 
         jlUsoRepuesto.setText("uso");
+
+        jtfUsoRepuesto.setEditable(false);
 
         jbSiguienteRepuesto.setText("Siguiente");
         jbSiguienteRepuesto.addActionListener(new java.awt.event.ActionListener() {
@@ -1667,11 +1849,18 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
 
         jbEliminarRepuesto.setText("Eliminar repuesto");
 
+        jtfNumFacturaRepuestos.setEditable(false);
         jtfNumFacturaRepuestos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtfNumFacturaRepuestosActionPerformed(evt);
             }
         });
+
+        jtfBastidorVehiculoRepuestos.setEditable(false);
+
+        jtfFechaCompraRepuesto.setEditable(false);
+
+        jtfTiendaRepuesto.setEditable(false);
 
         jlTiendaRepuesto.setText("tienda");
 
@@ -1813,7 +2002,11 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
 
         jlIdObd.setText("identificador");
 
+        jtfIdObd.setEditable(false);
+
         jlRpmInstObd.setText("rpm_inst");
+
+        jtfRpmInstObd.setEditable(false);
 
         jbSiguienteObd.setText("Siguiente");
         jbSiguienteObd.addActionListener(new java.awt.event.ActionListener() {
@@ -1835,11 +2028,18 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
 
         jbEliminarObd.setText("Eliminar registro OBD");
 
+        jtfBastidorVehiculoObd.setEditable(false);
         jtfBastidorVehiculoObd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtfBastidorVehiculoObdActionPerformed(evt);
             }
         });
+
+        jtfCodigoSalidaObd.setEditable(false);
+
+        jtfTemperaturaAguaObd.setEditable(false);
+
+        jtfTemperaturaAceiteObd.setEditable(false);
 
         jlTemperaturaAceiteObd.setText("temperatura aceite");
 
@@ -1850,6 +2050,8 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
         jlBastidorVehiculoObd.setText("bastidor del vehículo de esta lectura ");
 
         jlSensores.setText("sensores");
+
+        jtfSensores.setEditable(false);
 
         javax.swing.GroupLayout pTrabajadores3Layout = new javax.swing.GroupLayout(pTrabajadores3);
         pTrabajadores3.setLayout(pTrabajadores3Layout);
@@ -2061,6 +2263,10 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
     private void jtfModeloVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfModeloVehiculoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfModeloVehiculoActionPerformed
+
+    private void jbAnteriorVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAnteriorVehiculoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbAnteriorVehiculoActionPerformed
 
     /**
      * @param args the command line arguments
