@@ -163,6 +163,78 @@ public class Controlador
         String nombreCompleto=trabajador.getNombre()+" "+trabajador.getApellido1()+" "+trabajador.getApellido2();
         return nombreCompleto;
     }
+    public ArrayList getListaDni()
+    {
+      ArrayList<String> listaDni=new ArrayList();
+      ArrayList<Trabajador> listaTrabajadores=null;
+        try {
+            listaTrabajadores = modelo.getListadoTrabajadores();
+            
+        } catch (DAOTrabajadorExcepcion ex) {
+            ex.printStackTrace();
+            System.err.println("Error comprobando la lista de trabajadores");
+        }
+        
+      for(Trabajador trabajador:listaTrabajadores)
+      {
+          listaDni.add(trabajador.getDni());
+      }
+      return listaDni;
+    }
+    public ArrayList getListaNumsExpedicion()
+    {
+        ArrayList<String> listaNumsExpedicion=new ArrayList();
+        ArrayList<Informe> listaInformes=null;
+        try {
+            listaInformes = modelo.getListadoInformes();
+            
+        } catch (DAOInformeExcepcion ex) {
+            ex.printStackTrace();
+            System.err.println("Error comprobando la lista de informes");
+        }
+        
+      for(Informe informe:listaInformes)
+      {
+          listaNumsExpedicion.add(String.valueOf(informe.getNumExpedicion()));
+      }
+      return listaNumsExpedicion;
+    }
+    public ArrayList getListaBastidores()
+    {
+        ArrayList<String> listaBastidores=new ArrayList();
+        ArrayList<Vehiculo> listaVehiculos=null;
+        try {
+            listaVehiculos = modelo.getListadoVehiculos();
+            
+        } catch (DAOVehiculoExcepcion ex) {
+            ex.printStackTrace();
+            System.err.println("Error comprobando la lista de vehículos");
+        }
+        
+      for(Vehiculo vehiculo:listaVehiculos)
+      {
+          listaBastidores.add(String.valueOf(vehiculo.getBastidor()));
+      }
+      return listaBastidores;
+    }
+    public ArrayList getListaNumsFactura()
+    {
+        ArrayList<String> listaNumsFactura=new ArrayList();
+        ArrayList<Factura> listaFacturas=null;
+        try {
+            listaFacturas = modelo.getListadoFacturas();
+            
+        } catch (DAOFacturaExcepcion ex) {
+            ex.printStackTrace();
+            System.err.println("Error comprobando la lista de facturas");
+        }
+        
+      for(Factura factura:listaFacturas)
+      {
+          listaNumsFactura.add(String.valueOf(factura.getNumFactura()));
+      }
+      return listaNumsFactura;
+    }
     public void insertarVehiculo(Vehiculo vehiculo)
     {
         try 

@@ -106,6 +106,7 @@ public class ModeloJdbc implements DAO{
         }
      return listaTrabajadores;
     }
+    
     public Trabajador comprobarTrabajador(String dniTrabajador)
     {
         Connection conn=null;

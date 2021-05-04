@@ -5,8 +5,10 @@
  */
 package com.mycompany.fullauto.vista;
 
+import com.mycompany.fullauto.controlador.Controlador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.JTextField;
 
 /**
@@ -20,12 +22,19 @@ public class FormularioInforme extends javax.swing.JDialog implements ActionList
      * Creates new form insertarTrabajador
      */
     private boolean confirmarInsertar;
-    public FormularioInforme(java.awt.Frame parent, boolean modal) {
+    private static Controlador controlador;
+    public FormularioInforme(java.awt.Frame parent, boolean modal, Controlador controlador) {
         super(parent, modal);
+        this.controlador=controlador;
         initComponents();
         confirmarInsertar=false;
         jbAceptar.addActionListener(this);
         jbCancelar.addActionListener(this);
+        ArrayList<String> listaDni = controlador.getListaDni();
+        for(String dni:listaDni)
+        {
+            jcbDniTrabajadorInforme.addItem(dni); 
+        }
     }
 
     /**
@@ -41,12 +50,12 @@ public class FormularioInforme extends javax.swing.JDialog implements ActionList
         jlFormularioInforme = new javax.swing.JLabel();
         jtfNumExpedicion = new javax.swing.JTextField();
         jtfTareas = new javax.swing.JTextField();
-        jtfDniTrabajadorInforme = new javax.swing.JTextField();
         jlNumExpedicion = new javax.swing.JLabel();
         jlTareas = new javax.swing.JLabel();
         dniTrabajadorInforme = new javax.swing.JLabel();
         jbAceptar = new javax.swing.JButton();
         jbCancelar = new javax.swing.JButton();
+        jcbDniTrabajadorInforme = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -85,15 +94,15 @@ public class FormularioInforme extends javax.swing.JDialog implements ActionList
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(58, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jcbDniTrabajadorInforme, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtfTareas, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlNumExpedicion)
                     .addComponent(dniTrabajadorInforme)
                     .addComponent(jlTareas)
-                    .addComponent(jtfTareas, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtfNumExpedicion, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(31, 31, 31)
-                        .addComponent(jlFormularioInforme))
-                    .addComponent(jtfDniTrabajadorInforme, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jlFormularioInforme)))
                 .addGap(69, 69, 69))
         );
         jPanel1Layout.setVerticalGroup(
@@ -107,13 +116,13 @@ public class FormularioInforme extends javax.swing.JDialog implements ActionList
                 .addComponent(jtfNumExpedicion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jlTareas)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jtfTareas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jtfTareas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
                 .addComponent(dniTrabajadorInforme)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jtfDniTrabajadorInforme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addComponent(jcbDniTrabajadorInforme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbCancelar)
                     .addComponent(jbAceptar))
@@ -171,7 +180,7 @@ public class FormularioInforme extends javax.swing.JDialog implements ActionList
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                FormularioInforme dialog = new FormularioInforme(new javax.swing.JFrame(), true);
+                FormularioInforme dialog = new FormularioInforme(new javax.swing.JFrame(), true,controlador);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -211,7 +220,7 @@ public class FormularioInforme extends javax.swing.JDialog implements ActionList
         jtfTareas.setText(texto);
     }
     public void setTextoDniTrabajadorInforme(String texto){
-        jtfDniTrabajadorInforme.setText(texto);
+        jcbDniTrabajadorInforme.setSelectedItem(texto);
     }
     public void desactivarNumExpedicion()
     {
@@ -225,34 +234,9 @@ public class FormularioInforme extends javax.swing.JDialog implements ActionList
        return jtfTareas.getText();
     }
     public String getDniTrabajadorInforme(){
-        return jtfDniTrabajadorInforme.getText();
+        return jcbDniTrabajadorInforme.getSelectedItem().toString();
     }
     
-    /*public void setTextoApellido2(String texto){
-        jtfApellido2.setText(texto);
-    }
-    public void setTextoFuncion(String texto){
-        jtfFuncion.setText(texto);
-    }
-    
-    //Funciones para extraer los datos del formulario.
-     public String getDni() {
-        return jtfNumExpedicion.getText();
-    }
-     public String getNombre() {
-        return jtfTareas.getText();
-    }
-    public String getApellido1() {
-        return jtfDniTrabajadorInforme.getText();
-    }
-
-    public String getApellido2() {
-        return jtfApellido2.getText();
-    }
-    public String getFuncion() {
-        return jtfFuncion.getText();
-    }
-*/
     
     
 
@@ -261,10 +245,10 @@ public class FormularioInforme extends javax.swing.JDialog implements ActionList
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton jbAceptar;
     private javax.swing.JButton jbCancelar;
+    private javax.swing.JComboBox<String> jcbDniTrabajadorInforme;
     private javax.swing.JLabel jlFormularioInforme;
     private javax.swing.JLabel jlNumExpedicion;
     private javax.swing.JLabel jlTareas;
-    private javax.swing.JTextField jtfDniTrabajadorInforme;
     private javax.swing.JTextField jtfNumExpedicion;
     private javax.swing.JTextField jtfTareas;
     // End of variables declaration//GEN-END:variables

@@ -56,16 +56,16 @@
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace pref="58" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jcbDniTrabajadorInforme" min="-2" pref="212" max="-2" attributes="0"/>
+                      <Component id="jtfTareas" min="-2" pref="234" max="-2" attributes="0"/>
                       <Component id="jlNumExpedicion" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="dniTrabajadorInforme" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jlTareas" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jtfTareas" alignment="0" min="-2" pref="234" max="-2" attributes="0"/>
                       <Component id="jtfNumExpedicion" alignment="0" min="-2" pref="234" max="-2" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                           <Component id="jlFormularioInforme" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="jtfDniTrabajadorInforme" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
               </Group>
@@ -82,13 +82,13 @@
                   <Component id="jtfNumExpedicion" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jlTareas" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jtfTareas" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="jtfTareas" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                   <Component id="dniTrabajadorInforme" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jtfDniTrabajadorInforme" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="30" max="32767" attributes="0"/>
+                  <Component id="jcbDniTrabajadorInforme" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="19" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jbCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jbAceptar" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -116,8 +116,6 @@
         <Component class="javax.swing.JTextField" name="jtfNumExpedicion">
         </Component>
         <Component class="javax.swing.JTextField" name="jtfTareas">
-        </Component>
-        <Component class="javax.swing.JTextField" name="jtfDniTrabajadorInforme">
         </Component>
         <Component class="javax.swing.JLabel" name="jlNumExpedicion">
           <Properties>
@@ -155,6 +153,16 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Cancelar"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="jcbDniTrabajadorInforme">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="0"/>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>

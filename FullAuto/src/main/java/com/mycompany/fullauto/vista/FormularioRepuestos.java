@@ -5,8 +5,10 @@
  */
 package com.mycompany.fullauto.vista;
 
+import com.mycompany.fullauto.controlador.Controlador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JTextField;
 
@@ -21,12 +23,25 @@ public class FormularioRepuestos extends javax.swing.JDialog implements ActionLi
      * Creates new form insertarTrabajador
      */
     private boolean confirmarInsertar;
-    public FormularioRepuestos(java.awt.Frame parent, boolean modal) {
+    private static Controlador controlador;
+    public FormularioRepuestos(java.awt.Frame parent, boolean modal,Controlador controlador) {
         super(parent, modal);
         initComponents();
+        this.controlador=controlador;
         confirmarInsertar=false;
         jbAceptar.addActionListener(this);
         jbCancelar.addActionListener(this);
+        
+        ArrayList<String> listaBastidores = controlador.getListaBastidores();
+        for(String bastidor:listaBastidores)
+        {
+            jcbBastidorRepuestos.addItem(bastidor); 
+        }
+        ArrayList<String> listaNumsFactura = controlador.getListaNumsFactura();
+        for(String numFactura:listaNumsFactura)
+        {
+            jcbNumFacturaRepuestos.addItem(numFactura); 
+        }
     }
 
     /**
@@ -41,13 +56,11 @@ public class FormularioRepuestos extends javax.swing.JDialog implements ActionLi
         jPanel1 = new javax.swing.JPanel();
         jtfUso = new javax.swing.JTextField();
         jlNumSerie = new javax.swing.JLabel();
-        jtfBastidorRepuestos = new javax.swing.JTextField();
         jlReferencia = new javax.swing.JLabel();
         jlTienda = new javax.swing.JLabel();
         jlNombre = new javax.swing.JLabel();
         jlNumFacturaRepuestos = new javax.swing.JLabel();
         jlMarca = new javax.swing.JLabel();
-        jtfNumFacturaRepuestos = new javax.swing.JTextField();
         jlUso = new javax.swing.JLabel();
         jlFormularioRepuestos = new javax.swing.JLabel();
         jtfNumSerie = new javax.swing.JTextField();
@@ -60,6 +73,8 @@ public class FormularioRepuestos extends javax.swing.JDialog implements ActionLi
         jbCancelar = new javax.swing.JButton();
         jbAceptar = new javax.swing.JButton();
         jsFechaCompra = new javax.swing.JSpinner();
+        jcbBastidorRepuestos = new javax.swing.JComboBox<>();
+        jcbNumFacturaRepuestos = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -128,22 +143,22 @@ public class FormularioRepuestos extends javax.swing.JDialog implements ActionLi
                             .addComponent(jlNumSerie)
                             .addComponent(jtfNumSerie, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jlBastidorRepuestos)
-                            .addComponent(jtfBastidorRepuestos, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jlFechaCompra)
                             .addComponent(jlUso)
                             .addComponent(jtfUso, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jtfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jlNombre))
+                            .addComponent(jlNombre)
+                            .addComponent(jcbBastidorRepuestos, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jtfTienda, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jlTienda)
                             .addComponent(jlNumFacturaRepuestos)
-                            .addComponent(jtfNumFacturaRepuestos, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jlReferencia)
                             .addComponent(jtfReferencia, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jlMarca)
-                            .addComponent(jtfMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jtfMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jcbNumFacturaRepuestos, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(120, 120, 120))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -187,12 +202,11 @@ public class FormularioRepuestos extends javax.swing.JDialog implements ActionLi
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jlBastidorRepuestos)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtfBastidorRepuestos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jlNumFacturaRepuestos)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtfNumFacturaRepuestos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jcbBastidorRepuestos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jcbNumFacturaRepuestos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jlNumFacturaRepuestos))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbAceptar)
                     .addComponent(jbCancelar))
@@ -248,7 +262,7 @@ public class FormularioRepuestos extends javax.swing.JDialog implements ActionLi
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                FormularioRepuestos dialog = new FormularioRepuestos(new javax.swing.JFrame(), true);
+                FormularioRepuestos dialog = new FormularioRepuestos(new javax.swing.JFrame(), true,controlador);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -309,10 +323,10 @@ public class FormularioRepuestos extends javax.swing.JDialog implements ActionLi
     }
     
     public void setTextoBastidorRepuestos(String texto){
-        jtfBastidorRepuestos.setText(texto);
+        jcbBastidorRepuestos.setSelectedItem(texto);
     }
     public void setTextoNumFacturaRepuestos(String texto){
-        jtfNumFacturaRepuestos.setText(texto);
+        jcbNumFacturaRepuestos.setSelectedItem(texto);
     }
     
     //Funciones para extraer los datos del formulario.
@@ -340,10 +354,10 @@ public class FormularioRepuestos extends javax.swing.JDialog implements ActionLi
     }
 
     public String getBastidorVehiculoRepuestos() {
-        return jtfBastidorRepuestos.getText();
+        return jcbBastidorRepuestos.getSelectedItem().toString();
     }
     public String getNumFacturaRepuestos() {
-        return jtfNumFacturaRepuestos.getText();
+        return jcbNumFacturaRepuestos.getSelectedItem().toString();
     }
 
     
@@ -353,6 +367,8 @@ public class FormularioRepuestos extends javax.swing.JDialog implements ActionLi
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton jbAceptar;
     private javax.swing.JButton jbCancelar;
+    private javax.swing.JComboBox<String> jcbBastidorRepuestos;
+    private javax.swing.JComboBox<String> jcbNumFacturaRepuestos;
     private javax.swing.JLabel jlBastidorRepuestos;
     private javax.swing.JLabel jlFechaCompra;
     private javax.swing.JLabel jlFormularioRepuestos;
@@ -364,10 +380,8 @@ public class FormularioRepuestos extends javax.swing.JDialog implements ActionLi
     private javax.swing.JLabel jlTienda;
     private javax.swing.JLabel jlUso;
     private javax.swing.JSpinner jsFechaCompra;
-    private javax.swing.JTextField jtfBastidorRepuestos;
     private javax.swing.JTextField jtfMarca;
     private javax.swing.JTextField jtfNombre;
-    private javax.swing.JTextField jtfNumFacturaRepuestos;
     private javax.swing.JTextField jtfNumSerie;
     private javax.swing.JTextField jtfReferencia;
     private javax.swing.JTextField jtfTienda;

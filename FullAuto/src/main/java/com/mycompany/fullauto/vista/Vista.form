@@ -558,7 +558,7 @@
                                       <Component id="jlDniTrabajadorVehiculo" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace pref="49" max="32767" attributes="0"/>
+                              <EmptySpace pref="58" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -925,7 +925,7 @@
                                   </Group>
                               </Group>
                           </Group>
-                          <EmptySpace pref="390" max="32767" attributes="0"/>
+                          <EmptySpace pref="399" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1123,7 +1123,7 @@
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="jtfnumExpedicionInformeFactura" min="-2" pref="30" max="-2" attributes="0"/>
-                          <EmptySpace pref="337" max="32767" attributes="0"/>
+                          <EmptySpace pref="346" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1407,11 +1407,11 @@
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jlBastidorVehiculoRepuestos" min="-2" pref="14" max="-2" attributes="0"/>
-                              <EmptySpace pref="23" max="32767" attributes="0"/>
+                              <EmptySpace pref="27" max="32767" attributes="0"/>
                               <Component id="jtfBastidorVehiculoRepuestos" min="-2" pref="33" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jlNumeroFacturaRepuestos" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="16" max="32767" attributes="0"/>
+                              <EmptySpace pref="21" max="32767" attributes="0"/>
                               <Component id="jtfNumFacturaRepuestos" min="-2" pref="30" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
                           </Group>
@@ -1772,7 +1772,7 @@
                                       </Group>
                                   </Group>
                               </Group>
-                              <EmptySpace pref="38" max="32767" attributes="0"/>
+                              <EmptySpace pref="47" max="32767" attributes="0"/>
                               <Component id="jlBastidorVehiculoObd" min="-2" pref="25" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="jtfBastidorVehiculoObd" min="-2" pref="30" max="-2" attributes="0"/>

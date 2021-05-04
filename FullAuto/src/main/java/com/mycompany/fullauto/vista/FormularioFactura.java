@@ -5,8 +5,10 @@
  */
 package com.mycompany.fullauto.vista;
 
+import com.mycompany.fullauto.controlador.Controlador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.JTextField;
 
 /**
@@ -20,12 +22,20 @@ public class FormularioFactura extends javax.swing.JDialog implements ActionList
      * Creates new form insertarTrabajador
      */
     private boolean confirmarInsertar;
-    public FormularioFactura(java.awt.Frame parent, boolean modal) {
+    private static Controlador controlador;
+    public FormularioFactura(java.awt.Frame parent, boolean modal,Controlador controlador) {
         super(parent, modal);
+        this.controlador=controlador;
         initComponents();
         confirmarInsertar=false;
         jbAceptar.addActionListener(this);
         jbCancelar.addActionListener(this);
+        
+        ArrayList<String> listaNumsExpedicion = controlador.getListaNumsExpedicion();
+        for(String numExpedicion:listaNumsExpedicion)
+        {
+            jcbNumExpedicionInforme.addItem(numExpedicion); 
+        }
     }
 
     /**
@@ -43,12 +53,12 @@ public class FormularioFactura extends javax.swing.JDialog implements ActionList
         jtfNumFactura = new javax.swing.JTextField();
         jtfPrecio = new javax.swing.JTextField();
         jtfLineaFactura = new javax.swing.JTextField();
-        jtfNumExpedicionInforme = new javax.swing.JTextField();
         jlNumFactura = new javax.swing.JLabel();
         jlPrecioFactura = new javax.swing.JLabel();
         jlLineaFactura = new javax.swing.JLabel();
         jbAceptar = new javax.swing.JButton();
         jbCancelar = new javax.swing.JButton();
+        jcbNumExpedicionInforme = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -90,9 +100,9 @@ public class FormularioFactura extends javax.swing.JDialog implements ActionList
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(63, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jcbNumExpedicionInforme, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlNumExpedicionInforme)
                     .addComponent(jtfLineaFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtfNumExpedicionInforme, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlNumFactura)
                     .addComponent(jlLineaFactura)
                     .addComponent(jlPrecioFactura)
@@ -122,9 +132,9 @@ public class FormularioFactura extends javax.swing.JDialog implements ActionList
                 .addComponent(jtfLineaFactura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jlNumExpedicionInforme)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jtfNumExpedicionInforme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jcbNumExpedicionInforme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbCancelar)
                     .addComponent(jbAceptar))
@@ -182,7 +192,7 @@ public class FormularioFactura extends javax.swing.JDialog implements ActionList
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                FormularioFactura dialog = new FormularioFactura(new javax.swing.JFrame(), true);
+                FormularioFactura dialog = new FormularioFactura(new javax.swing.JFrame(), true,controlador);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -225,7 +235,7 @@ public class FormularioFactura extends javax.swing.JDialog implements ActionList
         jtfLineaFactura.setText(texto);
     }
     public void setTextoNumExpedicionInforme(String texto){
-        jtfNumExpedicionInforme.setText(texto);
+        jcbNumExpedicionInforme.setSelectedItem(texto);
     }
     public void desactivarNumFactura()
     {
@@ -243,20 +253,20 @@ public class FormularioFactura extends javax.swing.JDialog implements ActionList
         return jtfLineaFactura.getText();
     }
     public String getNumExpedicionInforme() {
-        return jtfNumExpedicionInforme.getText();
+        return jcbNumExpedicionInforme.getSelectedItem().toString();
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton jbAceptar;
     private javax.swing.JButton jbCancelar;
+    private javax.swing.JComboBox<String> jcbNumExpedicionInforme;
     private javax.swing.JLabel jlFormularioFactura;
     private javax.swing.JLabel jlLineaFactura;
     private javax.swing.JLabel jlNumExpedicionInforme;
     private javax.swing.JLabel jlNumFactura;
     private javax.swing.JLabel jlPrecioFactura;
     private javax.swing.JTextField jtfLineaFactura;
-    private javax.swing.JTextField jtfNumExpedicionInforme;
     private javax.swing.JTextField jtfNumFactura;
     private javax.swing.JTextField jtfPrecio;
     // End of variables declaration//GEN-END:variables

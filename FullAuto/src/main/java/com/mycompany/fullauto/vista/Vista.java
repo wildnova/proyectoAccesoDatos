@@ -432,6 +432,7 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
             jbSiguienteVehiculo.setEnabled(false);
         }
         Vehiculo vehiculo = listaVehiculos.get(contadorVehiculo);
+        
         String nombreCompleto=controlador.comprobarTrabajadorAsignado(vehiculo);
         cargarCamposVehiculo(vehiculo,nombreCompleto);
         
@@ -473,7 +474,7 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
     public void insertarVehiculo()
     {
         boolean confirmarInsertar;
-        FormularioVehiculo fv = new FormularioVehiculo(this, true);
+        FormularioVehiculo fv = new FormularioVehiculo(this, true,controlador);
         fv.setTextoTitulo("Insertar vehículo");
         fv.setVisible(true);
         confirmarInsertar= fv.getConfirmacion();
@@ -491,7 +492,7 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
      
         Vehiculo vehiculo = listaVehiculos.get(contadorVehiculo);
         
-        FormularioVehiculo fv = new FormularioVehiculo(this, true);
+        FormularioVehiculo fv = new FormularioVehiculo(this, true,controlador);
         fv.setTextoTitulo("Modificar vehículo");
         fv.desactivarBastidor();
         fv.setTextoBastidor(vehiculo.getBastidor());
@@ -608,7 +609,7 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
     public void insertarInforme()
     {
         boolean confirmarInsertar;
-        FormularioInforme fi = new FormularioInforme(this, true);
+        FormularioInforme fi = new FormularioInforme(this, true,controlador);
         fi.setTextoTitulo("Insertar informe");
         fi.setVisible(true);
         confirmarInsertar= fi.getConfirmacion();
@@ -626,7 +627,7 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
         
         Informe informe = listaInformes.get(contadorInforme);
         
-        FormularioInforme fi = new FormularioInforme(this, true);
+        FormularioInforme fi = new FormularioInforme(this, true,controlador);
         fi.setTextoTitulo("Modificar informe");
         fi.desactivarNumExpedicion();
         fi.setTextoNumExpedicion(String.valueOf(informe.getNumExpedicion()));
@@ -721,7 +722,7 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
     public void insertarFactura()
     {
         boolean confirmarInsertar;
-        FormularioFactura ff = new FormularioFactura(this, true);
+        FormularioFactura ff = new FormularioFactura(this, true,controlador);
         ff.setTextoTitulo("Insertar factura");
         ff.setVisible(true);
         confirmarInsertar= ff.getConfirmacion();
@@ -739,7 +740,7 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
         
         Factura factura = listaFacturas.get(contadorFactura);
         
-        FormularioFactura ff = new FormularioFactura(this, true);
+        FormularioFactura ff = new FormularioFactura(this, true,controlador);
         ff.setTextoTitulo("Modificar factura");
         ff.desactivarNumFactura();
         ff.setTextoNumFactura(String.valueOf(factura.getNumFactura()));
@@ -834,7 +835,7 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
     public void insertarRepuesto()
     {
         boolean confirmarInsertar;
-        FormularioRepuestos fr = new FormularioRepuestos(this, true);
+        FormularioRepuestos fr = new FormularioRepuestos(this, true,controlador);
         fr.setTextoTitulo("Insertar repuesto");
         fr.setVisible(true);
         confirmarInsertar= fr.getConfirmacion();
@@ -852,7 +853,7 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
         
         Repuestos repuesto = listaRepuestos.get(contadorRepuestos);
         
-        FormularioRepuestos fr = new FormularioRepuestos(this, true);
+        FormularioRepuestos fr = new FormularioRepuestos(this, true,controlador);
         fr.setTextoTitulo("Modificar repuesto");
         fr.desactivarNumSerie();
         fr.setTextoNumSerie(repuesto.getNumSerie());
@@ -961,7 +962,7 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
     public void insertarObd()
     {
         boolean confirmarInsertar;
-        FormularioObd fo = new FormularioObd(this, true);
+        FormularioObd fo = new FormularioObd(this, true,controlador);
         fo.setTextoTitulo("Insertar Obd");
         fo.setVisible(true);
         confirmarInsertar= fo.getConfirmacion();
@@ -979,7 +980,7 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
         
         Obd obd = listaObd.get(contadorObd);
         
-        FormularioObd fo = new FormularioObd(this, true);
+        FormularioObd fo = new FormularioObd(this, true,controlador);
         fo.setTextoTitulo("Modificar Obd");
         fo.desactivarIdObd();
         fo.setTextoId(String.valueOf(obd.getId()));
@@ -1586,7 +1587,7 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
                         .addComponent(jtfDNITrabajadorVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jlTrabajadorAsignado)
                         .addComponent(jlDniTrabajadorVehiculo)))
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addContainerGap(58, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout pVehiculosLayout = new javax.swing.GroupLayout(pVehiculos);
@@ -1691,7 +1692,7 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addComponent(jtfDniTrabajadorInforme, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(390, Short.MAX_VALUE))
+                .addContainerGap(399, Short.MAX_VALUE))
         );
 
         jtpTablaPrincipal.addTab("Informes", jPanel1);
@@ -1797,7 +1798,7 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
                         .addComponent(jlnumExpedicionInformeFactura)))
                 .addGap(18, 18, 18)
                 .addComponent(jtfnumExpedicionInformeFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(337, Short.MAX_VALUE))
+                .addContainerGap(346, Short.MAX_VALUE))
         );
 
         jtpTablaPrincipal.addTab("Facturas", jPanel2);
@@ -1976,11 +1977,11 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
                                 .addComponent(jbAnteriorRepuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(18, 18, 18)
                 .addComponent(jlBastidorVehiculoRepuestos, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addComponent(jtfBastidorVehiculoRepuestos, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jlNumeroFacturaRepuestos)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addComponent(jtfNumFacturaRepuestos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(73, 73, 73))
         );
@@ -2146,7 +2147,7 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
                         .addGroup(pTrabajadores3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jlSensores, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jtfSensores, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                 .addComponent(jlBastidorVehiculoObd, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jtfBastidorVehiculoObd, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)

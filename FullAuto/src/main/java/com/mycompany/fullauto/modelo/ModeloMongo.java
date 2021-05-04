@@ -65,16 +65,20 @@ public class ModeloMongo implements DAO{
         mongo = crearConexion();
         database= mongo.getDatabase("fullAuto");
         
-        MongoCollection<Document> trabajadores = database.getCollection("trabajador");
+        if(database.getCollection("trabajador").countDocuments()==0)
+        {
+            MongoCollection<Document> trabajadores = database.getCollection("trabajador");
+            Document trabajador = new Document("_id", new ObjectId());
+            trabajador.append("dni", "11111111A")
+                      .append("nombre", "Juan")
+                      .append("apellido1", "Bautista")
+                      .append("apellido2", "Conejero")
+                      .append("funcion", "cambios");
+            trabajadores.insertOne(trabajador);
+        }
         
-        Document trabajador = new Document("_id", new ObjectId());
-        trabajador.append("dni", "11111111A")
-                  .append("nombre", "Juan")
-                  .append("apellido1", "Bautista")
-                  .append("apellido2", "Conejero")
-                  .append("funcion", "cambios");
-        trabajadores.insertOne(trabajador);
-        
+        if(database.getCollection("vehiculo").countDocuments()==0)
+        {
         MongoCollection<Document> vehiculos = database.getCollection("vehiculo");
         Document vehiculo = new Document("_id", new ObjectId());
         vehiculo.append("bastidor", "111111111111111")
@@ -91,14 +95,20 @@ public class ModeloMongo implements DAO{
                   .append("dni_trabajador", "11111111A");
                   
         vehiculos.insertOne(vehiculo);
+        }
         
+        if(database.getCollection("informe").countDocuments()==0)
+        {
         MongoCollection<Document> informes = database.getCollection("informe");
         Document informe = new Document("_id", new ObjectId());
         informe.append("num_expedicion", 1111)
                   .append("tareas", "Sustituir pastillas de freno antiguas por las nuevas")
                   .append("dni_trabajador", "11111111A");
         informes.insertOne(informe);
+        }
         
+        if(database.getCollection("factura").countDocuments()==0)
+        {
         MongoCollection<Document> facturas = database.getCollection("factura");
         Document factura = new Document("_id", new ObjectId());
         factura.append("num_factura", 111)
@@ -107,7 +117,9 @@ public class ModeloMongo implements DAO{
                   .append("num_expedicion_informe", 1111);
                   
         facturas.insertOne(factura);
-        
+        }
+        if(database.getCollection("repuesto").countDocuments()==0)
+        {
         MongoCollection<Document> repuestos = database.getCollection("repuesto");
         Document repuesto = new Document("_id", new ObjectId());
         repuesto.append("num_serie", "25")
@@ -120,7 +132,10 @@ public class ModeloMongo implements DAO{
                   .append("bastidor_vehiculo", "111111111111111")
                   .append("num_factura", 111);
         repuestos.insertOne(repuesto);
+        }
         
+        if(database.getCollection("obd").countDocuments()==0)
+        {
         MongoCollection<Document> obds = database.getCollection("obd");
         Document obd = new Document("_id", new ObjectId());
         obd.append("id", 11111111)
@@ -132,7 +147,7 @@ public class ModeloMongo implements DAO{
                   .append("bastidor_vehiculo", "111111111111111");
                   
         obds.insertOne(obd);
-        
+        }
          
     }
     public MongoClient crearConexion()

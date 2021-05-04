@@ -93,21 +93,6 @@ public class ModeloObjectDB implements DAO{
        
         em = emf.createEntityManager();
 
-        // Store 1000 Point objects in the database:
-        /*em.getTransaction().begin();
-        
-            Trabajador trabajador = new Trabajador();
-            em.persist(trabajador);
-        
-        em.getTransaction().commit();
-*/
-        // Find the number of Point objects in the database:
-        //Query q1 = em.createQuery("SELECT COUNT(p) FROM Point p");
-        //System.out.println("Total Points: " + q1.getSingleResult());
-
-        
-        // Retrieve all the Point objects from the database:
-        
         TypedQuery<Trabajador> query =
             em.createQuery("SELECT t FROM Trabajador t", Trabajador.class);
         ArrayList<Trabajador> listaTrabajadores = (ArrayList)query.getResultList();
@@ -128,7 +113,7 @@ public class ModeloObjectDB implements DAO{
        em.close();
         return trabajador;
     }
-
+    
     @Override
     public void insertarTrabajador(Trabajador trabajador) throws DAOTrabajadorExcepcion {
         em = emf.createEntityManager();

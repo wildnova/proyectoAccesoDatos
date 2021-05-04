@@ -54,19 +54,6 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="63" pref="63" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jlFechaEntrada" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jtfFechaEntrada" alignment="0" min="-2" pref="234" max="-2" attributes="0"/>
-                              <Component id="jlConsumo" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jtfConsumo" alignment="0" min="-2" pref="234" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jlTiempoDedicado" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jtfTiempoDedicado" alignment="0" min="-2" pref="234" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jlCarburante" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -96,6 +83,8 @@
                                       <Component id="jtfModelo" alignment="0" min="-2" pref="234" max="-2" attributes="0"/>
                                       <Component id="jlAceite" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jtfAceite" alignment="0" min="-2" pref="234" max="-2" attributes="0"/>
+                                      <Component id="jtfTiempoDedicado" alignment="0" min="-2" pref="234" max="-2" attributes="0"/>
+                                      <Component id="jlTiempoDedicado" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -119,6 +108,10 @@
                               </Group>
                               <Component id="jlBastidor" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jtfBastidor" alignment="0" min="-2" pref="234" max="-2" attributes="0"/>
+                              <Component id="jlFechaEntrada" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jtfFechaEntrada" alignment="0" min="-2" pref="234" max="-2" attributes="0"/>
+                              <Component id="jlConsumo" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jtfConsumo" alignment="0" min="-2" pref="234" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace pref="52" max="32767" attributes="0"/>
                       </Group>
@@ -193,9 +186,9 @@
                           <Component id="jtfFechaEntrada" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="48" pref="48" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
                           <Component id="jlTiempoDedicado" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="jtfTiempoDedicado" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>

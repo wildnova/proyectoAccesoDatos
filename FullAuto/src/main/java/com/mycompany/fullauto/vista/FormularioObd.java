@@ -5,8 +5,10 @@
  */
 package com.mycompany.fullauto.vista;
 
+import com.mycompany.fullauto.controlador.Controlador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.JTextField;
 
 /**
@@ -20,12 +22,20 @@ public class FormularioObd extends javax.swing.JDialog implements ActionListener
      * Creates new form insertarTrabajador
      */
     private boolean confirmarInsertar;
-    public FormularioObd(java.awt.Frame parent, boolean modal) {
+    private static Controlador controlador;
+    public FormularioObd(java.awt.Frame parent, boolean modal,Controlador controlador) {
         super(parent, modal);
+        this.controlador=controlador;
         initComponents();
         confirmarInsertar=false;
         jbAceptar.addActionListener(this);
         jbCancelar.addActionListener(this);
+        
+        ArrayList<String> listaBastidores = controlador.getListaBastidores();
+        for(String bastidor:listaBastidores)
+        {
+            jcbBastidorObd.addItem(bastidor); 
+        }
     }
 
     /**
@@ -44,7 +54,6 @@ public class FormularioObd extends javax.swing.JDialog implements ActionListener
         jtfCodSalida = new javax.swing.JTextField();
         jlRmpInst = new javax.swing.JLabel();
         jlBastidorObd = new javax.swing.JLabel();
-        jtfBastidorObd = new javax.swing.JTextField();
         jlTempAceite = new javax.swing.JLabel();
         jlFormularioObd = new javax.swing.JLabel();
         jtfId = new javax.swing.JTextField();
@@ -55,6 +64,7 @@ public class FormularioObd extends javax.swing.JDialog implements ActionListener
         jbAceptar = new javax.swing.JButton();
         jlSensores = new javax.swing.JLabel();
         jtfSensores = new javax.swing.JTextField();
+        jcbBastidorObd = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -99,6 +109,10 @@ public class FormularioObd extends javax.swing.JDialog implements ActionListener
                 .addComponent(jlFormularioObd, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(289, 289, 289))
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(46, 46, 46)
+                .addComponent(jbCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(582, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(62, 62, 62)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -110,32 +124,25 @@ public class FormularioObd extends javax.swing.JDialog implements ActionListener
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jbAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(120, 120, 120))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jlId)
-                            .addComponent(jtfId, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jlCodSalida)
-                            .addComponent(jtfCodSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jtfRpmInst, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jlRmpInst))
-                        .addGap(97, 97, 97)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jlTempAceite)
-                            .addComponent(jtfTempAceite, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jlTempAgua)
-                            .addComponent(jtfTempAgua, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 106, Short.MAX_VALUE))))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(46, 46, 46)
-                        .addComponent(jbCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(83, 83, 83)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jlBastidorObd)
-                            .addComponent(jtfBastidorObd, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jcbBastidorObd, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jlId)
+                                    .addComponent(jtfId, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jlCodSalida)
+                                    .addComponent(jtfCodSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jtfRpmInst, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jlRmpInst))
+                                .addGap(97, 97, 97)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jlTempAceite)
+                                    .addComponent(jtfTempAceite, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jlTempAgua)
+                                    .addComponent(jtfTempAgua, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -170,9 +177,9 @@ public class FormularioObd extends javax.swing.JDialog implements ActionListener
                 .addComponent(jtfSensores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jlBastidorObd)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jtfBastidorObd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
+                .addGap(18, 18, 18)
+                .addComponent(jcbBastidorObd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(17, 17, 17)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -224,7 +231,7 @@ public class FormularioObd extends javax.swing.JDialog implements ActionListener
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                FormularioObd dialog = new FormularioObd(new javax.swing.JFrame(), true);
+                FormularioObd dialog = new FormularioObd(new javax.swing.JFrame(), true,controlador);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -282,7 +289,7 @@ public class FormularioObd extends javax.swing.JDialog implements ActionListener
     }
     
     public void setTextoBastidorObd(String texto){
-        jtfBastidorObd.setText(texto);
+        jcbBastidorObd.setSelectedItem(texto);
     }
     
     //Funciones para extraer los datos del formulario.
@@ -306,7 +313,7 @@ public class FormularioObd extends javax.swing.JDialog implements ActionListener
     }
     
     public String getBastidorObd(){
-        return jtfBastidorObd.getText();
+        return jcbBastidorObd.getSelectedItem().toString();
     }
 
     
@@ -316,6 +323,7 @@ public class FormularioObd extends javax.swing.JDialog implements ActionListener
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton jbAceptar;
     private javax.swing.JButton jbCancelar;
+    private javax.swing.JComboBox<String> jcbBastidorObd;
     private javax.swing.JLabel jlBastidorObd;
     private javax.swing.JLabel jlCodSalida;
     private javax.swing.JLabel jlFormularioObd;
@@ -324,7 +332,6 @@ public class FormularioObd extends javax.swing.JDialog implements ActionListener
     private javax.swing.JLabel jlSensores;
     private javax.swing.JLabel jlTempAceite;
     private javax.swing.JLabel jlTempAgua;
-    private javax.swing.JTextField jtfBastidorObd;
     private javax.swing.JTextField jtfCodSalida;
     private javax.swing.JTextField jtfId;
     private javax.swing.JTextField jtfRpmInst;

@@ -5,8 +5,10 @@
  */
 package com.mycompany.fullauto.vista;
 
+import com.mycompany.fullauto.controlador.Controlador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JTextField;
 
@@ -21,14 +23,20 @@ public class FormularioVehiculo extends javax.swing.JDialog implements ActionLis
      * Creates new form insertarTrabajador
      */
     private boolean confirmarInsertar;
-    public FormularioVehiculo(java.awt.Frame parent, boolean modal) {
+    private static Controlador controlador=null;
+    public FormularioVehiculo(java.awt.Frame parent, boolean modal, Controlador controlador) {
         super(parent, modal);
+        this.controlador=controlador;
         initComponents();
         confirmarInsertar=false;
         jbAceptar.addActionListener(this);
         jbCancelar.addActionListener(this);
         
-        
+        ArrayList<String> listaDni = controlador.getListaDni();
+        for(String dni:listaDni)
+        {
+            jcbDniTrabajadorVehiculo.addItem(dni); 
+        }
     }
 
     /**
@@ -53,7 +61,6 @@ public class FormularioVehiculo extends javax.swing.JDialog implements ActionLis
         jlMotor = new javax.swing.JLabel();
         jlDniTrabajadorAsignado = new javax.swing.JLabel();
         jlFormularioVehiculo = new javax.swing.JLabel();
-        jtfDniTrabajadorAsignado = new javax.swing.JTextField();
         jtfBastidor = new javax.swing.JTextField();
         jtfMatricula = new javax.swing.JTextField();
         jlConsumo = new javax.swing.JLabel();
@@ -68,6 +75,7 @@ public class FormularioVehiculo extends javax.swing.JDialog implements ActionLis
         jtfCarburante = new javax.swing.JTextField();
         jlCarburante = new javax.swing.JLabel();
         jsFechaEntrada = new javax.swing.JSpinner();
+        jcbDniTrabajadorVehiculo = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -164,16 +172,17 @@ public class FormularioVehiculo extends javax.swing.JDialog implements ActionLis
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jlFechaEntrada)
-                                    .addComponent(jsFechaEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(97, 97, 97)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jlTiempoDedicado)
-                                    .addComponent(jtfTiempoDedicado, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(22, 22, 22)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jtfDniTrabajadorAsignado, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jlDniTrabajadorAsignado))))
+                                    .addComponent(jsFechaEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(22, 22, 22)
+                                        .addComponent(jlDniTrabajadorAsignado)))
+                                .addGap(97, 97, 97))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jcbDniTrabajadorVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(71, 71, 71)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jlTiempoDedicado)
+                            .addComponent(jtfTiempoDedicado, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(187, 187, 187)
@@ -239,8 +248,8 @@ public class FormularioVehiculo extends javax.swing.JDialog implements ActionLis
                         .addGap(20, 20, 20)))
                 .addComponent(jlDniTrabajadorAsignado)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jtfDniTrabajadorAsignado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addComponent(jcbDniTrabajadorVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbAceptar)
                     .addComponent(jbCancelar))
@@ -295,7 +304,7 @@ public class FormularioVehiculo extends javax.swing.JDialog implements ActionLis
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                FormularioVehiculo dialog = new FormularioVehiculo(new javax.swing.JFrame(), true);
+                FormularioVehiculo dialog = new FormularioVehiculo(new javax.swing.JFrame(), true,controlador);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -364,8 +373,9 @@ public class FormularioVehiculo extends javax.swing.JDialog implements ActionLis
     public void setTextoTiempoDedicado(String texto){
         jtfTiempoDedicado.setText(texto);
     }
+    
     public void setTextoDniTrabajadorAsignado(String texto){
-        jtfDniTrabajadorAsignado.setText(texto);
+        jcbDniTrabajadorVehiculo.setSelectedItem(texto);
     }
     public void desactivarBastidor()
     {
@@ -408,7 +418,7 @@ public class FormularioVehiculo extends javax.swing.JDialog implements ActionLis
         return jtfTiempoDedicado.getText();
     }
     public String getDniTrabajadorAsignado() {
-        return jtfDniTrabajadorAsignado.getText();
+        return jcbDniTrabajadorVehiculo.getSelectedItem().toString();
     }
 
     
@@ -418,6 +428,7 @@ public class FormularioVehiculo extends javax.swing.JDialog implements ActionLis
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton jbAceptar;
     private javax.swing.JButton jbCancelar;
+    private javax.swing.JComboBox<String> jcbDniTrabajadorVehiculo;
     private javax.swing.JLabel jlAceite;
     private javax.swing.JLabel jlBastidor;
     private javax.swing.JLabel jlCarburante;
@@ -436,7 +447,6 @@ public class FormularioVehiculo extends javax.swing.JDialog implements ActionLis
     private javax.swing.JTextField jtfBastidor;
     private javax.swing.JTextField jtfCarburante;
     private javax.swing.JTextField jtfConsumo;
-    private javax.swing.JTextField jtfDniTrabajadorAsignado;
     private javax.swing.JTextField jtfMarca;
     private javax.swing.JTextField jtfMatricula;
     private javax.swing.JTextField jtfModelo;

@@ -56,9 +56,9 @@
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace pref="63" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jcbNumExpedicionInforme" min="-2" pref="212" max="-2" attributes="0"/>
                       <Component id="jlNumExpedicionInforme" min="-2" max="-2" attributes="0"/>
                       <Component id="jtfLineaFactura" min="-2" pref="234" max="-2" attributes="0"/>
-                      <Component id="jtfNumExpedicionInforme" min="-2" pref="234" max="-2" attributes="0"/>
                       <Component id="jlNumFactura" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jlLineaFactura" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jlPrecioFactura" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -92,9 +92,9 @@
                   <Component id="jtfLineaFactura" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="jlNumExpedicionInforme" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jtfNumExpedicionInforme" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="33" max="32767" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="jcbNumExpedicionInforme" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="22" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jbCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jbAceptar" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -133,8 +133,6 @@
         </Component>
         <Component class="javax.swing.JTextField" name="jtfLineaFactura">
         </Component>
-        <Component class="javax.swing.JTextField" name="jtfNumExpedicionInforme">
-        </Component>
         <Component class="javax.swing.JLabel" name="jlNumFactura">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -171,6 +169,16 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Cancelar"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="jcbNumExpedicionInforme">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="0"/>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>
