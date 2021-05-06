@@ -21,6 +21,7 @@ com\mycompany\fullauto\vista\FormularioRepuestos$1$1.class
 com\mycompany\fullauto\Repuestos.class
 com\mycompany\fullauto\vista\FormularioObd$1.class
 com\mycompany\fullauto\Exceptions\DAOConexionExcepcion.class
+com\mycompany\fullauto\ListasXML.class
 com\mycompany\fullauto\modelo\ModeloHibernate.class
 com\mycompany\fullauto\vista\FormularioTrabajador$1.class
 com\mycompany\fullauto\vista\SelectorConexion.class
@@ -52,6 +53,7 @@ com\mycompany\fullauto\vista\Vista$10.class
 com\mycompany\fullauto\vista\Vista$13.class
 com\mycompany\fullauto\modelo\ModeloJdbc.class
 com\mycompany\fullauto\vista\EliminarObd$1$1.class
+.netbeans_automatic_build
 com\mycompany\fullauto\vista\FormularioVehiculo$1$1.class
 com\mycompany\fullauto\vista\SelectorConexion$1.class
 com\mycompany\fullauto\vista\Vista$9.class

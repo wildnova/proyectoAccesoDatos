@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Trabajadores>
+    <trabajadores>
+        <dni>11111111A</dni>
+        <nombre>Juan</nombre>
+        <apellido1>Bautista</apellido1>
+        <apellido2>Conejero</apellido2>
+        <funcion>cambios</funcion>
+    </trabajadores>
+    <trabajadores>
+        <dni>22</dni>
+        <nombre>Will</nombre>
+        <apellido1>Turner</apellido1>
+        <apellido2>Sardner</apellido2>
+        <funcion>Recambios</funcion>
+    </trabajadores>
+    <trabajadores>
+        <dni>33</dni>
+        <nombre>Jack</nombre>
+        <apellido1>Sparrow</apellido1>
+        <apellido2>Spar</apellido2>
+        <funcion>Electromecánica</funcion>
+    </trabajadores>
+</Trabajadores>

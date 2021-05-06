@@ -14,10 +14,16 @@ import com.mycompany.fullauto.Exceptions.DAOTrabajadorExcepcion;
 import com.mycompany.fullauto.Exceptions.DAOVehiculoExcepcion;
 import com.mycompany.fullauto.Factura;
 import com.mycompany.fullauto.Informe;
+import com.mycompany.fullauto.clasesXml.TrabajadoresXml;
 import com.mycompany.fullauto.Obd;
 import com.mycompany.fullauto.Repuestos;
 import com.mycompany.fullauto.Trabajador;
 import com.mycompany.fullauto.Vehiculo;
+import com.mycompany.fullauto.clasesXml.FacturasXml;
+import com.mycompany.fullauto.clasesXml.InformesXml;
+import com.mycompany.fullauto.clasesXml.ObdsXml;
+import com.mycompany.fullauto.clasesXml.RepuestosXml;
+import com.mycompany.fullauto.clasesXml.VehiculosXml;
 import com.mycompany.fullauto.modelo.DAO;
 import com.mycompany.fullauto.modelo.ModeloHibernate;
 import com.mycompany.fullauto.modelo.ModeloJdbc;
@@ -26,10 +32,15 @@ import com.mycompany.fullauto.modelo.ModeloObjectDB;
 import com.mycompany.fullauto.vista.EliminarTrabajador;
 import com.mycompany.fullauto.vista.FormularioTrabajador;
 import com.mycompany.fullauto.vista.Vista;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.PropertyException;
 
 
 
@@ -65,7 +76,6 @@ public class Controlador
                 this.modelo = new ModeloMongo();
                 break;
         }
-
     }
     
    //Funciones de trabajador
@@ -143,98 +153,7 @@ public class Controlador
         return listaVehiculos;
         
     }
-    public String comprobarTrabajadorAsignado(Vehiculo vehiculo)
-    {
-        
-        String dniTrabajadorAsignado=vehiculo.getDniTrabajador();
-        
-        Trabajador trabajador=null;
-        try 
-        {
-            trabajador = modelo.comprobarTrabajador(dniTrabajadorAsignado);
-            System.out.println("dniTrabajador asignado en controlador: ------------------------------------------------"+ dniTrabajadorAsignado);
-        } 
-        catch (DAOTrabajadorExcepcion ex) 
-        {
-            System.err.println("Error al comprobar el trabajador");
-            ex.getMessage();
-            ex.printStackTrace();
-        }
-        String nombreCompleto=trabajador.getNombre()+" "+trabajador.getApellido1()+" "+trabajador.getApellido2();
-        return nombreCompleto;
-    }
-    public ArrayList getListaDni()
-    {
-      ArrayList<String> listaDni=new ArrayList();
-      ArrayList<Trabajador> listaTrabajadores=null;
-        try {
-            listaTrabajadores = modelo.getListadoTrabajadores();
-            
-        } catch (DAOTrabajadorExcepcion ex) {
-            ex.printStackTrace();
-            System.err.println("Error comprobando la lista de trabajadores");
-        }
-        
-      for(Trabajador trabajador:listaTrabajadores)
-      {
-          listaDni.add(trabajador.getDni());
-      }
-      return listaDni;
-    }
-    public ArrayList getListaNumsExpedicion()
-    {
-        ArrayList<String> listaNumsExpedicion=new ArrayList();
-        ArrayList<Informe> listaInformes=null;
-        try {
-            listaInformes = modelo.getListadoInformes();
-            
-        } catch (DAOInformeExcepcion ex) {
-            ex.printStackTrace();
-            System.err.println("Error comprobando la lista de informes");
-        }
-        
-      for(Informe informe:listaInformes)
-      {
-          listaNumsExpedicion.add(String.valueOf(informe.getNumExpedicion()));
-      }
-      return listaNumsExpedicion;
-    }
-    public ArrayList getListaBastidores()
-    {
-        ArrayList<String> listaBastidores=new ArrayList();
-        ArrayList<Vehiculo> listaVehiculos=null;
-        try {
-            listaVehiculos = modelo.getListadoVehiculos();
-            
-        } catch (DAOVehiculoExcepcion ex) {
-            ex.printStackTrace();
-            System.err.println("Error comprobando la lista de vehículos");
-        }
-        
-      for(Vehiculo vehiculo:listaVehiculos)
-      {
-          listaBastidores.add(String.valueOf(vehiculo.getBastidor()));
-      }
-      return listaBastidores;
-    }
-    public ArrayList getListaNumsFactura()
-    {
-        ArrayList<String> listaNumsFactura=new ArrayList();
-        ArrayList<Factura> listaFacturas=null;
-        try {
-            listaFacturas = modelo.getListadoFacturas();
-            
-        } catch (DAOFacturaExcepcion ex) {
-            ex.printStackTrace();
-            System.err.println("Error comprobando la lista de facturas");
-        }
-        
-      for(Factura factura:listaFacturas)
-      {
-          listaNumsFactura.add(String.valueOf(factura.getNumFactura()));
-      }
-      return listaNumsFactura;
-    }
+    
     public void insertarVehiculo(Vehiculo vehiculo)
     {
         try 
@@ -493,6 +412,212 @@ public class Controlador
             ex.getMessage();
         }
  
+    }
+    
+    //Funciones especiales
+    
+    public String comprobarTrabajadorAsignado(Vehiculo vehiculo)
+    {
+        
+        String dniTrabajadorAsignado=vehiculo.getDniTrabajador();
+        
+        Trabajador trabajador=null;
+        try 
+        {
+            trabajador = modelo.comprobarTrabajador(dniTrabajadorAsignado);
+            System.out.println("dniTrabajador asignado en controlador: ------------------------------------------------"+ dniTrabajadorAsignado);
+        } 
+        catch (DAOTrabajadorExcepcion ex) 
+        {
+            System.err.println("Error al comprobar el trabajador");
+            ex.getMessage();
+            ex.printStackTrace();
+        }
+        String nombreCompleto=trabajador.getNombre()+" "+trabajador.getApellido1()+" "+trabajador.getApellido2();
+        return nombreCompleto;
+    }
+    public ArrayList getListaDni()
+    {
+      ArrayList<String> listaDni=new ArrayList();
+      ArrayList<Trabajador> listaTrabajadores=null;
+        try {
+            listaTrabajadores = modelo.getListadoTrabajadores();
+            
+        } catch (DAOTrabajadorExcepcion ex) {
+            ex.printStackTrace();
+            System.err.println("Error comprobando la lista de trabajadores");
+        }
+        
+      for(Trabajador trabajador:listaTrabajadores)
+      {
+          listaDni.add(trabajador.getDni());
+      }
+      return listaDni;
+    }
+    public ArrayList getListaNumsExpedicion()
+    {
+        ArrayList<String> listaNumsExpedicion=new ArrayList();
+        ArrayList<Informe> listaInformes=null;
+        try {
+            listaInformes = modelo.getListadoInformes();
+            
+        } catch (DAOInformeExcepcion ex) {
+            ex.printStackTrace();
+            System.err.println("Error comprobando la lista de informes");
+        }
+        
+      for(Informe informe:listaInformes)
+      {
+          listaNumsExpedicion.add(String.valueOf(informe.getNumExpedicion()));
+      }
+      return listaNumsExpedicion;
+    }
+    public ArrayList getListaBastidores()
+    {
+        ArrayList<String> listaBastidores=new ArrayList();
+        ArrayList<Vehiculo> listaVehiculos=null;
+        try {
+            listaVehiculos = modelo.getListadoVehiculos();
+            
+        } catch (DAOVehiculoExcepcion ex) {
+            ex.printStackTrace();
+            System.err.println("Error comprobando la lista de vehículos");
+        }
+        
+      for(Vehiculo vehiculo:listaVehiculos)
+      {
+          listaBastidores.add(String.valueOf(vehiculo.getBastidor()));
+      }
+      return listaBastidores;
+    }
+    public ArrayList getListaNumsFactura()
+    {
+        ArrayList<String> listaNumsFactura=new ArrayList();
+        ArrayList<Factura> listaFacturas=null;
+        try {
+            listaFacturas = modelo.getListadoFacturas();
+            
+        } catch (DAOFacturaExcepcion ex) {
+            ex.printStackTrace();
+            System.err.println("Error comprobando la lista de facturas");
+        }
+        
+      for(Factura factura:listaFacturas)
+      {
+          listaNumsFactura.add(String.valueOf(factura.getNumFactura()));
+      }
+      return listaNumsFactura;
+    }
+    
+    public void exportarXml()
+    {
+        JAXBContext context=null;
+        Marshaller mar=null;
+        TrabajadoresXml listaTrabajadores = new TrabajadoresXml();
+        VehiculosXml listaVehiculos = new VehiculosXml();
+        InformesXml listaInformes = new InformesXml();
+        FacturasXml listaFacturas = new FacturasXml();
+        RepuestosXml listaRepuestos = new RepuestosXml();
+        ObdsXml listaObds = new ObdsXml();
+        
+        try 
+        {
+            listaTrabajadores.setTrabajadores(modelo.getListadoTrabajadores());
+            listaVehiculos.setVehiculos(modelo.getListadoVehiculos());
+            listaInformes.setInformes(modelo.getListadoInformes());
+            listaFacturas.setFacturas(modelo.getListadoFacturas());
+            listaRepuestos.setRepuestos(modelo.getListadoRepuestos());
+            listaObds.setObds(modelo.getListadoObd());
+        } 
+        catch (DAOTrabajadorExcepcion ex){
+            Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+        }catch (DAOVehiculoExcepcion ex) {
+            Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (DAOInformeExcepcion ex) {
+            Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (DAOFacturaExcepcion ex) {
+            Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (DAORepuestoExcepcion ex) {
+            Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (DAOObdExcepcion ex) {
+            Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        File file = new File(".\\exportacionesXML\\trabajadores.xml");
+        
+        try 
+        {
+            context = JAXBContext.newInstance(TrabajadoresXml.class);
+            mar=context.createMarshaller();
+            mar.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+            mar.marshal(listaTrabajadores, file);
+        } 
+        catch (JAXBException ex) 
+        {
+            Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        file = new File(".\\exportacionesXML\\vehiculos.xml");
+        try 
+        {
+            context = JAXBContext.newInstance(VehiculosXml.class);
+            mar=context.createMarshaller();
+            mar.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+            mar.marshal(listaVehiculos, file);
+        } 
+        catch (JAXBException ex) 
+        {
+            Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        file = new File(".\\exportacionesXML\\informes.xml");
+        try 
+        {
+            context = JAXBContext.newInstance(InformesXml.class);
+            mar=context.createMarshaller();
+            mar.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+            mar.marshal(listaInformes, file);
+        } 
+        catch (JAXBException ex) 
+        {
+            Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        file = new File(".\\exportacionesXML\\facturas.xml");
+        try 
+        {
+            context = JAXBContext.newInstance(FacturasXml.class);
+            mar=context.createMarshaller();
+            mar.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+            mar.marshal(listaFacturas, file);
+        } 
+        catch (JAXBException ex) 
+        {
+            Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        file = new File(".\\exportacionesXML\\repuestos.xml");
+        try 
+        {
+            context = JAXBContext.newInstance(RepuestosXml.class);
+            mar=context.createMarshaller();
+            mar.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+            mar.marshal(listaRepuestos, file);
+        } 
+        catch (JAXBException ex) 
+        {
+            Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        file = new File(".\\exportacionesXML\\obds.xml");
+        try 
+        {
+            context = JAXBContext.newInstance(ObdsXml.class);
+            mar=context.createMarshaller();
+            mar.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+            mar.marshal(listaObds, file);
+        } 
+        catch (JAXBException ex) 
+        {
+            Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
     
     

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Facturas>
+    <facturas>
+        <numFactura>111</numFactura>
+        <precio>35.45</precio>
+        <lineaFactura>Pastillas freno brembo delanteras y traseras</lineaFactura>
+        <numExpedicionInforme>1111</numExpedicionInforme>
+    </facturas>
+    <facturas>
+        <numFactura>222</numFactura>
+        <precio>402.0</precio>
+        <lineaFactura>Hacer muchos recambios</lineaFactura>
+        <numExpedicionInforme>2222</numExpedicionInforme>
+    </facturas>
+    <facturas>
+        <numFactura>333</numFactura>
+        <precio>29.0</precio>
+        <lineaFactura>Reprogramación centralita</lineaFactura>
+        <numExpedicionInforme>3333</numExpedicionInforme>
+    </facturas>
+</Facturas>

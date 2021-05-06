@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Vehiculos>
+    <vehiculos>
+        <bastidor>111111111111111</bastidor>
+        <matricula>4470KJZ</matricula>
+        <marca>Kia</marca>
+        <modelo>Cerato</modelo>
+        <motor>1600cc</motor>
+        <potenciaCv>130</potenciaCv>
+        <carburante>diesel</carburante>
+        <aceite>-10-40</aceite>
+        <consumo>5.8l/100km</consumo>
+        <fechaEntrada>2020-11-30T00:00:00+01:00</fechaEntrada>
+        <tiempoDedicado>60 minutos</tiempoDedicado>
+        <dniTrabajador>11111111A</dniTrabajador>
+    </vehiculos>
+    <vehiculos>
+        <bastidor>222222222222222</bastidor>
+        <matricula>1234ABC</matricula>
+        <marca>Elpato</marca>
+        <modelo>patoplus</modelo>
+        <motor>1500</motor>
+        <potenciaCv>40</potenciaCv>
+        <carburante>gasofa</carburante>
+        <aceite>Malo</aceite>
+        <consumo>4</consumo>
+        <fechaEntrada>2021-04-25T13:54:18.054+02:00</fechaEntrada>
+        <tiempoDedicado>poco</tiempoDedicado>
+        <dniTrabajador>22</dniTrabajador>
+    </vehiculos>
+    <vehiculos>
+        <bastidor>333333333333333</bastidor>
+        <matricula>4321CBA</matricula>
+        <marca>Rara</marca>
+        <modelo>Inexplicable</modelo>
+        <motor>1123</motor>
+        <potenciaCv>56</potenciaCv>
+        <carburante>Hibrido agua gas</carburante>
+        <aceite>mineral</aceite>
+        <consumo>10L /10m</consumo>
+        <fechaEntrada>2021-04-25T13:55:12.461+02:00</fechaEntrada>
+        <tiempoDedicado>suficiente</tiempoDedicado>
+        <dniTrabajador>33</dniTrabajador>
+    </vehiculos>
+    <vehiculos>
+        <bastidor>44444444</bastidor>
+        <matricula>asdf</matricula>
+        <marca>asdf</marca>
+        <modelo>asdf</modelo>
+        <motor>asdf</motor>
+        <potenciaCv>asdf</potenciaCv>
+        <carburante>asdfs</carburante>
+        <aceite>asdf</aceite>
+        <consumo>asdfs</consumo>
+        <fechaEntrada>2021-05-04T11:08:16.181+02:00</fechaEntrada>
+        <tiempoDedicado>asdf</tiempoDedicado>
+        <dniTrabajador>11111111A</dniTrabajador>
+    </vehiculos>
+</Vehiculos>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Informes>
+    <informes>
+        <numExpedicion>777</numExpedicion>
+        <tareas>abcd</tareas>
+        <dniTrabajadorInforme>11111111A</dniTrabajadorInforme>
+    </informes>
+    <informes>
+        <numExpedicion>1111</numExpedicion>
+        <tareas>Sustituir pastillas de freno antiguas por las nuevas</tareas>
+        <dniTrabajadorInforme>11111111A</dniTrabajadorInforme>
+    </informes>
+    <informes>
+        <numExpedicion>2222</numExpedicion>
+        <tareas>Hacer cosas</tareas>
+        <dniTrabajadorInforme>22</dniTrabajadorInforme>
+    </informes>
+    <informes>
+        <numExpedicion>3333</numExpedicion>
+        <tareas>hacer todavía más cosas</tareas>
+        <dniTrabajadorInforme>33</dniTrabajadorInforme>
+    </informes>
+</Informes>

@@ -62,6 +62,8 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
         controlador = new Controlador(this,seleccionModelo);
         
         //Listeners de los botones
+        jmiExportarXml.addActionListener(this);
+        
         jbSiguienteTrabajador.addActionListener(this);
         jbAnteriorTrabajador.addActionListener(this);
         jbInsertarTrabajador.addActionListener(this);
@@ -99,6 +101,7 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
         jbModificarObd.addActionListener(this);
         jbEliminarObd.addActionListener(this);
         
+       
         listaTrabajadores=null;
         listaVehiculos=null;
         listaInformes=null;
@@ -132,7 +135,14 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
     //LLamadas a cada uno de los distintos botones de la interfaz
     public void actionPerformed(ActionEvent ae) {
         System.out.println("evento Activado");
- 
+        
+        if(ae.getSource()==jmiExportarXml)
+        {
+            System.out.println("ExportarXml pulsado");
+            controlador.exportarXml();
+            ConfirmacionExportacionXml confirmacion = new ConfirmacionExportacionXml(this, true);
+            confirmacion.setVisible(true);
+        }
         if(ae.getSource()==jbSiguienteTrabajador)
         {
             System.out.println("jbSiguienteTrabajador pulsado");
@@ -1235,6 +1245,9 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
         jlSensores = new javax.swing.JLabel();
         jtfSensores = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
+        jmbBarraHerramientas = new javax.swing.JMenuBar();
+        jMenu2 = new javax.swing.JMenu();
+        jmiExportarXml = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -2192,12 +2205,21 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
                         .addGap(53, 53, 53)
                         .addComponent(lblTitle))
                     .addGroup(fondoMainLayout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGap(31, 31, 31)
                         .addComponent(jLabel2)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jtpTablaPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(39, 39, 39))
         );
+
+        jMenu2.setText("Archivo");
+
+        jmiExportarXml.setText("Exportar a XML");
+        jMenu2.add(jmiExportarXml);
+
+        jmbBarraHerramientas.add(jMenu2);
+
+        setJMenuBar(jmbBarraHerramientas);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -2309,6 +2331,7 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel fondoMain;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -2385,6 +2408,8 @@ public class Vista extends javax.swing.JFrame implements ActionListener{
     public javax.swing.JLabel jlTrabajadorAsignado;
     public javax.swing.JLabel jlUsoRepuesto;
     public javax.swing.JLabel jlnumExpedicionInformeFactura;
+    private javax.swing.JMenuBar jmbBarraHerramientas;
+    private javax.swing.JMenuItem jmiExportarXml;
     public javax.swing.JTextField jtfAceiteVehiculo;
     public javax.swing.JTextField jtfApellido1Trabajador;
     public javax.swing.JTextField jtfApellido2Trabajador;

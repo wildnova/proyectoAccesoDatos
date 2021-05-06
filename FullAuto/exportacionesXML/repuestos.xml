@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Repuestos>
+    <repuestos>
+        <numSerie>22222</numSerie>
+        <referencia>asdf</referencia>
+        <nombre>asdf</nombre>
+        <marca>asdf</marca>
+        <uso>asdf</uso>
+        <tienda>asdf</tienda>
+        <fechaCompra>2021-04-25T14:06:11.744+02:00</fechaCompra>
+        <BastidorVehiculoRepuestos>222222222222222</BastidorVehiculoRepuestos>
+        <NumFacturaRepuestos>2222</NumFacturaRepuestos>
+    </repuestos>
+    <repuestos>
+        <numSerie>25</numSerie>
+        <referencia>11111</referencia>
+        <nombre>pastilla de freno</nombre>
+        <marca>brembo</marca>
+        <uso>sistema de frenos</uso>
+        <tienda>Serca</tienda>
+        <fechaCompra>2021-01-06T00:00:00+01:00</fechaCompra>
+        <BastidorVehiculoRepuestos>111111111111111</BastidorVehiculoRepuestos>
+        <NumFacturaRepuestos>111</NumFacturaRepuestos>
+    </repuestos>
+    <repuestos>
+        <numSerie>33333</numSerie>
+        <referencia>gfdsg</referencia>
+        <nombre>gfds</nombre>
+        <marca>gfdsg</marca>
+        <uso>gfdsg</uso>
+        <tienda>gbfgds</tienda>
+        <fechaCompra>2021-04-25T14:07:11.166+02:00</fechaCompra>
+        <BastidorVehiculoRepuestos>333333333333333</BastidorVehiculoRepuestos>
+        <NumFacturaRepuestos>3333</NumFacturaRepuestos>
+    </repuestos>
+</Repuestos>

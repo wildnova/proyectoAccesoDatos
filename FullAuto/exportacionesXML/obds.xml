@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Obds>
+    <obds>
+        <id>22222</id>
+        <rpm_inst>3434</rpm_inst>
+        <temp_aceite>43.0</temp_aceite>
+        <temp_agua>233.0</temp_agua>
+        <cod_salida>234</cod_salida>
+        <sensores>bien</sensores>
+        <bastidorVehiculoObd>222222222222222</bastidorVehiculoObd>
+    </obds>
+    <obds>
+        <id>33333</id>
+        <rpm_inst>2342</rpm_inst>
+        <temp_aceite>234.0</temp_aceite>
+        <temp_agua>234.0</temp_agua>
+        <cod_salida>234</cod_salida>
+        <sensores>mal</sensores>
+        <bastidorVehiculoObd>333333333333333</bastidorVehiculoObd>
+    </obds>
+    <obds>
+        <id>11111111</id>
+        <rpm_inst>2500</rpm_inst>
+        <temp_aceite>63.2</temp_aceite>
+        <temp_agua>89.45</temp_agua>
+        <cod_salida>122</cod_salida>
+        <sensores>Frenos</sensores>
+        <bastidorVehiculoObd>111111111111111</bastidorVehiculoObd>
+    </obds>
+</Obds>
